@@ -53,7 +53,7 @@
                 android:bufferType="normal"
 
                 android:fontFamily="@font/inter"
-                android:hint="Tên đăng nhập hihi"
+                android:hint="Tên đăng nhập"
                 android:inputType="textPersonName"
                 android:textSize="14sp"
                 tools:ignore="TouchTargetSizeCheck" />
