@@ -55,7 +55,7 @@
                 android:fontFamily="@font/inter"
 
 
-                android:hint="Tên đăng nhập huy "
+                android:hint="Tên đăng nhập "
                 android:inputType="textPersonName"
                 android:textSize="14sp"
                 tools:ignore="TouchTargetSizeCheck" />
