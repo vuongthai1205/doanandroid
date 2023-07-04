@@ -44,7 +44,7 @@
                 app:srcCompat="@drawable/ic_action_name" />
 
             <EditText
-                android:id="@+id/edtUserName"
+                android:id="@+id/editTextTextPersonName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -91,7 +91,7 @@
                 app:srcCompat="@drawable/lock" />
 
             <EditText
-                android:id="@+id/edtPassWord"
+                android:id="@+id/editTextTextPersonName1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -124,14 +124,14 @@
             android:textColor="#000000" />
 
         <Button
-            android:id="@+id/button_login"
+            android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round"
             android:text="Đăng nhập"
             android:textAllCaps="false"
             android:textColor="#F7F8F9"
-            android:textSize="19sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textView2"
