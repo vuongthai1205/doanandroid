@@ -45,7 +45,7 @@
                 app:srcCompat="@drawable/ic_action_name" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/txtUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -58,6 +58,7 @@
                 android:hint="Tên đăng nhập"
                 android:inputType="textPersonName"
                 android:textSize="14sp"
+
                 tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
@@ -65,9 +66,15 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/close" />
+                app:srcCompat="@drawable/close"
+                 />
 
         </LinearLayout>
+
+
+
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,7 +99,7 @@
                 app:srcCompat="@drawable/phone" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName5"
+                android:id="@+id/txtPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -107,6 +114,57 @@
 
             <ImageView
                 android:id="@+id/imageView55"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/close" />
+
+        </LinearLayout>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/border"
+
+            android:baselineAligned="false"
+            android:gravity="center|center_vertical"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_baseline_email_24" />
+
+            <EditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_none"
+                android:bufferType="normal"
+
+                android:fontFamily="@font/inter"
+
+
+                android:hint="Nhập Email"
+                android:inputType="textPersonName"
+                android:textSize="14sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <ImageView
+                android:id="@+id/imageView8"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -137,16 +195,15 @@
                 app:srcCompat="@drawable/lock" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName1"
+                android:id="@+id/txtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/border_none"
-
                 android:bufferType="normal"
                 android:fontFamily="@font/inter"
                 android:hint="Mật khẩu"
-                android:inputType="textPassword"
+               android:inputType="textPassword"
                 android:textSize="14sp"
                 tools:ignore="TouchTargetSizeCheck" />
 
@@ -182,7 +239,7 @@
                 app:srcCompat="@drawable/lock" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName14"
+                android:id="@+id/txtPasswordAgain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -204,7 +261,7 @@
         </LinearLayout>
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/switchDieuKhoan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
@@ -212,7 +269,7 @@
             android:text="Chấp nhập điều khoản" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round"
