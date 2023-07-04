@@ -17,11 +17,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Button button_login = findViewById(R.id.button_login);
+        Button button_login = findViewById(R.id.btnSignIn);
 
         button_login.setOnClickListener(v -> {//Convert ra bieu thuc lambda
-            EditText edt_username = findViewById(R.id.edtUserName);
-            EditText edt_password = findViewById(R.id.edtPassWord);
+            EditText edt_username = findViewById(R.id.txtUserName);
+            EditText edt_password = findViewById(R.id.txtPassword);
             String username = edt_username.getText().toString();
             String password = edt_password.getText().toString();
             DatabaseHelper dbHelper = new DatabaseHelper(this);
@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
                 String select_password = cursor.getString(cursor.getColumnIndexOrThrow("mat_khau"));
                 if(password.equals(select_password)){
                     // Chuyển sang một trang khác
-                    Intent intent = new Intent(LoginActivity.this, Signup.class);
+                    Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                     startActivity(intent);
                     // Kết thúc Activity hiện tại
                     finish();
