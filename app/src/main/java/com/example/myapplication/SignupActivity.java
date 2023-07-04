@@ -26,7 +26,7 @@ public class SignupActivity extends AppCompatActivity {
     private Switch SwitchDienKhoan;
 
     // Tạo intent để chuyển trang
-    Intent st = new Intent(SignupActivity.this, MainActivity.class);
+
     public static final String TAG = SignupActivity.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
