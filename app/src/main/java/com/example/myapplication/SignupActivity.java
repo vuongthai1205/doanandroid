@@ -52,6 +52,7 @@ public class SignupActivity extends AppCompatActivity {
         InputAgianPW = (EditText) findViewById(R.id.txtPasswordAgain);
         SwitchDienKhoan = (Switch) findViewById(R.id.switchDieuKhoan);
         btnSignup = (Button) findViewById(R.id.btnSignUp);
+
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
