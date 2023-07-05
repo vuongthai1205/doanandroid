@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "doanandroid.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
     // Tạo các hằng số cho tên bảng
     final String TABLE_QUYEN = "table_quyen";
     final String TABLE_THANHVIEN = "table_thanhvien";
@@ -137,13 +137,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 // Thêm dữ liệu vào bảng table_thanhvien
         String insertThanhVien1 = "INSERT INTO " + TABLE_THANHVIEN + " (" +
                 COLUMN_TEN_DANG_NHAP + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
-                COLUMN_SO_DIEN_THOAI + ") VALUES ('thaigiavuong', 'admin', 1, '0123456789')";
+                COLUMN_SO_DIEN_THOAI +", " + COLUMN_EMAIL + ") VALUES ('thaigiavuong', 'admin', 1, '0123456789', 'giavuong.1205@gmail.com')";
         String insertThanhVien2 = "INSERT INTO " + TABLE_THANHVIEN + " (" +
                 COLUMN_TEN_DANG_NHAP + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
-                COLUMN_SO_DIEN_THOAI + ") VALUES ('dinhtanhuy', 'admin', 1, '9876543210')";
+                COLUMN_SO_DIEN_THOAI +", " + COLUMN_EMAIL + ") VALUES ('dinhtanhuy', 'admin', 1, '9876543210', 'dinhtanhuy@gmail.com')";
         String insertThanhVien3 = "INSERT INTO " + TABLE_THANHVIEN + " (" +
                 COLUMN_TEN_DANG_NHAP + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
-                COLUMN_SO_DIEN_THOAI + ") VALUES ('dangtrungminh', 'admin', 1, '111222333')";
+                COLUMN_SO_DIEN_THOAI +", " + COLUMN_EMAIL + ") VALUES ('dangtrungminh', 'admin', 1, '111222333', 'dangtrungminh@gmail.com')";
         String insertThanhVien4 = "INSERT INTO " + TABLE_THANHVIEN + " (" +
                 COLUMN_TEN_DANG_NHAP + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
                 COLUMN_SO_DIEN_THOAI + ") VALUES ('khachhang', 'khachhang', 3, '111222333')";
