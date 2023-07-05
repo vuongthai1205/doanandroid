@@ -27,15 +27,15 @@ public class LoginActivity extends AppCompatActivity {
             DatabaseHelper dbHelper = new DatabaseHelper(this);
             SQLiteDatabase database = dbHelper.getReadableDatabase();
 
-            String [] information = {"ten_nguoi_dung","mat_khau","id_quyen"};
-            String select_ten_nguoi_dung = "ten_nguoi_dung = ?";
+            String [] information = {dbHelper.COLUMN_TEN_DANG_NHAP,dbHelper.COLUMN_MAT_KHAU,dbHelper.COLUMN_ID_QUYEN_THANHVIEN};
+            String select_ten_nguoi_dung = dbHelper.COLUMN_TEN_DANG_NHAP + " = ?";
             String [] select_ten_args = {username};
             Cursor cursor;
-            cursor = database.query("table_thanhvien",
+            cursor = database.query(dbHelper.TABLE_THANHVIEN,
                     information,select_ten_nguoi_dung,select_ten_args,null,null,null);
 
             if(cursor.moveToFirst()){
-                String select_password = cursor.getString(cursor.getColumnIndexOrThrow("mat_khau"));
+                String select_password = cursor.getString(cursor.getColumnIndexOrThrow(dbHelper.COLUMN_MAT_KHAU));
                 if(password.equals(select_password)){
                     // Chuyển sang một trang khác
                     Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
