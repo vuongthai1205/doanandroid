@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "doanandroid.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     // Tạo các hằng số cho tên bảng
     final String TABLE_QUYEN = "table_quyen";
     final String TABLE_THANHVIEN = "table_thanhvien";
@@ -21,7 +21,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     final String COLUMN_TEN_QUYEN = "ten_quyen";
 
     final String COLUMN_ID_THANHVIEN = "id_thanh_vien";
-    final String COLUMN_TEN_NGUOI_DUNG = "ten_nguoi_dung";
+    final String COLUMN_TEN_DANG_NHAP = "ten_dang_nhap";
+    final String COLUMN_HO = "ho_thanh_vien";
+    final String COLUMN_TEN = "ten_thanh_vien";
     final String COLUMN_MAT_KHAU = "mat_khau";
     final String COLUMN_AVATAR = "avatar";
     final String COLUMN_ID_QUYEN_THANHVIEN = "id_quyen";
@@ -69,7 +71,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String createTable_thanhvien = "CREATE TABLE " + TABLE_THANHVIEN + " (" +
                 COLUMN_ID_THANHVIEN + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_TEN_NGUOI_DUNG + " VARCHAR(100) NOT NULL, " +
+                COLUMN_TEN_DANG_NHAP + " VARCHAR(100) NOT NULL, " +
+                COLUMN_HO + " VARCHAR(30) ," +
+                COLUMN_TEN+ " VARCHAR(30) ," +
                 COLUMN_MAT_KHAU + " VARCHAR(50) NOT NULL, " +
                 COLUMN_AVATAR + " VARCHAR(100), " +
                 COLUMN_ID_QUYEN_THANHVIEN + " INTEGER NOT NULL, " +
@@ -132,19 +136,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 // Thêm dữ liệu vào bảng table_thanhvien
         String insertThanhVien1 = "INSERT INTO " + TABLE_THANHVIEN + " (" +
-                COLUMN_TEN_NGUOI_DUNG + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
+                COLUMN_TEN_DANG_NHAP + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
                 COLUMN_SO_DIEN_THOAI + ") VALUES ('thaigiavuong', 'admin', 1, '0123456789')";
         String insertThanhVien2 = "INSERT INTO " + TABLE_THANHVIEN + " (" +
-                COLUMN_TEN_NGUOI_DUNG + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
+                COLUMN_TEN_DANG_NHAP + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
                 COLUMN_SO_DIEN_THOAI + ") VALUES ('dinhtanhuy', 'admin', 1, '9876543210')";
         String insertThanhVien3 = "INSERT INTO " + TABLE_THANHVIEN + " (" +
-                COLUMN_TEN_NGUOI_DUNG + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
+                COLUMN_TEN_DANG_NHAP + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
                 COLUMN_SO_DIEN_THOAI + ") VALUES ('dangtrungminh', 'admin', 1, '111222333')";
         String insertThanhVien4 = "INSERT INTO " + TABLE_THANHVIEN + " (" +
-                COLUMN_TEN_NGUOI_DUNG + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
+                COLUMN_TEN_DANG_NHAP + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
                 COLUMN_SO_DIEN_THOAI + ") VALUES ('khachhang', 'khachhang', 3, '111222333')";
         String insertThanhVien5 = "INSERT INTO " + TABLE_THANHVIEN + " (" +
-                COLUMN_TEN_NGUOI_DUNG + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
+                COLUMN_TEN_DANG_NHAP + ", " + COLUMN_MAT_KHAU + ", " + COLUMN_ID_QUYEN_THANHVIEN + ", " +
                 COLUMN_SO_DIEN_THOAI + ") VALUES ('nhanvien', 'nhanvien', 2, '111222333')";
 
         sqLiteDatabase.execSQL(insertThanhVien1);
