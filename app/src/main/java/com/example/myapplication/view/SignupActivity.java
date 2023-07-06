@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import com.example.myapplication.R;
 
 public class SignupActivity extends AppCompatActivity {
     boolean chapNhanDieuKhoan = false;
@@ -72,7 +74,7 @@ public class SignupActivity extends AppCompatActivity {
 
     // Hàm chuyển trang
     public void NextPage(){
-        Intent intent = new Intent(SignupActivity.this,LoginActivity.class);
+        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 

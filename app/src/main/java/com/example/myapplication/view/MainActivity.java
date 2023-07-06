@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.view;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.R;
+import com.example.myapplication.model.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;

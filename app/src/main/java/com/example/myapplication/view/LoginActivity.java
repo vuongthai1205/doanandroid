@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.view;
 
 
 import android.app.AlertDialog;
@@ -19,6 +19,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.R;
+import com.example.myapplication.model.DatabaseHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -83,15 +86,15 @@ public class LoginActivity extends AppCompatActivity {
             DatabaseHelper dbHelper = new DatabaseHelper(this);
             SQLiteDatabase database = dbHelper.getReadableDatabase();
 
-            String [] information = {dbHelper.COLUMN_TEN_DANG_NHAP,dbHelper.COLUMN_MAT_KHAU,dbHelper.COLUMN_ID_QUYEN_THANHVIEN};
-            String select_ten_nguoi_dung = dbHelper.COLUMN_TEN_DANG_NHAP + " = ?";
+            String [] information = {dbHelper.getCOLUMN_TEN_DANG_NHAP(),dbHelper.getCOLUMN_MAT_KHAU(),dbHelper.getCOLUMN_ID_QUYEN_THANHVIEN()};
+            String select_ten_nguoi_dung = dbHelper.getCOLUMN_TEN_DANG_NHAP() + " = ?";
             String [] select_ten_args = {username};
             Cursor cursor;
-            cursor = database.query(dbHelper.TABLE_THANHVIEN,
+            cursor = database.query(dbHelper.getTABLE_THANHVIEN(),
                     information,select_ten_nguoi_dung,select_ten_args,null,null,null);
 
             if(cursor.moveToFirst()){
-                String select_password = cursor.getString(cursor.getColumnIndexOrThrow(dbHelper.COLUMN_MAT_KHAU));
+                String select_password = cursor.getString(cursor.getColumnIndexOrThrow(dbHelper.getCOLUMN_MAT_KHAU()));
                 if(password.equals(select_password)){
                     // Chuyển sang một trang khác
                     Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
