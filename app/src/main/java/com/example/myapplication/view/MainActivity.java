@@ -9,22 +9,23 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.model.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;
 
     private SQLiteDatabase sqLiteDatabase;
+    private ActivityMainBinding activityMainBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+
+        setContentView(activityMainBinding.getRoot());
 
 
-        setContentView(R.layout.activity_main);
-
-        Button button_login_home = findViewById(R.id.button_login_home);
-
-        button_login_home.setOnClickListener(new View.OnClickListener() {
+        activityMainBinding.buttonLoginHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start the Login activity
@@ -35,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        Button button_signup_home = findViewById(R.id.button_signup_home);
-        button_signup_home.setOnClickListener(new View.OnClickListener() {
+
+        activityMainBinding.buttonSignupHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Start the Login activity
