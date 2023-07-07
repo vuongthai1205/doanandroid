@@ -1,10 +1,18 @@
 package com.example.myapplication.model;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.myapplication.config.DatabaseHelper;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class ThanhVienRepository {
     private DatabaseHelper databaseHelper;
@@ -36,4 +44,32 @@ public class ThanhVienRepository {
 
         sqLiteDatabase.insert(databaseHelper.getTABLE_THANHVIEN(), null , values);
     }
+
+    public List<ThanhVien> getAllThanhVien() throws ParseException {
+        List<ThanhVien> list = new ArrayList<>();
+        String pattern = "dd-MM-yyyy";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+        Cursor cursor = sqLiteDatabase.query(databaseHelper.getTABLE_THANHVIEN(), null,null,null,null,null,null);
+        if (cursor != null && cursor.moveToFirst()){
+            do {
+                @SuppressLint("Range") String tenDangNhap = cursor.getString(cursor.getColumnIndex(databaseHelper.getCOLUMN_TEN_DANG_NHAP()));
+                @SuppressLint("Range") String ho = cursor.getString(cursor.getColumnIndex(databaseHelper.getCOLUMN_HO()));
+                @SuppressLint("Range") String ten = cursor.getString(cursor.getColumnIndex(databaseHelper.getCOLUMN_TEN()));
+                @SuppressLint("Range") String matKhau = cursor.getString(cursor.getColumnIndex(databaseHelper.getCOLUMN_MAT_KHAU()));
+                @SuppressLint("Range") String avatar = cursor.getString(cursor.getColumnIndex(databaseHelper.getCOLUMN_AVATAR()));
+                @SuppressLint("Range") int idQuyenThanhVien = cursor.getInt(cursor.getColumnIndex(databaseHelper.getCOLUMN_ID_QUYEN_THANHVIEN()));
+                @SuppressLint("Range") String soDienThoai = cursor.getString(cursor.getColumnIndex(databaseHelper.getCOLUMN_SO_DIEN_THOAI()));
+                @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex(databaseHelper.getCOLUMN_EMAIL()));
+                @SuppressLint("Range") Date ngayTao = dateFormat.parse(cursor.getString(cursor.getColumnIndex(databaseHelper.getCOLUMN_NGAY_TAO())) );
+                @SuppressLint("Range") Date ngayCapNhat = dateFormat.parse(cursor.getString(cursor.getColumnIndex(databaseHelper.getCOLUMN_NGAY_CAP_NHAT())));
+                ThanhVien thanhVien = new ThanhVien(tenDangNhap,ho,ten,matKhau,avatar,idQuyenThanhVien,email,soDienThoai,ngayTao,ngayCapNhat);
+                list.add(thanhVien);
+            }
+            while(cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
 }

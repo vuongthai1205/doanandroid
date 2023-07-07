@@ -4,8 +4,8 @@ public class Quyen {
     private int idQuyen;
     private String tenQuyen;
 
-    public Quyen(int idQuyen, String tenQuyen) {
-        this.idQuyen = idQuyen;
+    public Quyen( String tenQuyen) {
+
         this.tenQuyen = tenQuyen;
     }
 
@@ -15,9 +15,6 @@ public class Quyen {
         return idQuyen;
     }
 
-    public void setIdQuyen(int idQuyen) {
-        this.idQuyen = idQuyen;
-    }
 
     public String getTenQuyen() {
         return tenQuyen;

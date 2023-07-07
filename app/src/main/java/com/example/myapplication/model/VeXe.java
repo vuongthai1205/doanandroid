@@ -10,8 +10,8 @@ public class VeXe {
     private Date ngayGioDat;
     private String thongTinKhac;
 
-    public VeXe(int idVeXe, int idThanhVienVeXe, int idLoaiXeVeXe, int idChuyenXeVeXe, Date ngayGioDat, String thongTinKhac) {
-        this.idVeXe = idVeXe;
+    public VeXe( int idThanhVienVeXe, int idLoaiXeVeXe, int idChuyenXeVeXe, Date ngayGioDat, String thongTinKhac) {
+
         this.idThanhVienVeXe = idThanhVienVeXe;
         this.idLoaiXeVeXe = idLoaiXeVeXe;
         this.idChuyenXeVeXe = idChuyenXeVeXe;

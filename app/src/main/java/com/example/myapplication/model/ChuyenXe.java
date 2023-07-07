@@ -10,8 +10,8 @@ public class ChuyenXe {
     private String diaDiemDi;
     private String diaDiemDen;
 
-    public ChuyenXe(int idChuyenXe, String tenChuyen, String hinhAnh, Date thoiGianBatDau, String diaDiemDi, String diaDiemDen) {
-        this.idChuyenXe = idChuyenXe;
+    public ChuyenXe( String tenChuyen, String hinhAnh, Date thoiGianBatDau, String diaDiemDi, String diaDiemDen) {
+
         this.tenChuyen = tenChuyen;
         this.hinhAnh = hinhAnh;
         this.thoiGianBatDau = thoiGianBatDau;
