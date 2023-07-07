@@ -5,8 +5,8 @@ public class LoaiXe {
     private String tenLoaiXe;
     private int soLuongGhe;
 
-    public LoaiXe(int idLoaiXe, String tenLoaiXe, int soLuongGhe) {
-        this.idLoaiXe = idLoaiXe;
+    public LoaiXe( String tenLoaiXe, int soLuongGhe) {
+
         this.tenLoaiXe = tenLoaiXe;
         this.soLuongGhe = soLuongGhe;
     }

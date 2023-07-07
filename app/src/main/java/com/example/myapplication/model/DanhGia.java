@@ -7,8 +7,8 @@ public class DanhGia {
     private int diemDanhGia;
     private String nhanXet;
 
-    public DanhGia(int idDanhGia, int idThanhVienDanhGia, int idChuyenXeDanhGia, int diemDanhGia, String nhanXet) {
-        this.idDanhGia = idDanhGia;
+    public DanhGia(int idThanhVienDanhGia, int idChuyenXeDanhGia, int diemDanhGia, String nhanXet) {
+
         this.idThanhVienDanhGia = idThanhVienDanhGia;
         this.idChuyenXeDanhGia = idChuyenXeDanhGia;
         this.diemDanhGia = diemDanhGia;
@@ -21,9 +21,6 @@ public class DanhGia {
         return idDanhGia;
     }
 
-    public void setIdDanhGia(int idDanhGia) {
-        this.idDanhGia = idDanhGia;
-    }
 
     public int getIdThanhVienDanhGia() {
         return idThanhVienDanhGia;

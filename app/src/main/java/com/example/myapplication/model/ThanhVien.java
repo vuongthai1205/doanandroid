@@ -15,8 +15,8 @@ public class ThanhVien {
     private Date ngayTao;
     private Date ngayCapNhat;
 
-    public ThanhVien(int id, String tenDangNhap, String ho, String ten, String matKhau, String avatar, int idQuyenThanhVien, String email, String soDienThoai, Date ngayTao, Date ngayCapNhat) {
-        this.id = id;
+    public ThanhVien( String tenDangNhap, String ho, String ten, String matKhau, String avatar, int idQuyenThanhVien, String email, String soDienThoai, Date ngayTao, Date ngayCapNhat) {
+
         this.tenDangNhap = tenDangNhap;
         this.ho = ho;
         this.ten = ten;
@@ -35,9 +35,6 @@ public class ThanhVien {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getTenDangNhap() {
         return tenDangNhap;

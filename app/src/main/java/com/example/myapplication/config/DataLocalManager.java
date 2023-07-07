@@ -25,4 +25,6 @@ public class DataLocalManager {
     public static boolean getFirstInstall(){
         return DataLocalManager.getInstance().mySharePreferences.getBooleanValue(PREF_FIRST_INSTALL);
     }
+
+
 }
