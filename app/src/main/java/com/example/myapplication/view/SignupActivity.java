@@ -2,6 +2,8 @@ package com.example.myapplication.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,125 +29,96 @@ public class SignupActivity extends AppCompatActivity {
     private Button btnSignup;
     private Switch SwitchDienKhoan;
 
-    // Tạo intent để chuyển trang
-
     public static final String TAG = SignupActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState == null){
-            Log.e(TAG, "Debug SignupActivity" );
-        }
-        else{
-            Log.e(TAG, "Welcome SignupActivity");
-        }
         setContentView(R.layout.activity_signup);
         HandlSignup();
-        HandleSwitch();
-
-
-    // Hàm xử lý chính
     }
+
     public void HandlSignup() {
-        InputNameLogin = (EditText) findViewById(R.id.txtUserName);
-        InputNumber = (EditText) findViewById(R.id.txtPhoneNumber);
-        InputEmail = (EditText) findViewById(R.id.txtEmail);
-        InputPassWord = (EditText) findViewById(R.id.txtPassword);
-        InputAgianPW = (EditText) findViewById(R.id.txtPasswordAgain);
-        SwitchDienKhoan = (Switch) findViewById(R.id.switchDieuKhoan);
-        btnSignup = (Button) findViewById(R.id.btnSignUp);
-
-        btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                btnSignup();
-                if (chapNhanDieuKhoan){
-                    Toast.makeText(getApplicationContext(), "Bạn đã đăng kí thành công!", Toast.LENGTH_SHORT).show();
-                    NextPage();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Bạn phải chấp nhận điều khoản!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-    }
-
-    // Hàm chuyển trang
-    public void NextPage(){
-        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    // Hàm xử lý Điều khoản
-    public void HandleSwitch() {
+        InputNameLogin = findViewById(R.id.txtUserName);
+        InputNumber = findViewById(R.id.txtPhoneNumber);
+        InputEmail = findViewById(R.id.txtEmail);
+        InputPassWord = findViewById(R.id.txtPassword);
+        InputAgianPW = findViewById(R.id.txtPasswordAgain);
+        SwitchDienKhoan = findViewById(R.id.switchDieuKhoan);
+        btnSignup = findViewById(R.id.btnSignUp);
 
         SwitchDienKhoan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    chapNhanDieuKhoan = true;
-                    Toast.makeText(getApplicationContext(), "Bạn đã chấp nhận điều khoản!", Toast.LENGTH_SHORT).show();
+                chapNhanDieuKhoan = isChecked;
 
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Bạn chưa chấp nhận điều khoản!", Toast.LENGTH_SHORT).show();
-
-                    chapNhanDieuKhoan = false;
-                }
             }
         });
-    }
-    // hàm xử lý button đăng ký
-    public void btnSignup(){
-        String inputNameLogin = InputNameLogin.getText().toString().trim();
-        String inputNumber = InputNumber.getText().toString().trim();
-        String inputEmail = InputEmail.getText().toString().trim();
-        String inputPassWord = InputPassWord.getText().toString().trim();
-        String inputAgainPW = InputAgianPW.getText().toString().trim();
-        String chooseDieuKhoan = SwitchDienKhoan.getText().toString().trim();
+
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = InputNameLogin.getText().toString().trim();
+                String phoneNumber = InputNumber.getText().toString().trim();
+                String email = InputEmail.getText().toString().trim();
+                String password = InputPassWord.getText().toString().trim();
+                String confirmPassword = InputAgianPW.getText().toString().trim();
+
+                if (!chapNhanDieuKhoan) {
+                    Toast.makeText(SignupActivity.this, "Bạn phải chấp nhận điều khoản", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(username)) {
+                    Toast.makeText(SignupActivity.this, "Tên đăng nhập không được trống", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(phoneNumber)) {
+                    Toast.makeText(SignupActivity.this, "Số điện thoại không được trống", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (!TextUtils.isDigitsOnly(phoneNumber)) {
+                    Toast.makeText(SignupActivity.this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(SignupActivity.this, "Email không được trống", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    Toast.makeText(SignupActivity.this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(password) || password.length() < 5) {
+                    Toast.makeText(SignupActivity.this, "Mật khẩu phải có ít nhất 5 kí tự", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(confirmPassword) || !password.equals(confirmPassword)) {
+                    Toast.makeText(SignupActivity.this, "Mật khẩu nhập lại không khớp", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+                builder.setMessage("Chính sách bảo mật \n " +
+                        "1.Không chia sẻ mật khẩu với bất kì tổ chức cá nhân nào \n 2.Thông báo cho người dùng về việc thu thập dữ liệu riêng tư và cách thức mà nó sử dụng.\n" +
+                        "3.Cung cấp cho người dùng lựa chọn từ chối thu thập dữ liệu.\n" +
+                        "4.Cho phép người dùng truy cập dữ liệu được thu thập hoặc tranh luận về tính chính xác của nó.\n" +
+                        "5.Đảm bảo với người dùng rằng dữ liệu của họ an toàn và bảo mật." );
 
 
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Chuyển hướng đến trang đăng ký tài khoản
+                        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
 
-        // kiểm tra tên đăng nhập và số điên thoại không trống
-        if(TextUtils.isEmpty(inputNameLogin) || (TextUtils.isEmpty(inputNumber))){
-                Toast.makeText(this, "Không được để trống tên đăng nhập hoặc số điện thoại ",Toast.LENGTH_SHORT).show();
-                return;
-        }
-
-        // kiểm tra số điện thoại phải là số
-        if (!TextUtils.isDigitsOnly(inputNumber))
-            Toast.makeText(this, "Số điện thoại phải là số! ",Toast.LENGTH_SHORT).show();
-
-        // kiểm tra email phải hợp lệ và không trống
-        if (TextUtils.isEmpty(inputEmail)){
-            Toast.makeText(this, "Không được để trống email ",Toast.LENGTH_SHORT).show();
-            return;
-        }  else if (!Patterns.EMAIL_ADDRESS.matcher(inputEmail).matches()) {
-            Toast.makeText(this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // kiểm tra password không trống và độ dài của password
-        if (TextUtils.isEmpty(inputPassWord)){
-            Toast.makeText(this, "Không được để trống mật khẩu",Toast.LENGTH_SHORT).show();
-
-        }
-        else if (inputPassWord.length() < 5) {
-            Toast.makeText(this, "Mật khẩu phải có ít nhất 5 ký tự", Toast.LENGTH_SHORT).show();
-
-        }
-
-        // Kiểm tra password phải trùng với ô nhập password
-        if (TextUtils.isEmpty(inputAgainPW)){
-            Toast.makeText(this, "Không được để trống nhập lại mật khẩu ",Toast.LENGTH_SHORT).show();
-
-        }
-        else if(!inputAgainPW.equals(inputPassWord)){
-            Toast.makeText(this, "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
-        }
-
-
+                });
+                builder.setNegativeButton("Hủy", null);
+                builder.show();
+            }
+        });
     }
 }
