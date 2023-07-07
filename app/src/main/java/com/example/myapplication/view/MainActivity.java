@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.R;
+import com.example.myapplication.config.DataLocalManager;
 import com.example.myapplication.databinding.ActivityMainBinding;
-import com.example.myapplication.model.DatabaseHelper;
+import com.example.myapplication.config.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;

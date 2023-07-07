@@ -21,7 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
-import com.example.myapplication.model.DatabaseHelper;
+import com.example.myapplication.config.DatabaseHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
