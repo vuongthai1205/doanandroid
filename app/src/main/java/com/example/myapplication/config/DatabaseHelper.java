@@ -229,6 +229,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    @Override
+    public SQLiteDatabase getReadableDatabase() {
+        return super.getReadableDatabase();
+    }
+
     public String getTABLE_QUYEN() {
         return TABLE_QUYEN;
     }
