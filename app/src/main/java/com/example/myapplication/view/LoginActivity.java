@@ -102,7 +102,9 @@ public class LoginActivity extends AppCompatActivity {
                 String select_password = cursor.getString(cursor.getColumnIndexOrThrow(dbHelper.getCOLUMN_MAT_KHAU()));
                 int quyenHienTai = cursor.getInt(cursor.getColumnIndexOrThrow(dbHelper.getCOLUMN_ID_QUYEN_THANHVIEN()));
                 if(password.equals(select_password)){
-                    luuThongTinQuyen(String.valueOf(quyenHienTai));
+
+                    String tenQuyen = loginViewModel.chuyenDoiQuyenThanhVien(this, quyenHienTai);
+                    luuThongTinQuyen(tenQuyen);
                     chuyenTrangTheoQuyen(quyenHienTai);
                 }else{
 //                    Toast.makeText(getApplicationContext(), "Kiểm tra lại mật khẩu", Toast.LENGTH_SHORT).show();

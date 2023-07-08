@@ -1,5 +1,6 @@
 package com.example.myapplication.viewmodel;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -12,16 +13,25 @@ public class LoginViewModel {
     public LoginViewModel() {
     }
 
-    public String chuyenDoiQuyenThanhVien(int id){
-        String query = "SELECT " + databaseHelper.getCOLUMN_TEN_QUYEN() + " FROM " + databaseHelper.getTABLE_THANHVIEN() + " , " + databaseHelper.getTABLE_QUYEN() + " WHERE " +databaseHelper.getTABLE_THANHVIEN()+ "."+ databaseHelper.getCOLUMN_ID_QUYEN_THANHVIEN() + " = " + databaseHelper.getTABLE_QUYEN() + "." + databaseHelper.getCOLUMN_ID_QUYEN()
-                + " AND " + databaseHelper.getTABLE_THANHVIEN()+ "."+ databaseHelper.getCOLUMN_ID_QUYEN_THANHVIEN() + " = " + id;
-        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+    public String chuyenDoiQuyenThanhVien(Context context, int id){
         String tenQuyen = null;
-        if (cursor.moveToFirst()){
-            tenQuyen = cursor.getString(0);
+        databaseHelper = new DatabaseHelper(context);
+        sqLiteDatabase = databaseHelper.getReadableDatabase();
 
+        String[] projection = { databaseHelper.getCOLUMN_TEN_QUYEN() };
+        String selection = databaseHelper.getCOLUMN_ID_QUYEN()+ " = ?";
+        String[] selectionArgs = { String.valueOf(id) };
+        String tableName = databaseHelper.getTABLE_QUYEN();
+
+        Cursor cursor = sqLiteDatabase.query(tableName, projection, selection, selectionArgs, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            tenQuyen = cursor.getString(cursor.getColumnIndexOrThrow(databaseHelper.getCOLUMN_TEN_QUYEN()));
         }
+
         cursor.close();
+        databaseHelper.close();
+
         return tenQuyen;
     }
 }
