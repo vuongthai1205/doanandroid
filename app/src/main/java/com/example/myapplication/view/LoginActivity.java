@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.view;
 
 
 import android.app.AlertDialog;
@@ -21,8 +21,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LoginActivity extends AppCompatActivity {
+import com.example.myapplication.R;
+import com.example.myapplication.config.DatabaseHelper;
+import com.example.myapplication.config.MySharePreferences;
+import com.example.myapplication.model.ThanhVienRepository;
 
+public class LoginActivity extends AppCompatActivity {
+    private ThanhVienRepository thanhVienRepository = new ThanhVienRepository(this);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Xóa trống tên đăng nhập
         LinearLayout layout_username = findViewById(R.id.layoutUserName);
-        ImageView img_clear_username = layout_username.findViewById(R.id.imgClearUserName);
+        ImageView img_clear_username = findViewById(R.id.imgClearUserName);
         final EditText edt_clear_username = layout_username.findViewById(R.id.txtUserName);
         img_clear_username.setOnClickListener(v -> edt_clear_username.setText(""));
 
@@ -84,21 +89,23 @@ public class LoginActivity extends AppCompatActivity {
             DatabaseHelper dbHelper = new DatabaseHelper(this);
             SQLiteDatabase database = dbHelper.getReadableDatabase();
 
-            String [] information = {dbHelper.COLUMN_TEN_DANG_NHAP,dbHelper.COLUMN_MAT_KHAU,dbHelper.COLUMN_ID_QUYEN_THANHVIEN};
-            String select_ten_nguoi_dung = dbHelper.COLUMN_TEN_DANG_NHAP + " = ?";
+            luuThongTin(username);
+
+            String [] information = {dbHelper.getCOLUMN_TEN_DANG_NHAP(),dbHelper.getCOLUMN_MAT_KHAU(),dbHelper.getCOLUMN_ID_QUYEN_THANHVIEN()};
+            String select_ten_nguoi_dung = dbHelper.getCOLUMN_TEN_DANG_NHAP() + " = ?";
             String [] select_ten_args = {username};
             Cursor cursor;
-            cursor = database.query(dbHelper.TABLE_THANHVIEN,
+            cursor = database.query(dbHelper.getTABLE_THANHVIEN(),
                     information,select_ten_nguoi_dung,select_ten_args,null,null,null);
 
             if(cursor.moveToFirst()){
-                String select_password = cursor.getString(cursor.getColumnIndexOrThrow(dbHelper.COLUMN_MAT_KHAU));
+                String select_password = cursor.getString(cursor.getColumnIndexOrThrow(dbHelper.getCOLUMN_MAT_KHAU()));
+                int quyenHienTai = cursor.getInt(cursor.getColumnIndexOrThrow(dbHelper.getCOLUMN_ID_QUYEN_THANHVIEN()));
                 if(password.equals(select_password)){
-                    // Chuyển sang một trang khác
-                    Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
-                    startActivity(intent);
-                    // Kết thúc Activity hiện tại
-                    finish();
+
+                    String tenQuyen = thanhVienRepository.chuyenDoiQuyenThanhVien(quyenHienTai);
+                    luuThongTinQuyen(tenQuyen);
+                    chuyenTrangTheoQuyen(quyenHienTai);
                 }else{
 //                    Toast.makeText(getApplicationContext(), "Kiểm tra lại mật khẩu", Toast.LENGTH_SHORT).show();
                     edt_password.setError("Kiểm tra lại mật khẩu");
@@ -140,5 +147,28 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void luuThongTin(String name){
+        MySharePreferences mySharePreferences = new MySharePreferences(this);
+        mySharePreferences.putStringValue("ten_dang_nhap" , name);
+
+    }
+    private void luuThongTinQuyen(String name){
+        MySharePreferences mySharePreferences = new MySharePreferences(this);
+        mySharePreferences.putStringValue("ten_quyen" , name);
+
+    }
+    private void chuyenTrangTheoQuyen(int quyen){
+        if(quyen == 1 || quyen == 2){
+            Intent intent = new Intent(LoginActivity.this, AdminManagerActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            Intent intent = new Intent(LoginActivity.this, UserManagerActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
