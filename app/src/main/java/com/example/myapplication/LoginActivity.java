@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -127,6 +128,17 @@ public class LoginActivity extends AppCompatActivity {
             }
             cursor.close();
             database.close();
+        });
+
+        //ResetPassword
+
+        TextView textView_reset_password = findViewById(R.id.textViewResetPassword);
+        textView_reset_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,ResetPasswordActivity.class);
+                startActivity(intent);
+            }
         });
     }
 }
