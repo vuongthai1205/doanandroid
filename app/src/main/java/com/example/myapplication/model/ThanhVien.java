@@ -29,6 +29,8 @@ public class ThanhVien {
         this.ngayCapNhat = ngayCapNhat;
     }
 
+
+
     // Các phương thức truy cập (getter) và cập nhật (setter) cho các trường
 
     public int getId() {
