@@ -24,10 +24,9 @@ import com.example.myapplication.R;
 import com.example.myapplication.config.DatabaseHelper;
 import com.example.myapplication.config.MySharePreferences;
 import com.example.myapplication.model.ThanhVienRepository;
-import com.example.myapplication.viewmodel.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
-    private LoginViewModel loginViewModel = new LoginViewModel();
+    private ThanhVienRepository thanhVienRepository = new ThanhVienRepository(this);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 int quyenHienTai = cursor.getInt(cursor.getColumnIndexOrThrow(dbHelper.getCOLUMN_ID_QUYEN_THANHVIEN()));
                 if(password.equals(select_password)){
 
-                    String tenQuyen = loginViewModel.chuyenDoiQuyenThanhVien(this, quyenHienTai);
+                    String tenQuyen = thanhVienRepository.chuyenDoiQuyenThanhVien(quyenHienTai);
                     luuThongTinQuyen(tenQuyen);
                     chuyenTrangTheoQuyen(quyenHienTai);
                 }else{

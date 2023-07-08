@@ -72,4 +72,25 @@ public class ThanhVienRepository {
         return list;
     }
 
+    public String chuyenDoiQuyenThanhVien(int id){
+        String tenQuyen = null;
+        sqLiteDatabase = databaseHelper.getReadableDatabase();
+
+        String[] projection = { databaseHelper.getCOLUMN_TEN_QUYEN() };
+        String selection = databaseHelper.getCOLUMN_ID_QUYEN()+ " = ?";
+        String[] selectionArgs = { String.valueOf(id) };
+        String tableName = databaseHelper.getTABLE_QUYEN();
+
+        Cursor cursor = sqLiteDatabase.query(tableName, projection, selection, selectionArgs, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            tenQuyen = cursor.getString(cursor.getColumnIndexOrThrow(databaseHelper.getCOLUMN_TEN_QUYEN()));
+        }
+
+        cursor.close();
+        databaseHelper.close();
+
+        return tenQuyen;
+    }
+
 }
