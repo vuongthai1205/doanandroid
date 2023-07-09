@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "doanandroid.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     // Tạo các hằng số cho tên bảng
     private final String TABLE_QUYEN = "table_quyen";
     private final String TABLE_THANHVIEN = "table_thanhvien";
@@ -71,14 +71,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String createTable_thanhvien = "CREATE TABLE " + getTABLE_THANHVIEN() + " (" +
                 getCOLUMN_ID_THANHVIEN() + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                getCOLUMN_TEN_DANG_NHAP() + " VARCHAR(100) NOT NULL, " +
+                getCOLUMN_TEN_DANG_NHAP() + " VARCHAR(100) NOT NULL UNIQUE  , " +
                 getCOLUMN_HO() + " VARCHAR(30) ," +
                 getCOLUMN_TEN() + " VARCHAR(30) ," +
                 getCOLUMN_MAT_KHAU() + " VARCHAR(50) NOT NULL, " +
                 getCOLUMN_AVATAR() + " VARCHAR(100), " +
                 getCOLUMN_ID_QUYEN_THANHVIEN() + " INTEGER NOT NULL, " +
-                getCOLUMN_EMAIL() + " VARCHAR(50), " +
-                getCOLUMN_SO_DIEN_THOAI() + " VARCHAR(12) NOT NULL, " +
+                getCOLUMN_EMAIL() + " VARCHAR(50) UNIQUE , " +
+                getCOLUMN_SO_DIEN_THOAI() + " VARCHAR(12) NOT NULL UNIQUE , " +
                 getCOLUMN_NGAY_TAO() + " DATETIME, " +
                 getCOLUMN_NGAY_CAP_NHAT() + " DATETIME, " +
                 "FOREIGN KEY (" + getCOLUMN_ID_QUYEN_THANHVIEN() + ") REFERENCES " + getTABLE_QUYEN() + "(" + getCOLUMN_ID_QUYEN() + "))";
@@ -146,10 +146,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 getCOLUMN_SO_DIEN_THOAI() +", " + getCOLUMN_EMAIL() + ") VALUES ('dangtrungminh', 'admin', 1, '111222333', 'dangtrungminh@gmail.com')";
         String insertThanhVien4 = "INSERT INTO " + getTABLE_THANHVIEN() + " (" +
                 getCOLUMN_TEN_DANG_NHAP() + ", " + getCOLUMN_MAT_KHAU() + ", " + getCOLUMN_ID_QUYEN_THANHVIEN() + ", " +
-                getCOLUMN_SO_DIEN_THOAI() + ") VALUES ('khachhang', 'khachhang', 3, '111222333')";
+                getCOLUMN_SO_DIEN_THOAI() + ") VALUES ('khachhang', 'khachhang', 3, '123')";
         String insertThanhVien5 = "INSERT INTO " + getTABLE_THANHVIEN() + " (" +
                 getCOLUMN_TEN_DANG_NHAP() + ", " + getCOLUMN_MAT_KHAU() + ", " + getCOLUMN_ID_QUYEN_THANHVIEN() + ", " +
-                getCOLUMN_SO_DIEN_THOAI() + ") VALUES ('nhanvien', 'nhanvien', 2, '111222333')";
+                getCOLUMN_SO_DIEN_THOAI() + ") VALUES ('nhanvien', 'nhanvien', 2, '1234')";
 
         sqLiteDatabase.execSQL(insertThanhVien1);
         sqLiteDatabase.execSQL(insertThanhVien2);

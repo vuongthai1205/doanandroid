@@ -12,10 +12,10 @@ public class ThanhVien {
     private int idQuyenThanhVien;
     private String email;
     private String soDienThoai;
-    private Date ngayTao;
-    private Date ngayCapNhat;
+    private String ngayTao;
+    private String ngayCapNhat;
 
-    public ThanhVien( String tenDangNhap, String ho, String ten, String matKhau, String avatar, int idQuyenThanhVien, String email, String soDienThoai, Date ngayTao, Date ngayCapNhat) {
+    public ThanhVien( String tenDangNhap, String ho, String ten, String matKhau, String avatar, int idQuyenThanhVien, String email, String soDienThoai, String ngayTao, String ngayCapNhat) {
 
         this.tenDangNhap = tenDangNhap;
         this.ho = ho;
@@ -102,19 +102,19 @@ public class ThanhVien {
         this.soDienThoai = soDienThoai;
     }
 
-    public Date getNgayTao() {
+    public String getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(Date ngayTao) {
+    public void setNgayTao(String ngayTao) {
         this.ngayTao = ngayTao;
     }
 
-    public Date getNgayCapNhat() {
+    public String getNgayCapNhat() {
         return ngayCapNhat;
     }
 
-    public void setNgayCapNhat(Date ngayCapNhat) {
+    public void setNgayCapNhat(String ngayCapNhat) {
         this.ngayCapNhat = ngayCapNhat;
     }
 }
