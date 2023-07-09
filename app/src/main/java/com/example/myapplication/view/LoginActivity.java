@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+import com.example.myapplication.config.DataLocalManager;
 import com.example.myapplication.config.DatabaseHelper;
 import com.example.myapplication.config.MySharePreferences;
 import com.example.myapplication.model.ThanhVienRepository;
@@ -44,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             DatabaseHelper dbHelper = new DatabaseHelper(this);
             SQLiteDatabase database = dbHelper.getReadableDatabase();
 
-            luuThongTin(username);
+            DataLocalManager.setNameUser(username);
 
             String [] information = {dbHelper.getCOLUMN_TEN_DANG_NHAP(),dbHelper.getCOLUMN_MAT_KHAU(),dbHelper.getCOLUMN_ID_QUYEN_THANHVIEN()};
             String select_ten_nguoi_dung = dbHelper.getCOLUMN_TEN_DANG_NHAP() + " = ?";
@@ -59,7 +60,8 @@ public class LoginActivity extends AppCompatActivity {
                 if(password.equals(select_password)){
 
                     String tenQuyen = thanhVienRepository.chuyenDoiQuyenThanhVien(quyenHienTai);
-                    luuThongTinQuyen(tenQuyen);
+                    DataLocalManager.setNameRole(tenQuyen);
+                    DataLocalManager.setIdRole(quyenHienTai);
                     chuyenTrangTheoQuyen(quyenHienTai);
                 }else{
                     edt_password.setError("Kiểm tra lại mật khẩu");
@@ -147,16 +149,7 @@ public class LoginActivity extends AppCompatActivity {
         editText.setSelection(editText.getText().length());//Di chuyển con trỏ về cuối dòng
     }
 
-    private void luuThongTin(String name){
-        MySharePreferences mySharePreferences = new MySharePreferences(this);
-        mySharePreferences.putStringValue("ten_dang_nhap" , name);
 
-    }
-    private void luuThongTinQuyen(String name){
-        MySharePreferences mySharePreferences = new MySharePreferences(this);
-        mySharePreferences.putStringValue("ten_quyen" , name);
-
-    }
     private void chuyenTrangTheoQuyen(int quyen){
         if(quyen == 1 || quyen == 2){
             Intent intent = new Intent(LoginActivity.this, AdminManagerActivity.class);
