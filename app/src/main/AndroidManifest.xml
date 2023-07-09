@@ -53,6 +53,13 @@
         <activity
             android:name=".view.LoginActivity"
             android:label="" />
+        <activity
+            android:name=".view.ResetPasswordActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
     </application>
 
 </manifest>
