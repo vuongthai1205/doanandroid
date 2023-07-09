@@ -157,6 +157,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(insertThanhVien4);
         sqLiteDatabase.execSQL(insertThanhVien5);
 
+
 // Thêm dữ liệu vào bảng table_loaixe
         String insertLoaiXe1 = "INSERT INTO " + getTABLE_LOAIXE() + " (" +
                 getCOLUMN_TEN_LOAIXE() + ", " + getCOLUMN_SO_LUONG_GHE() + ") VALUES ('Xe 5 chỗ', 5)";
