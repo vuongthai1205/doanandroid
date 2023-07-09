@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.AccountFragment">
+    <data>
+        <variable
+            name="AccountViewModel"
+            type="com.example.myapplication.viewmodel.AccountViewModel" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="18dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/containerText"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Họ và tên: "
+                android:textSize="18sp"
+                android:layout_marginTop="18dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên đăng nhập: "
+                android:textSize="18sp"
+                android:layout_marginTop="18dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số điện thoại: "
+                android:textSize="18sp"
+                android:layout_marginTop="18dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: "
+                android:textSize="18sp"
+                android:layout_marginTop="18dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày tạo: "
+                android:textSize="18sp"
+                android:layout_marginTop="18dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày cập nhật: "
+                android:textSize="18sp"
+                android:layout_marginTop="18dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ảnh đại diện: "
+                android:textSize="18sp"
+                android:layout_marginTop="18dp"/>
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/containerInfo"
+            android:layout_toRightOf="@+id/containerText"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/accountName"
+                android:text="@={AccountViewModel.hoVaTen}"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/accountUserName"
+
+                android:text="@={AccountViewModel.tenDangNhap}"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/accountSodienThoai"
+
+                android:text="@={AccountViewModel.soDienThoai}"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/accountEmail"
+
+                android:text="@={AccountViewModel.email}"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/accountNgayTao"
+
+                android:text="@={AccountViewModel.ngayTao}"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/accountNgayCapNhat"
+
+                android:text="@={AccountViewModel.ngayCapNhat}"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <ImageView
+                android:id="@+id/accountAvatar"
+
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher_background"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            >
+            <Button
+                android:id="@+id/btnUpdateAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cập nhật thông tin"/>
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đăng xuất"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</layout>
