@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -32,56 +33,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button button_login = findViewById(R.id.btnSignIn);
-
-
-        //Xóa trống tên đăng nhập
-        LinearLayout layout_username = findViewById(R.id.layoutUserName);
-        ImageView img_clear_username = findViewById(R.id.imgClearUserName);
-        final EditText edt_clear_username = layout_username.findViewById(R.id.txtUserName);
-        img_clear_username.setOnClickListener(v -> edt_clear_username.setText(""));
-
-
-        //Ẩn/Hiện mật khẩu
-        LinearLayout layout_password = findViewById(R.id.layoutPassword);
-        ImageView img_show_password = layout_password.findViewById(R.id.imgShowPassword);
-        final EditText edt_show_password = layout_password.findViewById(R.id.txtPassword);
-        img_show_password.setOnClickListener(new View.OnClickListener() {
-            boolean isPasswordVisible = false;
-            @Override
-            public void onClick(View v) {
-                if(isPasswordVisible){
-                    edt_show_password.setTransformationMethod(null);// Hiện mật khẩu
-                }
-                else{
-                    edt_show_password.setTransformationMethod(new PasswordTransformationMethod());//Ẩn mật khẩu
-                }
-                edt_show_password.setSelection(edt_show_password.getText().length());//Di chuyển con trỏ về cuối dòng
-                isPasswordVisible = !isPasswordVisible;// Đảo ngược trạng thái
-            }
-        });
-
-        //Hạn chế người dùng nhập sai định dạng
-        InputFilter filter = new InputFilter() {
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                for (int i = start;i < end;i++){
-                    char c = source.charAt(i);
-                    if (Character.isWhitespace(c) || c == ','|| c == '.'){
-                        return "";
-                    }
-                }
-                return null;
-            }
-        };
-
         EditText edt_username = findViewById(R.id.txtUserName);
         EditText edt_password = findViewById(R.id.txtPassword);
-        // Set filter cho EditText Username và EditText Password
-        edt_username.setFilters(new InputFilter[] {filter});
-        edt_password.setFilters(new InputFilter[] {filter});
 
 
-        //Xác thực đăng nhập
+        //Xử lí button đăng nhập
         button_login.setOnClickListener(v -> {//Convert ra bieu thuc lambda
             String username = edt_username.getText().toString();
             String password = edt_password.getText().toString();
@@ -106,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
                     luuThongTinQuyen(tenQuyen);
                     chuyenTrangTheoQuyen(quyenHienTai);
                 }else{
-//                    Toast.makeText(getApplicationContext(), "Kiểm tra lại mật khẩu", Toast.LENGTH_SHORT).show();
                     edt_password.setError("Kiểm tra lại mật khẩu");
                     return;
                 }
@@ -128,13 +83,68 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                         startActivity(intent);
                     }
-                });
-                builder.setNegativeButton("Hủy", null);
+                }).setNegativeButton("Hủy", null);
                 builder.show();
             }
             cursor.close();
             database.close();
         });
+
+        //Xử lí click lên view đặt lại mật khẩu
+        TextView textView_reset_pass = findViewById(R.id.textViewResetPassword);
+        textView_reset_pass.setOnClickListener(v ->{
+            Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+            startActivity(intent);
+        });
+
+        //Xóa trống tên đăng nhập
+        LinearLayout layout_username = findViewById(R.id.layoutUserName);
+        ImageView img_clear_username = findViewById(R.id.imgClearUserName);
+        final EditText edt_clear_username = layout_username.findViewById(R.id.txtUserName);
+        img_clear_username.setOnClickListener(v -> edt_clear_username.setText(""));
+
+
+        //Ẩn/Hiện mật khẩu
+        LinearLayout layout_password = findViewById(R.id.layoutPassword);
+        ImageView img_show_password = layout_password.findViewById(R.id.imgShowPassword);
+        final EditText edt_show_password = layout_password.findViewById(R.id.txtPassword);
+        img_show_password.setOnClickListener(new View.OnClickListener() {
+            boolean isPasswordVisible = false;
+            @Override
+            public void onClick(View v) {
+                ShowHidePassword(edt_show_password,isPasswordVisible);
+                isPasswordVisible = !isPasswordVisible;// Đảo ngược trạng thái
+            }
+        });
+
+        // Set filter
+        edt_username.setFilters(new InputFilter[] {filter});
+        edt_password.setFilters(new InputFilter[] {filter});
+
+    }
+
+    //Filter định dạng nội dung nhập
+    InputFilter filter = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            for (int i = start;i < end;i++){
+                char c = source.charAt(i);
+                if (Character.isWhitespace(c) || c == ','|| c == '.'){
+                    return "";
+                }
+            }
+            return null;
+        }
+    };
+
+    //Phương thức ẩn hiện password
+    private void ShowHidePassword(EditText editText, boolean isPasswordVisible) {
+        if (isPasswordVisible) {
+            editText.setTransformationMethod(null);// Hiện mật khẩu
+        } else {
+            editText.setTransformationMethod(new PasswordTransformationMethod());//Ẩn mật khẩu
+        }
+        editText.setSelection(editText.getText().length());//Di chuyển con trỏ về cuối dòng
     }
 
     private void luuThongTin(String name){
