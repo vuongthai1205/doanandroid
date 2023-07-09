@@ -5,6 +5,9 @@ import android.content.Context;
 public class DataLocalManager {
 
     private static final String PREF_FIRST_INSTALL = "PREF_FIRST_INSTALL";
+    private static final String USER_NAME = "USER_NAME";
+    private static final String ROLE_NAME = "ROLE_NAME";
+    private static final String ID_ROLE = "ID_ROLE";
     private static DataLocalManager instance;
     private MySharePreferences mySharePreferences;
 
@@ -25,6 +28,29 @@ public class DataLocalManager {
     public static boolean getFirstInstall(){
         return DataLocalManager.getInstance().mySharePreferences.getBooleanValue(PREF_FIRST_INSTALL);
     }
+    public static void setNameUser(String name){
+        DataLocalManager.getInstance().mySharePreferences.putStringValue(USER_NAME,name);
 
+    }
+    public static String getNameUser(){
+        return DataLocalManager.getInstance().mySharePreferences.getStringValue(USER_NAME);
 
+    }
+
+    public static void setNameRole(String name){
+        DataLocalManager.getInstance().mySharePreferences.putStringValue(ROLE_NAME,name);
+
+    }
+    public static String getNameRole(){
+        return DataLocalManager.getInstance().mySharePreferences.getStringValue(ROLE_NAME);
+
+    }
+    public static void setIdRole(int id){
+        DataLocalManager.getInstance().mySharePreferences.putIntValue(ID_ROLE,id);
+
+    }
+    public static int getIdRole(){
+        return DataLocalManager.getInstance().mySharePreferences.getIntValue(ID_ROLE);
+
+    }
 }

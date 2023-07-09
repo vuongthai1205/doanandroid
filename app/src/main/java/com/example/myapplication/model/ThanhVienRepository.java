@@ -88,7 +88,7 @@ public class ThanhVienRepository {
         }
 
         cursor.close();
-        databaseHelper.close();
+        this.close();
 
         return tenQuyen;
     }
