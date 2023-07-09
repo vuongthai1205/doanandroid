@@ -62,7 +62,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/imgDelete"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -72,7 +72,105 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/border"
+
+            android:baselineAligned="false"
+            android:gravity="center|center_vertical"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imgName"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_action_name" />
+
+            <EditText
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_none"
+                android:bufferType="normal"
+
+                android:fontFamily="@font/inter"
+
+
+                android:hint="Tên người dùng"
+                android:inputType="textPersonName"
+                android:textSize="14sp"
+
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <ImageView
+                android:id="@+id/deleteName"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/close"
+                />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/border"
+
+            android:baselineAligned="false"
+            android:gravity="center|center_vertical"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imageView31"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_action_name" />
+
+            <EditText
+                android:id="@+id/txtLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_none"
+                android:bufferType="normal"
+
+                android:fontFamily="@font/inter"
+
+
+                android:hint="Họ người dùng"
+                android:inputType="textPersonName"
+                android:textSize="14sp"
+
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <ImageView
+                android:id="@+id/deleteLastName"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/close"
+                />
+
+        </LinearLayout>
 
 
 
@@ -113,7 +211,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
-                android:id="@+id/imageView55"
+                android:id="@+id/deleteNumberPhone"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -164,7 +262,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/deleteEmail"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -208,7 +306,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/imgShowPassword"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -253,7 +351,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
-                android:id="@+id/imageView64"
+                android:id="@+id/imgShowPasswordAgain"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
