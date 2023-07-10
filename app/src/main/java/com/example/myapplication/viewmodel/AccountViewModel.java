@@ -1,16 +1,11 @@
 package com.example.myapplication.viewmodel;
 
-import android.content.Context;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.example.myapplication.BR;
-import com.example.myapplication.config.DataLocalManager;
 import com.example.myapplication.model.ThanhVien;
-import com.example.myapplication.model.ThanhVienRepository;
-
-import java.text.ParseException;
 
 public class AccountViewModel extends BaseObservable {
     private String hoVaTen;
