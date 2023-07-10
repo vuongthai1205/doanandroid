@@ -19,7 +19,7 @@ public class ChuyenXe {
         this.diaDiemDen = diaDiemDen;
     }
 
-    // Các phương thức truy cập (getter) và cập nhật (setter) cho các trường
+    // Các phương thức truy cập (getter) và cập nhật (setter) cho các trường dữ liệu
 
     public int getIdChuyenXe() {
         return idChuyenXe;
