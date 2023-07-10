@@ -22,7 +22,6 @@ public class ThanhVienRepository {
     public ThanhVienRepository(Context context){
         databaseHelper = new DatabaseHelper(context);
     }
-
     public void openToWrite(){
         sqLiteDatabase = databaseHelper.getWritableDatabase();
     }
@@ -49,6 +48,7 @@ public class ThanhVienRepository {
         values.put(databaseHelper.getCOLUMN_NGAY_CAP_NHAT(), thanhVien.getNgayCapNhat());
 
         sqLiteDatabase.insert(databaseHelper.getTABLE_THANHVIEN(), null , values);
+        close();
     }
 
     public ThanhVien getThanhVienByUserName(String username) {

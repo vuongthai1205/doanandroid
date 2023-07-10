@@ -12,107 +12,124 @@
         android:layout_height="match_parent"
         android:padding="8dp">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/containerText"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:id="@+id/containerHoVaTen">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Họ và tên: "
-                android:layout_marginTop="18dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="Họ và tên"/>
+            <EditText
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Tên đăng nhập: "
-                android:layout_marginTop="18dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Số điện thoại: "
-                android:layout_marginTop="18dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email: "
-                android:layout_marginTop="18dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ngày tạo: "
-                android:layout_marginTop="18dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ngày cập nhật: "
-                android:layout_marginTop="18dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ảnh đại diện: "
-                android:layout_marginTop="18dp"/>
+                android:layout_weight="2"
+                android:text="@={AccountViewModel.hoVaTen}"
+                />
         </LinearLayout>
         <LinearLayout
-
-            android:layout_width="wrap_content"
+            android:id="@+id/containerTenDangNhap"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/containerInfo"
-            android:layout_toRightOf="@+id/containerText"
-            android:layout_marginLeft="20dp"
-            android:orientation="vertical">
-
-            <EditText
-                android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/containerHoVaTen">
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/accountName"
-                android:text="@={AccountViewModel.hoVaTen}"
-                android:background="@color/black"
-                android:textStyle="bold"/>
+                android:layout_weight="1"
+                android:text="Tên đăng nhập"/>
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/accountUserName"
+                android:layout_width="0dp"
 
+                android:layout_height="wrap_content"
                 android:text="@={AccountViewModel.tenDangNhap}"
-                android:textStyle="bold"/>
-            <EditText
-                android:layout_width="wrap_content"
+                android:layout_weight="2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/containerSoDienThoai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/containerTenDangNhap">
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/accountSodienThoai"
-
+                android:layout_weight="1"
+                android:text="Số điện thoại"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:text="@={AccountViewModel.soDienThoai}"
-                android:textStyle="bold"/>
-            <EditText
-                android:layout_width="wrap_content"
+                android:layout_weight="2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/containerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/containerSoDienThoai">
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/accountEmail"
-
+                android:layout_weight="1"
+                android:text="Email"/>
+            <EditText
+                android:layout_width="0dp"
                 android:text="@={AccountViewModel.email}"
-                android:textStyle="bold"/>
-            <EditText
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/accountNgayTao"
-
+                android:layout_weight="2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/containerNgayTao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/containerEmail">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ngày tạo"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:text="@={AccountViewModel.ngayTao}"
-                android:textStyle="bold"/>
+                android:layout_weight="2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/containerNgayCapNhat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/containerNgayTao">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ngày cập nhật"/>
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/accountNgayCapNhat"
-
                 android:text="@={AccountViewModel.ngayCapNhat}"
-                android:textStyle="bold"/>
-            <ImageView
-                android:id="@+id/accountAvatar"
-
-                android:layout_marginTop="8dp"
-                android:layout_width="wrap_content"
+                android:layout_weight="2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/containerAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/containerNgayCapNhat">
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_background"
-                />
-
-
+                android:layout_weight="1"
+                android:text="Ảnh đại diện"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher_background"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"

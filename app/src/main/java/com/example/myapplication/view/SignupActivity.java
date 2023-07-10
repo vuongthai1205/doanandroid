@@ -62,19 +62,13 @@ public class SignupActivity extends AppCompatActivity {
         activitySignupBinding = DataBindingUtil.setContentView(this, R.layout.activity_signup);
         activitySignupBinding.setSignupViewModel(signupViewModel);
 
-        String tenDangNhap = activitySignupBinding.txtUserName.getText().toString().trim();
-        String ho = activitySignupBinding.txtName.getText().toString().trim();
-        String ten = activitySignupBinding.txtUserName.getText().toString().trim();
-        String soDienThoai = activitySignupBinding.txtPhoneNumber.getText().toString().trim();
-        String email = activitySignupBinding.txtEmail.getText().toString().trim();
-        String password = activitySignupBinding.txtPassword.getText().toString().trim();
+
 
         activitySignupBinding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThanhVien thanhVien = new ThanhVien(tenDangNhap, ho, ten,password,null,3,email,soDienThoai, null,null);
-                ThanhVienRepository thanhVienRepository = new ThanhVienRepository(getApplicationContext());
-                thanhVienRepository.addThanhVien(thanhVien);
+
+                signupViewModel.handleSignup(getApplicationContext());
             }
         });
 

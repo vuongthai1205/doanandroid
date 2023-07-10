@@ -2,11 +2,14 @@ package com.example.myapplication.viewmodel;
 
 
 import android.content.Context;
+import android.text.TextUtils;
+import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.example.myapplication.BR;
+import com.example.myapplication.config.DatabaseHelper;
 import com.example.myapplication.model.ThanhVien;
 import com.example.myapplication.model.ThanhVienRepository;
 
@@ -18,13 +21,38 @@ public class SignupViewModel extends BaseObservable {
     private String email;
     private String password;
     private String passwordAgain;
+    private ThanhVienRepository thanhVienRepository;
 
 
+    public void handleSignup(Context context){
+        if(isEmpty()){
+            Toast.makeText(context, "Không được bỏ trống", Toast.LENGTH_LONG).show();
+        }
+        else{
+            thanhVienRepository = new ThanhVienRepository(context);
+            ThanhVien thanhVien = new ThanhVien(tenDangNhap, ho, ten,password,null,3,email,soDienThoai, null,null);
 
-    public void handleSignup(String tenDangNhap, String ten , String ho , String soDienThoai, String email, String password){
-        ThanhVien thanhVien = new ThanhVien(tenDangNhap, ho, ten,password,null,3,email,soDienThoai, null,null);
+            thanhVienRepository.addThanhVien(thanhVien);
+        }
 
     }
+
+    public boolean isEmpty(){
+
+        if (TextUtils.isEmpty(tenDangNhap) || TextUtils.isEmpty(ho) || TextUtils.isEmpty(ten) ||
+        TextUtils.isEmpty(soDienThoai) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(passwordAgain)
+        )
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public String noiChuoi(String chuoi){
+        return "Không được bỏ trống ô " + chuoi;
+    }
+
+
 
 
     @Bindable
