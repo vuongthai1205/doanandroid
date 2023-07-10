@@ -1,8 +1,8 @@
 package com.example.myapplication.model;
 
-import java.util.Date;
 
 public class ThanhVien {
+
     private int id;
     private String tenDangNhap;
     private String ho;

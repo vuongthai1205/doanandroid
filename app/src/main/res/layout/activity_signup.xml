@@ -65,6 +65,7 @@
                     android:hint="Tên đăng nhập"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
+
                     android:text="@{SignupViewModel.tenDangNhap}"
                     tools:ignore="TouchTargetSizeCheck" />
 
@@ -115,6 +116,7 @@
                     android:hint="Tên người dùng"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
+
                     android:text="@{SignupViewModel.ten}"
 
                     tools:ignore="TouchTargetSizeCheck" />
@@ -162,6 +164,7 @@
                     android:bufferType="normal"
 
                     android:fontFamily="@font/inter"
+
                     android:text="@{SignupViewModel.ho}"
 
 
@@ -212,6 +215,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_none"
                     android:bufferType="normal"
+
                     android:text="@{SignupViewModel.soDienThoai}"
 
                     android:fontFamily="@font/inter"
@@ -262,7 +266,9 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_none"
                     android:bufferType="normal"
+
                     android:text="@{SignupViewModel.email}"
+
 
                     android:fontFamily="@font/inter"
 
@@ -312,6 +318,7 @@
                     android:bufferType="normal"
                     android:fontFamily="@font/inter"
                     android:hint="Mật khẩu"
+
                     android:text="@{SignupViewModel.password}"
 
                     android:inputType="textPassword"
@@ -355,6 +362,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/border_none"
+
                     android:text="@{SignupViewModel.passwordAgain}"
 
                     android:bufferType="normal"
@@ -388,6 +396,7 @@
                 android:text="Đăng ký"
                 android:textAllCaps="false"
                 android:textColor="#F7F8F9"
+
                 android:textSize="16sp"
                 />
 
