@@ -4,6 +4,7 @@ package com.example.myapplication.model;
 public class ThanhVien {
 
     private int id;
+
     private String tenDangNhap;
     private String ho;
     private String ten;
@@ -14,6 +15,7 @@ public class ThanhVien {
     private String soDienThoai;
     private String ngayTao;
     private String ngayCapNhat;
+
 
     public ThanhVien( String tenDangNhap, String ho, String ten, String matKhau, String avatar, int idQuyenThanhVien, String email, String soDienThoai, String ngayTao, String ngayCapNhat) {
 
@@ -37,6 +39,9 @@ public class ThanhVien {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTenDangNhap() {
         return tenDangNhap;

@@ -380,13 +380,17 @@
                     app:srcCompat="@drawable/eye" />
             </LinearLayout>
 
+
             <Switch
                 android:id="@+id/switchDieuKhoan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
                 android:minHeight="48dp"
+                android:checked="@={SignupViewModel.dieuKhoan}"
                 android:text="Chấp nhập điều khoản" />
+
+
 
             <Button
                 android:id="@+id/btnSignUp"

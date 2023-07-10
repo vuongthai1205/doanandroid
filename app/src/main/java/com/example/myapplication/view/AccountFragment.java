@@ -28,6 +28,9 @@ public class AccountFragment extends Fragment {
 
         AccountViewModel accountViewModel = new AccountViewModel();
         fragmentAccountBinding.setAccountViewModel(accountViewModel);
+
+
+
         thanhVienRepository = new ThanhVienRepository(getContext());
         ThanhVien thanhVien = thanhVienRepository.getThanhVienByUserName(DataLocalManager.getNameUser());
         accountViewModel.showAccount(thanhVien);

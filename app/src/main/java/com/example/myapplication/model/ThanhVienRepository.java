@@ -3,11 +3,17 @@ package com.example.myapplication.model;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.myapplication.config.DatabaseHelper;
 import com.example.myapplication.config.VariableGlobal;
+import com.example.myapplication.view.LoginActivity;
+import com.example.myapplication.view.SignupActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,8 +53,35 @@ public class ThanhVienRepository {
         values.put(databaseHelper.getCOLUMN_NGAY_TAO(), thanhVien.getNgayTao());
         values.put(databaseHelper.getCOLUMN_NGAY_CAP_NHAT(), thanhVien.getNgayCapNhat());
 
-        sqLiteDatabase.insert(databaseHelper.getTABLE_THANHVIEN(), null , values);
+            sqLiteDatabase.insert(databaseHelper.getTABLE_THANHVIEN(), null , values);
+
         close();
+    }
+
+    public boolean isThanhVienExist(ThanhVien thanhVien){
+        openToRead();
+
+        String[] projection = {databaseHelper.getCOLUMN_TEN_DANG_NHAP()};
+        String selection = databaseHelper.getCOLUMN_TEN_DANG_NHAP() + " = ? OR " +
+                databaseHelper.getCOLUMN_EMAIL() + " = ? OR " +
+                databaseHelper.getCOLUMN_SO_DIEN_THOAI() + " = ?";
+        String[] selectionArgs = {thanhVien.getTenDangNhap(), thanhVien.getEmail(), thanhVien.getSoDienThoai()};
+
+        Cursor cursor = sqLiteDatabase.query(
+                databaseHelper.getTABLE_THANHVIEN(),
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        boolean exists = cursor.moveToFirst();
+        cursor.close();
+        close();
+
+        return exists;
     }
 
     public ThanhVien getThanhVienByUserName(String username) {
