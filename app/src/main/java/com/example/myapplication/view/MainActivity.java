@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
+import com.example.myapplication.R;
 import com.example.myapplication.config.DataLocalManager;
 import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.config.DatabaseHelper;
@@ -20,10 +22,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
-
-        setContentView(activityMainBinding.getRoot());
-
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         activityMainBinding.buttonLoginHome.setOnClickListener(new View.OnClickListener() {
             @Override

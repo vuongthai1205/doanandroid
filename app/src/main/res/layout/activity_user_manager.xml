@@ -1,50 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
     tools:context=".view.UserManagerActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="User"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:background="#0A1726">
-
-        <Button
-            android:id="@+id/btnLoc"
-            android:layout_width="0dp"
+    <data>
+        <variable
+            name="UserManagerViewModel"
+            type="com.example.myapplication.viewmodel.UserManagerViewModel" />
+    </data>
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/fragmentAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/containerBtn"/>
+        <LinearLayout
+            android:id="@+id/containerBtn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lọc"
-            android:layout_weight="1"
-            android:background="#0A1726"
-            android:textColor="@color/white"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:background="#0A1726">
 
-            />
-        <Button
-            android:id="@+id/btnTrangChu"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Trang chủ"
-            android:layout_weight="1"
-            android:background="#0A1726"
-            android:textColor="@color/white"
+            <Button
+                android:id="@+id/btnLoc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Lọc"
+                android:layout_weight="1"
+                android:background="#0A1726"
+                android:textColor="@color/white"
 
-            />
-        <Button
-            android:id="@+id/btnTaiKhoan"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Tài Khoản"
-            android:layout_weight="1"
-            android:background="#0A1726"
-            android:textColor="@color/white"
+                />
+            <Button
+                android:id="@+id/btnTrangChu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Trang chủ"
+                android:layout_weight="1"
+                android:background="#0A1726"
+                android:textColor="@color/white"
 
-            />
-    </LinearLayout>
-</RelativeLayout>
+                />
+            <Button
+                android:id="@+id/btnTaiKhoan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Tài Khoản"
+                android:layout_weight="1"
+                android:background="#0A1726"
+                android:textColor="@color/white"
+
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

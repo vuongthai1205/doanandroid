@@ -1,14 +1,18 @@
 package com.example.myapplication.viewmodel;
 
 
+import android.content.Context;
+
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.example.myapplication.BR;
 import com.example.myapplication.model.ThanhVien;
+import com.example.myapplication.model.ThanhVienRepository;
 
 public class AccountViewModel extends BaseObservable {
-    private String hoVaTen;
+    private String ho;
+    private String ten;
     private String tenDangNhap;
     private String soDienThoai;
     private String email;
@@ -18,7 +22,8 @@ public class AccountViewModel extends BaseObservable {
 
     public void showAccount(ThanhVien thanhVien){
 
-        setHoVaTen(thanhVien.getHo() + thanhVien.getTen());
+        setHo(thanhVien.getHo());
+        setTen(thanhVien.getTen());
         setTenDangNhap(thanhVien.getTenDangNhap());
         setSoDienThoai(thanhVien.getSoDienThoai());
         setEmail(thanhVien.getEmail());
@@ -27,15 +32,13 @@ public class AccountViewModel extends BaseObservable {
         setAvatar(thanhVien.getAvatar());
     }
 
-    @Bindable
-    public String getHoVaTen() {
-        return hoVaTen;
+    public void updateAccount(Context context){
+        ThanhVienRepository thanhVienRepository = new ThanhVienRepository(context);
+        ThanhVien thanhVien = new ThanhVien(tenDangNhap, ho,ten, avatar,email,soDienThoai);
+        thanhVienRepository.updateThanhVienByUserName(tenDangNhap, thanhVien);
     }
 
-    public void setHoVaTen(String hoVaTen) {
-        this.hoVaTen = hoVaTen;
-        notifyPropertyChanged(BR.hoVaTen);
-    }
+
     @Bindable
     public String getTenDangNhap() {
         return tenDangNhap;
@@ -91,5 +94,23 @@ public class AccountViewModel extends BaseObservable {
         notifyPropertyChanged(BR.avatar);
     }
 
+    @Bindable
+    public String getHo() {
+        return ho;
+    }
 
+    public void setHo(String ho) {
+        this.ho = ho;
+        notifyPropertyChanged(BR.ho);
+    }
+
+    @Bindable
+    public String getTen() {
+        return ten;
+    }
+
+    public void setTen(String ten) {
+        this.ten = ten;
+        notifyPropertyChanged(BR.ten);
+    }
 }

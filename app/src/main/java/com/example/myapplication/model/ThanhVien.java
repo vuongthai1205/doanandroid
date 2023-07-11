@@ -31,6 +31,16 @@ public class ThanhVien {
         this.ngayCapNhat = ngayCapNhat;
     }
 
+    public ThanhVien( String tenDangNhap, String ho, String ten, String avatar,  String email, String soDienThoai) {
+
+        this.tenDangNhap = tenDangNhap;
+        this.ho = ho;
+        this.ten = ten;
+        this.avatar = avatar;
+        this.email = email;
+        this.soDienThoai = soDienThoai;
+    }
+
 
 
     // Các phương thức truy cập (getter) và cập nhật (setter) cho các trường
