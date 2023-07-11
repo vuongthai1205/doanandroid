@@ -42,6 +42,9 @@ public class ThanhVienRepository {
     public void addThanhVien(ThanhVien thanhVien){
         openToWrite();
         ContentValues values = new ContentValues();
+        Date dataNow = new Date();
+        thanhVien.setNgayTao(VariableGlobal.dateFormat.format(dataNow));
+        thanhVien.setNgayCapNhat(VariableGlobal.dateFormat.format(dataNow));
         values.put(databaseHelper.getCOLUMN_TEN_DANG_NHAP(), thanhVien.getTenDangNhap());
         values.put(databaseHelper.getCOLUMN_HO(), thanhVien.getHo());
         values.put(databaseHelper.getCOLUMN_TEN(), thanhVien.getTen());
@@ -53,10 +56,33 @@ public class ThanhVienRepository {
         values.put(databaseHelper.getCOLUMN_NGAY_TAO(), thanhVien.getNgayTao());
         values.put(databaseHelper.getCOLUMN_NGAY_CAP_NHAT(), thanhVien.getNgayCapNhat());
 
-            sqLiteDatabase.insert(databaseHelper.getTABLE_THANHVIEN(), null , values);
+        sqLiteDatabase.insert(databaseHelper.getTABLE_THANHVIEN(), null , values);
 
         close();
     }
+
+    public void updateThanhVienByUserName(String username, ThanhVien thanhVien) {
+
+            openToWrite();
+
+            ContentValues values = new ContentValues();
+            Date dataNow = new Date();
+            thanhVien.setNgayCapNhat(VariableGlobal.dateFormat.format(dataNow));
+
+            values.put(databaseHelper.getCOLUMN_HO(), thanhVien.getHo());
+            values.put(databaseHelper.getCOLUMN_TEN(), thanhVien.getTen());
+            values.put(databaseHelper.getCOLUMN_AVATAR(), thanhVien.getAvatar());
+            values.put(databaseHelper.getCOLUMN_EMAIL(), thanhVien.getEmail());
+            values.put(databaseHelper.getCOLUMN_SO_DIEN_THOAI(), thanhVien.getSoDienThoai());
+            values.put(databaseHelper.getCOLUMN_NGAY_CAP_NHAT(), thanhVien.getNgayCapNhat());
+
+            sqLiteDatabase.update(databaseHelper.getTABLE_THANHVIEN(), values, databaseHelper.getCOLUMN_TEN_DANG_NHAP() + "=?", new String[]{username});
+
+            close();
+
+
+    }
+
 
     public boolean isThanhVienExist(ThanhVien thanhVien){
         openToRead();

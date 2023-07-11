@@ -61,7 +61,7 @@ public class SignupViewModel extends BaseObservable {
         thanhVienRepository = new ThanhVienRepository(context);
         ThanhVien thanhVien = new ThanhVien(tenDangNhap, ho, ten,password,null,3,email,soDienThoai, null,null);
         if (thanhVienRepository.isThanhVienExist(thanhVien)){
-            Toast.makeText(context, "Người dùng đã tồn tại, vui lòng kiểm tra lại", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Người dùng đã tồn tại, vui lòng kiểm tra lại: tên đăng nhập, số điện thoại, email", Toast.LENGTH_LONG).show();
             return;
         }
 
