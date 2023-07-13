@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import com.example.myapplication.BR;
 import com.example.myapplication.model.ThanhVien;
 import com.example.myapplication.model.ThanhVienRepository;
-import com.github.dhaval2404.imagepicker.ImagePicker;
 
 public class AccountViewModel extends BaseObservable {
     private String ho;
