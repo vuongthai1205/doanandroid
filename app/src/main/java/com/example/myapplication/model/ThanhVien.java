@@ -40,6 +40,13 @@ public class ThanhVien {
         this.email = email;
         this.soDienThoai = soDienThoai;
     }
+    public ThanhVien(String tenDangNhap){
+        this.tenDangNhap = tenDangNhap;
+    }
+    public ThanhVien(String tenDangNhap,String email){
+        this.tenDangNhap = tenDangNhap;
+        this.email = email;
+    }
 
 
 
