@@ -1,6 +1,8 @@
 package com.example.myapplication.view;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,23 +20,23 @@ import com.example.myapplication.model.ThanhVien;
 import com.example.myapplication.model.ThanhVienRepository;
 import com.example.myapplication.viewmodel.AccountViewModel;
 
-import java.text.ParseException;
-
 public class AccountFragment extends Fragment {
     private FragmentAccountBinding fragmentAccountBinding;
     private ThanhVienRepository thanhVienRepository;
+    AccountViewModel accountViewModel = new AccountViewModel();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         fragmentAccountBinding = FragmentAccountBinding.inflate(inflater,container, false );
 
-        AccountViewModel accountViewModel = new AccountViewModel();
         fragmentAccountBinding.setAccountViewModel(accountViewModel);
 
 
 
         thanhVienRepository = new ThanhVienRepository(getContext());
         ThanhVien thanhVien = thanhVienRepository.getThanhVienByUserName(DataLocalManager.getNameUser());
+
         accountViewModel.showAccount(thanhVien);
 
         fragmentAccountBinding.btnUpdateAccount.setOnClickListener(new View.OnClickListener() {
@@ -51,11 +53,16 @@ public class AccountFragment extends Fragment {
                 Logout();
             }
         });
+
+
         return fragmentAccountBinding.getRoot();
 
 
 
     }
+
+
+
 
     private void Logout() {
         Intent intent = new Intent(getContext(),LoginActivity.class);

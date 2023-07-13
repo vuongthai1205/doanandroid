@@ -1,10 +1,13 @@
 package com.example.myapplication.viewmodel;
 
-
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
+import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.BR;
 import com.example.myapplication.model.ThanhVien;
@@ -37,6 +40,10 @@ public class AccountViewModel extends BaseObservable {
         ThanhVien thanhVien = new ThanhVien(tenDangNhap, ho,ten, avatar,email,soDienThoai);
         thanhVienRepository.updateThanhVienByUserName(tenDangNhap, thanhVien);
     }
+
+    
+
+
 
 
     @Bindable
