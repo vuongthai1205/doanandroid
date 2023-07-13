@@ -3,20 +3,12 @@ package com.example.myapplication.model;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.example.myapplication.config.DatabaseHelper;
 import com.example.myapplication.config.VariableGlobal;
-import com.example.myapplication.view.LoginActivity;
-import com.example.myapplication.view.SignupActivity;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -84,7 +76,7 @@ public class ThanhVienRepository {
     }
 
 
-    public boolean isThanhVienExist(ThanhVien thanhVien){
+    public boolean isThanhVienExist(ThanhVien thanhVien) {
         openToRead();
 
         String[] projection = {databaseHelper.getCOLUMN_TEN_DANG_NHAP()};
@@ -108,6 +100,77 @@ public class ThanhVienRepository {
         close();
 
         return exists;
+    }
+    public String getMatKhauByUserName(ThanhVien thanhVien){
+        openToRead();
+        String matKhau = "";
+
+        String[] projection = {databaseHelper.getCOLUMN_TEN_DANG_NHAP(),databaseHelper.getCOLUMN_MAT_KHAU(),databaseHelper.getCOLUMN_ID_QUYEN_THANHVIEN()};
+        String selection = databaseHelper.getCOLUMN_TEN_DANG_NHAP() + " = ? ";
+        String[] selectionArgs = {thanhVien.getTenDangNhap()};
+
+        Cursor cursor = sqLiteDatabase.query(
+                databaseHelper.getTABLE_THANHVIEN(),
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+        if(cursor.moveToFirst())
+            matKhau = cursor.getString(cursor.getColumnIndexOrThrow(databaseHelper.getCOLUMN_MAT_KHAU()));
+        cursor.close();
+        return matKhau;
+
+    }
+
+
+
+    public int getQuyenByUserName(ThanhVien thanhVien){
+        openToRead();
+        int quyen = -1;
+        String[] projection = {databaseHelper.getCOLUMN_TEN_DANG_NHAP(),databaseHelper.getCOLUMN_MAT_KHAU(),databaseHelper.getCOLUMN_ID_QUYEN_THANHVIEN()};
+        String selection = databaseHelper.getCOLUMN_TEN_DANG_NHAP() + " = ? ";
+        String[] selectionArgs = {thanhVien.getTenDangNhap()};
+
+        Cursor cursor = sqLiteDatabase.query(
+                databaseHelper.getTABLE_THANHVIEN(),
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+        if(cursor.moveToFirst()) {
+             quyen = cursor.getInt(cursor.getColumnIndexOrThrow(databaseHelper.getCOLUMN_ID_QUYEN_THANHVIEN()));
+        }
+        cursor.close();
+        return quyen;
+    }
+
+    public ThanhVien getThanhVienByEmail(String inputEmail){
+        openToRead();
+        ThanhVien thanhVien = null;
+        Cursor cursor = sqLiteDatabase.query(databaseHelper.getTABLE_THANHVIEN(), null, databaseHelper.getCOLUMN_EMAIL() + "= ? ",new String[]{inputEmail},null,null,null);
+        if(cursor != null && cursor.moveToFirst()){
+            String tendangnhap = cursor.getString(cursor.getColumnIndexOrThrow(databaseHelper.getCOLUMN_TEN_DANG_NHAP()));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow(databaseHelper.getCOLUMN_EMAIL()));
+            thanhVien = new ThanhVien(tendangnhap,email);
+        }
+        cursor.close();
+        this.close();
+        return thanhVien;
+    }
+    public int updatePasswordByEmailOfThanhVien(String passsword,ThanhVien thanhVien){
+        openToWrite();
+        ContentValues values = new ContentValues();
+        values.put(databaseHelper.getCOLUMN_MAT_KHAU(), passsword);
+        String whereEmail = databaseHelper.getCOLUMN_EMAIL() + "=?";
+        String [] whereEmailArgs = {thanhVien.getEmail()};
+        int rowSuccses = sqLiteDatabase.update(databaseHelper.getTABLE_THANHVIEN(),values,whereEmail,whereEmailArgs);
+        return rowSuccses;
     }
 
     public ThanhVien getThanhVienByUserName(String username) {
