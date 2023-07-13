@@ -25,7 +25,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
         activityResetPasswordBinding = DataBindingUtil.setContentView(ResetPasswordActivity.this,R.layout.activity_reset_password);
-        activityResetPasswordBinding.setReserPasswordViewModel(resetPasswordViewModel);
+        activityResetPasswordBinding.setResetPasswordViewModel(resetPasswordViewModel);
 
 
         // Xử lí button đặt lại
@@ -61,38 +61,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         activityResetPasswordBinding.imgShowAgainPassword.setOnClickListener(v ->
                 resetPasswordViewModel.showPass(activityResetPasswordBinding.edtResetAgainPassword));
     }
-
-
-    //Phương thức updatePassword
-//    private void UpdatePassword(String email, String resetPassword, String resetAgainPassword) {
-//        DatabaseHelper dbHelper = new DatabaseHelper(this);
-//        SQLiteDatabase database = dbHelper.getWritableDatabase();
-//        String[] information = {dbHelper.getCOLUMN_EMAIL(), dbHelper.getCOLUMN_MAT_KHAU()};
-//        String select_ten_nguoi_dung = dbHelper.getCOLUMN_EMAIL() + " = ?";
-//        String[] select_ten_args = {email};
-//        Cursor cursor;
-//        cursor = database.query(dbHelper.getTABLE_THANHVIEN(), information, select_ten_nguoi_dung, select_ten_args, null, null, null);
-//        if (cursor.moveToFirst()) {
-//            String select_email = cursor.getString(cursor.getColumnIndexOrThrow(dbHelper.getCOLUMN_EMAIL()));
-//            if (email.equals(select_email) && resetPassword.equals(resetAgainPassword)) {
-//                ContentValues values = new ContentValues();
-//                values.put(dbHelper.getCOLUMN_MAT_KHAU(), resetPassword);
-//                String whereEmail = dbHelper.getCOLUMN_EMAIL() + "=?";
-//                String[] wherEmailArgs = {email};
-//                int rowSuccses = database.update(dbHelper.getTABLE_THANHVIEN(), values, whereEmail, wherEmailArgs);
-//                if (rowSuccses == 1){
-//                    Toast.makeText(getApplicationContext(), "Đặt lại mật khẩu thành công", Toast.LENGTH_SHORT).show();
-//                    showDialogSignIn();
-//                }
-//                else
-//                    Toast.makeText(getApplicationContext(), "Đặt lại mật khẩu không thành công", Toast.LENGTH_SHORT).show();
-//            } else
-//                Toast.makeText(getApplicationContext(), "Kiểm tra lại mật khẩu", Toast.LENGTH_SHORT).show();
-//        } else
-//            Toast.makeText(getApplicationContext(), "Kiểm tra lại email", Toast.LENGTH_SHORT).show();
-//        cursor.close();
-//        database.close();
-//    }
 
     // Hộp thoại xác nhận đăng nhập
     private void showDialogSignIn(){
