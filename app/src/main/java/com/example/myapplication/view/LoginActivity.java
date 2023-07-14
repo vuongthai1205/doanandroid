@@ -16,23 +16,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.myapplication.R;
+import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.DataLocalManager;
 import com.example.myapplication.databinding.ActivityLoginBinding;
+import com.example.myapplication.model.DAO.QuyenDao;
+import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.ThanhVien;
-import com.example.myapplication.model.ThanhVienRepository;
 import com.example.myapplication.viewmodel.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding activityLoginBinding;
     LoginViewModel loginViewModel = new LoginViewModel();
-    ThanhVienRepository thanhVienRepository = new ThanhVienRepository(this);
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login);
         activityLoginBinding.setLoginViewModel(loginViewModel);
 
+        AppDatabase appDatabase = AppDatabase.getInstance(getBaseContext());
+        ThanhVienDAO thanhVienDAO = appDatabase.getThanhVienDAO();
+        QuyenDao quyenDao = appDatabase.getQuyenDAO();
         // Xử lí button đăng nhập
         activityLoginBinding.btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,15 +49,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 DataLocalManager.setNameUser(tenDangNhap);
                 ThanhVien thanhVien = new ThanhVien(tenDangNhap);
-                String select_password = thanhVienRepository.getMatKhauByUserName(thanhVien);
-                int quyenHienTai = thanhVienRepository.getQuyenByUserName(thanhVien);
+                String select_password = thanhVienDAO.getMatKhauByUserName(thanhVien.getTenDangNhap());
+                int quyenHienTai = thanhVienDAO.getQuyenByUserName(thanhVien.getTenDangNhap());
 
                 // Khi không tìm thấy thông tin người dùng sẽ chuyển sang trang đăng kí
                  if(TextUtils.isEmpty(select_password)){
                     Toast.makeText(LoginActivity.this, "Không tìm thấy thông tin người dùng", Toast.LENGTH_SHORT).show();
                     showDialogSignUp();
-                }else if( password.equals(select_password)){
-                    String tenQuyen = thanhVienRepository.chuyenDoiQuyenThanhVien(quyenHienTai);
+                }else if(password.equals(select_password)){
+                    String tenQuyen = quyenDao.chuyenDoiQuyenThanhVien(quyenHienTai);
                     DataLocalManager.setNameRole(tenQuyen);
                     DataLocalManager.setIdRole(quyenHienTai);
                     chuyenTrangTheoQuyen(quyenHienTai);

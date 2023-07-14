@@ -1,17 +1,17 @@
 package com.example.myapplication.viewmodel;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.BR;
+import com.example.myapplication.config.AppDatabase;
+import com.example.myapplication.config.VariableGlobal;
+import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.ThanhVien;
-import com.example.myapplication.model.ThanhVienRepository;
+
+import java.util.Date;
 
 public class AccountViewModel extends BaseObservable {
     private String ho;
@@ -36,9 +36,12 @@ public class AccountViewModel extends BaseObservable {
     }
 
     public void updateAccount(Context context){
-        ThanhVienRepository thanhVienRepository = new ThanhVienRepository(context);
+        ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(context).getThanhVienDAO();
         ThanhVien thanhVien = new ThanhVien(tenDangNhap, ho,ten, avatar,email,soDienThoai);
-        thanhVienRepository.updateThanhVienByUserName(tenDangNhap, thanhVien);
+        Date dataNow = new Date();
+        thanhVien.setNgayCapNhat(VariableGlobal.dateFormat.format(dataNow));
+
+        thanhVienDAO.updateThanhVien(thanhVien);
     }
 
     

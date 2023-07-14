@@ -11,8 +11,9 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.example.myapplication.BR;
+import com.example.myapplication.config.AppDatabase;
+import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.ThanhVien;
-import com.example.myapplication.model.ThanhVienRepository;
 import com.example.myapplication.view.LoginActivity;
 
 public class SignupViewModel extends BaseObservable {
@@ -24,7 +25,7 @@ public class SignupViewModel extends BaseObservable {
     private String password;
     private String passwordAgain;
     private boolean dieuKhoan;
-    private ThanhVienRepository thanhVienRepository;
+
 
 
 
@@ -58,14 +59,15 @@ public class SignupViewModel extends BaseObservable {
             return;
         }
 
-        thanhVienRepository = new ThanhVienRepository(context);
         ThanhVien thanhVien = new ThanhVien(tenDangNhap, ho, ten,password,null,3,email,soDienThoai, null,null);
-        if (thanhVienRepository.isThanhVienExist(thanhVien)){
+        ThanhVienDAO appDatabase = AppDatabase.getInstance(context).getThanhVienDAO();
+
+        if (appDatabase.isThanhVienExist(thanhVien.getTenDangNhap(), thanhVien.getEmail(), thanhVien.getSoDienThoai())){
             Toast.makeText(context, "Người dùng đã tồn tại, vui lòng kiểm tra lại: tên đăng nhập, số điện thoại, email", Toast.LENGTH_LONG).show();
             return;
         }
 
-        thanhVienRepository.addThanhVien(thanhVien);
+        appDatabase.insertAll(thanhVien);
         Toast.makeText(context, "Đăng ký thành công", Toast.LENGTH_LONG).show();
         Intent newActivityIntent = new Intent(context, LoginActivity.class);
         newActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
