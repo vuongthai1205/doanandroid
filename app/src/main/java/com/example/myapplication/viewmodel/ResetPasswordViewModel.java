@@ -10,28 +10,27 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.example.myapplication.BR;
+import com.example.myapplication.config.AppDatabase;
+import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.ThanhVien;
-import com.example.myapplication.model.ThanhVienRepository;
 
 public class ResetPasswordViewModel extends BaseObservable {
     private String email;
     private String matKhau;
     private String resetMatKhau;
-    private ThanhVienRepository thanhVienRepository ;
     public boolean check = false;
 
-
     public void handleResetPassword(Context context) {
-        thanhVienRepository = new ThanhVienRepository(context);
-        ThanhVien thanhVien = thanhVienRepository.getThanhVienByEmail(email);
+        ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(context).getThanhVienDAO();
+        ThanhVien thanhVien = thanhVienDAO.getThanhVienByEmail(email);
         if (thanhVien == null){
             Toast.makeText(context, "Không tìm thấy thông tin người dùng", Toast.LENGTH_SHORT).show();
             check = false;
             return ;
         }
         if(matKhau.equals(resetMatKhau)) {
-            thanhVienRepository.updatePasswordByEmailOfThanhVien(matKhau, thanhVien);
-            if (thanhVienRepository.updatePasswordByEmailOfThanhVien(matKhau, thanhVien) == 1){
+            thanhVien.setMatKhau(matKhau);
+            if (thanhVienDAO.updateThanhVien(thanhVien) == 1){
                 Toast.makeText(context, "Đặt lại mật khẩu thành công", Toast.LENGTH_SHORT).show();
                 check = true;
             }

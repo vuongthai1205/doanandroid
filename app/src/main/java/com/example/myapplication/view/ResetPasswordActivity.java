@@ -13,13 +13,11 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.ActivityResetPasswordBinding;
-import com.example.myapplication.model.ThanhVienRepository;
 import com.example.myapplication.viewmodel.ResetPasswordViewModel;
 
 public class ResetPasswordActivity extends AppCompatActivity {
     ActivityResetPasswordBinding activityResetPasswordBinding;
     ResetPasswordViewModel resetPasswordViewModel = new ResetPasswordViewModel();
-    ThanhVienRepository thanhVienRepository = new ThanhVienRepository(this);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

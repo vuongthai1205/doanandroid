@@ -1,28 +1,24 @@
 package com.example.myapplication.view;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.myapplication.R;
+import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.DataLocalManager;
 import com.example.myapplication.databinding.FragmentAccountBinding;
+import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.ThanhVien;
-import com.example.myapplication.model.ThanhVienRepository;
 import com.example.myapplication.viewmodel.AccountViewModel;
 
 public class AccountFragment extends Fragment {
     private FragmentAccountBinding fragmentAccountBinding;
-    private ThanhVienRepository thanhVienRepository;
     AccountViewModel accountViewModel = new AccountViewModel();
 
     @Override
@@ -32,10 +28,11 @@ public class AccountFragment extends Fragment {
 
         fragmentAccountBinding.setAccountViewModel(accountViewModel);
 
+        ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(getContext()).getThanhVienDAO();
 
 
-        thanhVienRepository = new ThanhVienRepository(getContext());
-        ThanhVien thanhVien = thanhVienRepository.getThanhVienByUserName(DataLocalManager.getNameUser());
+
+        ThanhVien thanhVien = thanhVienDAO.getThanhVienByUserName(DataLocalManager.getNameUser());
 
         accountViewModel.showAccount(thanhVien);
 

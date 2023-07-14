@@ -1,22 +1,41 @@
 package com.example.myapplication.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "table_thanhvien")
 public class ThanhVien {
 
-    private int id;
 
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_thanh_vien")
+    private int id;
+    @ColumnInfo(name = "ten_dang_nhap")
     private String tenDangNhap;
+    @ColumnInfo(name = "ho_thanh_vien")
     private String ho;
+    @ColumnInfo(name = "ten_thanh_vien")
     private String ten;
+    @ColumnInfo(name = "mat_khau")
     private String matKhau;
     private String avatar;
+    @ColumnInfo(name = "id_quyen")
     private int idQuyenThanhVien;
     private String email;
+    @ColumnInfo(name = "so_dien_thoai")
     private String soDienThoai;
+    @ColumnInfo(name = "ngay_tao")
     private String ngayTao;
+    @ColumnInfo(name = "ngay_cap_nhat")
     private String ngayCapNhat;
 
+    public ThanhVien(){
 
+    }
+
+    @Ignore
     public ThanhVien( String tenDangNhap, String ho, String ten, String matKhau, String avatar, int idQuyenThanhVien, String email, String soDienThoai, String ngayTao, String ngayCapNhat) {
 
         this.tenDangNhap = tenDangNhap;
@@ -30,7 +49,7 @@ public class ThanhVien {
         this.ngayTao = ngayTao;
         this.ngayCapNhat = ngayCapNhat;
     }
-
+    @Ignore
     public ThanhVien( String tenDangNhap, String ho, String ten, String avatar,  String email, String soDienThoai) {
 
         this.tenDangNhap = tenDangNhap;
@@ -40,9 +59,11 @@ public class ThanhVien {
         this.email = email;
         this.soDienThoai = soDienThoai;
     }
+    @Ignore
     public ThanhVien(String tenDangNhap){
         this.tenDangNhap = tenDangNhap;
     }
+    @Ignore
     public ThanhVien(String tenDangNhap,String email){
         this.tenDangNhap = tenDangNhap;
         this.email = email;
