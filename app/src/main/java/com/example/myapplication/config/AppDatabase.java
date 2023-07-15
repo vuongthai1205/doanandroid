@@ -13,7 +13,7 @@ import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.Quyen;
 import com.example.myapplication.model.ThanhVien;
 
-@Database(version = 2,
+@Database(version = 3,
     entities = {
             ThanhVien.class,
             Quyen.class
@@ -26,7 +26,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ThanhVienDAO getThanhVienDAO();
     public abstract QuyenDao getQuyenDAO();
     private static AppDatabase instance;
-    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             // Thêm dữ liệu vào bảng table_quyen
@@ -67,7 +67,7 @@ public abstract class AppDatabase extends RoomDatabase {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "doanandroid.db")
                     .allowMainThreadQueries()
-                    .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_2_3)
                     .build();
         }
         return instance;
