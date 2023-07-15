@@ -40,7 +40,6 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 accountViewModel.updateAccount(getContext());
-                Toast.makeText(getContext(), "Cập nhật thông tin thành công" , Toast.LENGTH_LONG).show();
             }
         });
 

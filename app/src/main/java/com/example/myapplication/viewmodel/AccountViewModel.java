@@ -1,6 +1,7 @@
 package com.example.myapplication.viewmodel;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -37,11 +38,16 @@ public class AccountViewModel extends BaseObservable {
 
     public void updateAccount(Context context){
         ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(context).getThanhVienDAO();
-        ThanhVien thanhVien = new ThanhVien(tenDangNhap, ho,ten, avatar,email,soDienThoai);
+        ThanhVien thanhVien = thanhVienDAO.getThanhVienByUserName(tenDangNhap);
         Date dataNow = new Date();
         thanhVien.setNgayCapNhat(VariableGlobal.dateFormat.format(dataNow));
 
-        thanhVienDAO.updateThanhVien(thanhVien);
+        thanhVien.setHo(ho);
+        thanhVien.setTen(ten);
+        thanhVien.setSoDienThoai(soDienThoai);
+        thanhVien.setEmail(email);
+
+        thanhVienDAO.update(thanhVien);
     }
 
     
