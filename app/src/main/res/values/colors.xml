@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorBgMenu">#0A1726</color>
+    <color name="color_manager_user">#321E50</color>
+    <color name="color_manager_chuyen_xe">#1A3850</color>
+    <color name="color_manager_loai_xe">#144A9C</color>
+    <color name="color_manager_ve_dat">#9D2929</color>
 </resources>

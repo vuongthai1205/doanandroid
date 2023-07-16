@@ -1,6 +1,7 @@
 package com.example.myapplication.viewmodel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.widget.EditText;
@@ -15,6 +16,9 @@ import com.example.myapplication.config.DataLocalManager;
 import com.example.myapplication.model.DAO.QuyenDao;
 import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.ThanhVien;
+import com.example.myapplication.view.AdminManagerActivity;
+import com.example.myapplication.view.LoginActivity;
+import com.example.myapplication.view.UserManagerActivity;
 
 
 public class LoginViewModel extends BaseObservable {
@@ -41,6 +45,7 @@ public class LoginViewModel extends BaseObservable {
                     String tenQuyen = quyenDao.chuyenDoiQuyenThanhVien(quyenHienTai);
                     DataLocalManager.setNameRole(tenQuyen);
                     DataLocalManager.setIdRole(quyenHienTai);
+                    DataLocalManager.setIsLogin(true);
                     check = true;
                     return;
                 } else {
@@ -68,6 +73,8 @@ public class LoginViewModel extends BaseObservable {
         }
 
     }
+
+
 
     //Kiểm tra nhập
     public boolean kiemTraNhap( String tenDangNhap, String password) {

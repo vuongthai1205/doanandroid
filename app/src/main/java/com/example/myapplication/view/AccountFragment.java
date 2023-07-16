@@ -61,6 +61,7 @@ public class AccountFragment extends Fragment {
 
 
     private void Logout() {
+        DataLocalManager.setIsLogin(false);
         Intent intent = new Intent(getContext(),LoginActivity.class);
         startActivity(intent);
     }

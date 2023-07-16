@@ -3,17 +3,19 @@ package com.example.myapplication.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.ActivityMainBinding;
+import com.example.myapplication.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding activityMainBinding;
-
+    ActivityMainBinding activityMainBinding;
+    MainViewModel mainViewModel = new MainViewModel();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -21,7 +23,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        activityMainBinding.setMainViewModel(mainViewModel);
 
+
+        mainViewModel.checkLogin(getApplicationContext());
         activityMainBinding.buttonLoginHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

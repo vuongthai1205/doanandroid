@@ -6,8 +6,8 @@
     tools:context=".view.MainActivity">
     <data>
         <variable
-            name="MainActivity"
-            type="com.example.myapplication.view.MainActivity" />
+            name="MainViewModel"
+            type="com.example.myapplication.viewmodel.MainViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
