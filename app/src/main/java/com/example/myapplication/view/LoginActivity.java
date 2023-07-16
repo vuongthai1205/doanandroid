@@ -86,12 +86,8 @@ public class LoginActivity extends AppCompatActivity {
         builder.show();
     }
 
-<<<<<<< HEAD
-        // get
-    private void chuyenTrangTheoQuyen(int quyen){
-=======
+
     public void chuyenTrangTheoQuyen(int quyen){
->>>>>>> 48641e1773c671e09f02cf3ecad95da4115af187
         if(quyen == 1 || quyen == 2){
             Intent intent = new Intent(LoginActivity.this, AdminManagerActivity.class);
             startActivity(intent);
