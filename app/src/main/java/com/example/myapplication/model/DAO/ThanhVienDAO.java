@@ -17,8 +17,13 @@ public interface ThanhVienDAO {
 
     @Delete
     void delete(ThanhVien thanhVien);
+
     @Update
     int updateThanhVien(ThanhVien thanhVien);
+
+    @Update
+    void update(ThanhVien thanhVien);
+
     @Query("select * from table_thanhvien")
     List<ThanhVien> getAll();
 
@@ -40,4 +45,8 @@ public interface ThanhVienDAO {
 
     @Query("SELECT * FROM table_thanhvien WHERE ten_dang_nhap = :username LIMIT 1")
     ThanhVien getThanhVienByUserName(String username);
+
+    @Query("UPDATE table_thanhvien SET ten_thanh_vien = :ten, ho_thanh_vien = :ho, so_dien_thoai = :soDienThoai, email = :email, ngay_tao = :ngayTao, ngay_cap_nhat = :ngayCapNhat, avatar = :avatar WHERE ten_dang_nhap = :tenDangNhap")
+    void updateByUsername(String tenDangNhap, String ho, String ten, String soDienThoai, String email, String ngayTao, String ngayCapNhat, String avatar);
+
 }

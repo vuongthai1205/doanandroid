@@ -35,7 +35,7 @@ public class ThanhVien {
 
     }
 
-    @Ignore
+
     public ThanhVien( String tenDangNhap, String ho, String ten, String matKhau, String avatar, int idQuyenThanhVien, String email, String soDienThoai, String ngayTao, String ngayCapNhat) {
 
         this.tenDangNhap = tenDangNhap;

@@ -12,9 +12,12 @@ import androidx.databinding.Bindable;
 
 import com.example.myapplication.BR;
 import com.example.myapplication.config.AppDatabase;
+import com.example.myapplication.config.VariableGlobal;
 import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.ThanhVien;
 import com.example.myapplication.view.LoginActivity;
+
+import java.util.Date;
 
 public class SignupViewModel extends BaseObservable {
     private String tenDangNhap;
@@ -66,6 +69,9 @@ public class SignupViewModel extends BaseObservable {
             Toast.makeText(context, "Người dùng đã tồn tại, vui lòng kiểm tra lại: tên đăng nhập, số điện thoại, email", Toast.LENGTH_LONG).show();
             return;
         }
+        Date date = new Date();
+        thanhVien.setNgayTao(VariableGlobal.dateFormat.format(date));
+        thanhVien.setNgayCapNhat(VariableGlobal.dateFormat.format(date));
 
         appDatabase.insertAll(thanhVien);
         Toast.makeText(context, "Đăng ký thành công", Toast.LENGTH_LONG).show();
