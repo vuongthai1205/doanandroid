@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Tên đăng nhập"/>
-            <EditText
+            <TextView
                 android:layout_width="0dp"
 
                 android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Ngày tạo"/>
-            <EditText
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@={AccountViewModel.ngayTao}"
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Ngày cập nhật"/>
-            <EditText
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@={AccountViewModel.ngayCapNhat}"
@@ -147,10 +147,16 @@
                 android:layout_weight="1"
                 android:text="Ảnh đại diện"/>
             <ImageView
-                android:layout_width="0dp"
+                android:id="@+id/avatarImg"
+                android:layout_width="wrap_content"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_background"/>
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tải lên"
+                android:id="@+id/btnUploadImage"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"

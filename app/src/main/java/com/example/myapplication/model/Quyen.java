@@ -1,7 +1,15 @@
 package com.example.myapplication.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "table_quyen")
 public class Quyen {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_quyen")
     private int idQuyen;
+    @ColumnInfo(name = "ten_quyen")
     private String tenQuyen;
 
     public Quyen( String tenQuyen) {
@@ -15,6 +23,9 @@ public class Quyen {
         return idQuyen;
     }
 
+    public void setIdQuyen(int idQuyen) {
+        this.idQuyen = idQuyen;
+    }
 
     public String getTenQuyen() {
         return tenQuyen;
