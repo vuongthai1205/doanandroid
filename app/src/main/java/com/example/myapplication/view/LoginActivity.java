@@ -7,9 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,11 +15,9 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.myapplication.R;
 import com.example.myapplication.config.AppDatabase;
-import com.example.myapplication.config.DataLocalManager;
 import com.example.myapplication.databinding.ActivityLoginBinding;
 import com.example.myapplication.model.DAO.QuyenDao;
 import com.example.myapplication.model.DAO.ThanhVienDAO;
-import com.example.myapplication.model.ThanhVien;
 import com.example.myapplication.viewmodel.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
@@ -43,28 +39,12 @@ public class LoginActivity extends AppCompatActivity {
 
                 String tenDangNhap = loginViewModel.getTenDangNhap();
                 String password = loginViewModel.getPassword();
-                if(loginViewModel.kiemTraNhap(tenDangNhap,password)==false) {
-                    Toast.makeText(LoginActivity.this, "Vui lòng nhập dữ liệu", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                DataLocalManager.setNameUser(tenDangNhap);
-                ThanhVien thanhVien = new ThanhVien(tenDangNhap);
-                String select_password = thanhVienDAO.getMatKhauByUserName(thanhVien.getTenDangNhap());
-                int quyenHienTai = thanhVienDAO.getQuyenByUserName(thanhVien.getTenDangNhap());
 
-                // Khi không tìm thấy thông tin người dùng sẽ chuyển sang trang đăng kí
-                 if(TextUtils.isEmpty(select_password)){
-                    Toast.makeText(LoginActivity.this, "Không tìm thấy thông tin người dùng", Toast.LENGTH_SHORT).show();
+                loginViewModel.handleLogin(getApplicationContext());
+                if(loginViewModel.isCheck()==true)
+                    chuyenTrangTheoQuyen(loginViewModel.getQuyenHienTai());
+                if(loginViewModel.isCheckNull()==true)
                     showDialogSignUp();
-                }else if(password.equals(select_password)){
-                    String tenQuyen = quyenDao.chuyenDoiQuyenThanhVien(quyenHienTai);
-                    DataLocalManager.setNameRole(tenQuyen);
-                    DataLocalManager.setIdRole(quyenHienTai);
-                    chuyenTrangTheoQuyen(quyenHienTai);
-                }else{
-                    Toast.makeText(LoginActivity.this, "Kiểm tra lại mật khẩu", Toast.LENGTH_SHORT).show();
-                    return;
-                }
             }
         });
 

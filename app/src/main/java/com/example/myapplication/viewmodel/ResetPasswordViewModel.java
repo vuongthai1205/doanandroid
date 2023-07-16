@@ -21,6 +21,11 @@ public class ResetPasswordViewModel extends BaseObservable {
     public boolean check = false;
 
     public void handleResetPassword(Context context) {
+        if (kiemTraNhap(email,matKhau,resetMatKhau)==false) {
+            Toast.makeText(context,"Vui lòng nhập đầy đủ dữ liệu",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(context).getThanhVienDAO();
         ThanhVien thanhVien = thanhVienDAO.getThanhVienByEmail(email);
         if (thanhVien == null){

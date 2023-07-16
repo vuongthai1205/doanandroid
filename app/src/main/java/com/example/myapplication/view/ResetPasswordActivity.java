@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,10 +30,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             String email = resetPasswordViewModel.getEmail();
             String matKhau = resetPasswordViewModel.getMatKhau();
             String resetMatKhau = resetPasswordViewModel.getResetMatKhau();
-            if (resetPasswordViewModel.kiemTraNhap(email,matKhau,resetMatKhau)==false) {
-                Toast.makeText(ResetPasswordActivity.this,"Vui lòng nhập đầy đủ dữ liệu",Toast.LENGTH_SHORT).show();
-                return;
-            }
+
             resetPasswordViewModel.handleResetPassword(getApplicationContext());
             if(resetPasswordViewModel.isCheck()==true) {
                 showDialogSignIn();
