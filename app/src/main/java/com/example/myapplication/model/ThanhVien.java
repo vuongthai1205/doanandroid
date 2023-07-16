@@ -4,10 +4,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "table_thanhvien"
-    ,foreignKeys = @ForeignKey(entity = Quyen.class, parentColumns = "id_quyen", childColumns = "id_quyen")
+    ,foreignKeys = @ForeignKey(entity = Quyen.class, parentColumns = "id_quyen", childColumns = "id_quyen"),
+        indices = {@Index(name = "index_id_quyen", value = "id_quyen")}
 )
 
 public class ThanhVien {
@@ -39,7 +41,7 @@ public class ThanhVien {
 
     }
 
-
+@Ignore
     public ThanhVien( String tenDangNhap, String ho, String ten, String matKhau, String avatar, int idQuyenThanhVien, String email, String soDienThoai, String ngayTao, String ngayCapNhat) {
 
         this.tenDangNhap = tenDangNhap;
