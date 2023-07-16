@@ -1,5 +1,6 @@
 package com.example.myapplication.view;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -29,6 +30,8 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+
+
         handleDeleteText();
         handleShowPassword();
     }

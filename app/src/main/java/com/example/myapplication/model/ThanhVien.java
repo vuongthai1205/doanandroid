@@ -2,10 +2,14 @@ package com.example.myapplication.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "table_thanhvien")
+@Entity(tableName = "table_thanhvien"
+    ,foreignKeys = @ForeignKey(entity = Quyen.class, parentColumns = "id_quyen", childColumns = "id_quyen")
+)
+
 public class ThanhVien {
 
 
@@ -120,7 +124,6 @@ public class ThanhVien {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
-
     public int getIdQuyenThanhVien() {
         return idQuyenThanhVien;
     }
