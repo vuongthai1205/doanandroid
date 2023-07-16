@@ -25,12 +25,15 @@ public class ThanhVienRepository {
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase sqLiteDatabase;
 
+    //
     public ThanhVienRepository(Context context){
         databaseHelper = new DatabaseHelper(context);
     }
+    // Dùng để getWritableDatabase() là một phương thức của SQLiteOpenHelper được gọi để trả về một đối tượng SQLiteDatabase có thể được sử dụng để ghi dữ liệu vào cơ sở dữ liệu.
     public void openToWrite(){
         sqLiteDatabase = databaseHelper.getWritableDatabase();
     }
+    // Tương tự như openToWrite(), nó sử dụng databaseHelper để lấy một đối tượng SQLiteDatabase có thể được sử dụng để đọc dữ liệu từ cơ sở dữ liệu
     public void openToRead(){
         sqLiteDatabase = databaseHelper.getReadableDatabase();
     }
@@ -60,7 +63,7 @@ public class ThanhVienRepository {
 
         close();
     }
-
+    // Tổng quan, đoạn mã này thực hiện các bước để mở kết nối ghi đến cơ sở dữ liệu, chuẩn bị dữ liệu cần chèn, thực hiện chèn dữ liệu và sau đó đóng kết nối với cơ sở dữ liệu.
     public void updateThanhVienByUserName(String username, ThanhVien thanhVien) {
 
             openToWrite();
@@ -109,7 +112,7 @@ public class ThanhVienRepository {
 
         return exists;
     }
-
+    // lấy thông tin thành viên để hiển thị
     public ThanhVien getThanhVienByUserName(String username) {
         openToWrite();
         ThanhVien thanhVien = null;
@@ -162,7 +165,6 @@ public class ThanhVienRepository {
     public String chuyenDoiQuyenThanhVien(int id){
         openToRead();
         String tenQuyen = null;
-
         String[] projection = { databaseHelper.getCOLUMN_TEN_QUYEN() };
         String selection = databaseHelper.getCOLUMN_ID_QUYEN()+ " = ?";
         String[] selectionArgs = { String.valueOf(id) };

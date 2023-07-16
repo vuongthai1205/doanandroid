@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
         editText.setSelection(editText.getText().length());//Di chuyển con trỏ về cuối dòng
     }
 
-
+        // get
     private void chuyenTrangTheoQuyen(int quyen){
         if(quyen == 1 || quyen == 2){
             Intent intent = new Intent(LoginActivity.this, AdminManagerActivity.class);
