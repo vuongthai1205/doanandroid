@@ -1,16 +1,32 @@
 package com.example.myapplication.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
+
 import java.util.Date;
 
+
+@Entity(tableName = "table_chuyenxe"
+
+)
 public class ChuyenXe {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_chuyen_xe")
     private int idChuyenXe;
+    @ColumnInfo(name = "ten_chuyen")
     private String tenChuyen;
+    @ColumnInfo(name = "hinh_anh")
     private String hinhAnh;
-    private Date thoiGianBatDau;
+    @ColumnInfo(name = "thoi_gian_bat_dau")
+    private String thoiGianBatDau;
+    @ColumnInfo(name = "dia_diem_di")
     private String diaDiemDi;
+    @ColumnInfo(name = "dia_diem_den")
     private String diaDiemDen;
 
-    public ChuyenXe( String tenChuyen, String hinhAnh, Date thoiGianBatDau, String diaDiemDi, String diaDiemDen) {
+    public ChuyenXe( String tenChuyen, String hinhAnh, String thoiGianBatDau, String diaDiemDi, String diaDiemDen) {
 
         this.tenChuyen = tenChuyen;
         this.hinhAnh = hinhAnh;
@@ -45,11 +61,11 @@ public class ChuyenXe {
         this.hinhAnh = hinhAnh;
     }
 
-    public Date getThoiGianBatDau() {
+    public String getThoiGianBatDau() {
         return thoiGianBatDau;
     }
 
-    public void setThoiGianBatDau(Date thoiGianBatDau) {
+    public void setThoiGianBatDau(String thoiGianBatDau) {
         this.thoiGianBatDau = thoiGianBatDau;
     }
 

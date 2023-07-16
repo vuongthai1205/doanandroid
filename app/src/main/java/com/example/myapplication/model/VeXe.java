@@ -1,16 +1,39 @@
 package com.example.myapplication.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
+
 import java.util.Date;
 
+@Entity(tableName = "table_dat_ve",
+        foreignKeys = {@ForeignKey(entity = ThanhVien.class, parentColumns = "id_thanh_vien", childColumns = "id_thanh_vien"),
+                @ForeignKey(entity = LoaiXe.class, parentColumns = "id_loai_xe",childColumns = "id_loai_xe"),
+                @ForeignKey(entity = ChuyenXe.class, parentColumns = "id_chuyen_xe", childColumns = "id_chuyen_xe")
+        }
+        ,indices = {@Index(name = "index_id_thanhvien_vexe", value = "id_thanh_vien"),
+        @Index(name = "index_id_loai_xe", value = "id_loai_xe"),
+        @Index(name = "index_id_chuyen_xe_vexe", value = "id_chuyen_xe") }
+)
 public class VeXe {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_ve_xe")
     private int idVeXe;
+    @ColumnInfo(name = "id_thanh_vien")
     private int idThanhVienVeXe;
+    @ColumnInfo(name = "id_loai_xe")
     private int idLoaiXeVeXe;
+    @ColumnInfo(name = "id_chuyen_xe")
     private int idChuyenXeVeXe;
-    private Date ngayGioDat;
+    @ColumnInfo(name = "ngay_gio_dat")
+    private String ngayGioDat;
+    @ColumnInfo(name="thong_tin_khac")
     private String thongTinKhac;
 
-    public VeXe( int idThanhVienVeXe, int idLoaiXeVeXe, int idChuyenXeVeXe, Date ngayGioDat, String thongTinKhac) {
+    public VeXe( int idThanhVienVeXe, int idLoaiXeVeXe, int idChuyenXeVeXe, String ngayGioDat, String thongTinKhac) {
 
         this.idThanhVienVeXe = idThanhVienVeXe;
         this.idLoaiXeVeXe = idLoaiXeVeXe;
@@ -53,11 +76,11 @@ public class VeXe {
         this.idChuyenXeVeXe = idChuyenXeVeXe;
     }
 
-    public Date getNgayGioDat() {
+    public String getNgayGioDat() {
         return ngayGioDat;
     }
 
-    public void setNgayGioDat(Date ngayGioDat) {
+    public void setNgayGioDat(String ngayGioDat) {
         this.ngayGioDat = ngayGioDat;
     }
 

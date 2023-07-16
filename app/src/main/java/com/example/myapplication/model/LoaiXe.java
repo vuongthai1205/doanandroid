@@ -1,8 +1,20 @@
 package com.example.myapplication.model;
 
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "table_loaixe"
+)
 public class LoaiXe {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_loai_xe")
     private int idLoaiXe;
+    @ColumnInfo(name = "ten_loai_xe")
     private String tenLoaiXe;
+    @ColumnInfo(name = "so_luong_ghe")
     private int soLuongGhe;
 
     public LoaiXe( String tenLoaiXe, int soLuongGhe) {
