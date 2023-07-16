@@ -3,45 +3,52 @@ package com.example.myapplication.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 @Entity(tableName = "table_dat_ve",
         foreignKeys = {@ForeignKey(entity = ThanhVien.class, parentColumns = "id_thanh_vien", childColumns = "id_thanh_vien"),
-                @ForeignKey(entity = LoaiXe.class, parentColumns = "id_loai_xe",childColumns = "id_loai_xe"),
                 @ForeignKey(entity = ChuyenXe.class, parentColumns = "id_chuyen_xe", childColumns = "id_chuyen_xe")
         }
         ,indices = {@Index(name = "index_id_thanhvien_vexe", value = "id_thanh_vien"),
-        @Index(name = "index_id_loai_xe", value = "id_loai_xe"),
         @Index(name = "index_id_chuyen_xe_vexe", value = "id_chuyen_xe") }
 )
-public class VeXe {
+public class DatVe {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_ve_xe")
     private int idVeXe;
     @ColumnInfo(name = "id_thanh_vien")
     private int idThanhVienVeXe;
-    @ColumnInfo(name = "id_loai_xe")
-    private int idLoaiXeVeXe;
     @ColumnInfo(name = "id_chuyen_xe")
     private int idChuyenXeVeXe;
+    @ColumnInfo(name = "so_luong_ve")
+    private int soLuongVe;
     @ColumnInfo(name = "ngay_gio_dat")
     private String ngayGioDat;
     @ColumnInfo(name="thong_tin_khac")
     private String thongTinKhac;
+    public DatVe(){
 
-    public VeXe( int idThanhVienVeXe, int idLoaiXeVeXe, int idChuyenXeVeXe, String ngayGioDat, String thongTinKhac) {
+    }
+    @Ignore
+    public DatVe(int idThanhVienVeXe,int idChuyenXeVeXe, int soLuongVe, String ngayGioDat, String thongTinKhac) {
 
         this.idThanhVienVeXe = idThanhVienVeXe;
-        this.idLoaiXeVeXe = idLoaiXeVeXe;
         this.idChuyenXeVeXe = idChuyenXeVeXe;
+        this.soLuongVe = soLuongVe;
         this.ngayGioDat = ngayGioDat;
         this.thongTinKhac = thongTinKhac;
     }
 
+    public int getSoLuongVe() {
+        return soLuongVe;
+    }
+
+    public void setSoLuongVe(int soLuongVe) {
+        this.soLuongVe = soLuongVe;
+    }
     // Các phương thức truy cập (getter) và cập nhật (setter) cho các trường
 
     public int getIdVeXe() {
@@ -60,13 +67,6 @@ public class VeXe {
         this.idThanhVienVeXe = idThanhVienVeXe;
     }
 
-    public int getIdLoaiXeVeXe() {
-        return idLoaiXeVeXe;
-    }
-
-    public void setIdLoaiXeVeXe(int idLoaiXeVeXe) {
-        this.idLoaiXeVeXe = idLoaiXeVeXe;
-    }
 
     public int getIdChuyenXeVeXe() {
         return idChuyenXeVeXe;

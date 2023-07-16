@@ -3,6 +3,7 @@ package com.example.myapplication.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -29,7 +30,10 @@ public class DanhGia {
     private int diemDanhGia;
     @ColumnInfo(name = "nhan_xet")
     private String nhanXet;
+    public DanhGia(){
 
+    }
+    @Ignore
     public DanhGia(int idThanhVienDanhGia, int idChuyenXeDanhGia, int diemDanhGia, String nhanXet) {
 
         this.idThanhVienDanhGia = idThanhVienDanhGia;

@@ -2,6 +2,7 @@ package com.example.myapplication.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -14,7 +15,10 @@ public class Quyen {
     private int idQuyen;
     @ColumnInfo(name = "ten_quyen")
     private String tenQuyen;
+    public Quyen(){
 
+    }
+    @Ignore
     public Quyen( String tenQuyen) {
 
         this.tenQuyen = tenQuyen;

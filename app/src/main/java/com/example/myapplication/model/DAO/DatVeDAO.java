@@ -4,14 +4,14 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.myapplication.model.VeXe;
+import com.example.myapplication.model.DatVe;
 
 import java.util.List;
 
 @Dao
-public interface VeXeDAO {
+public interface DatVeDAO {
     @Insert
-    void insert(VeXe... veXes);
+    void insert(DatVe... veXes);
     @Query("select * from table_dat_ve")
-    List<VeXe> getAll();
+    List<DatVe> getAll();
 }

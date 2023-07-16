@@ -3,6 +3,7 @@ package com.example.myapplication.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -16,7 +17,10 @@ public class LoaiXe {
     private String tenLoaiXe;
     @ColumnInfo(name = "so_luong_ghe")
     private int soLuongGhe;
+    public LoaiXe(){
 
+    }
+    @Ignore
     public LoaiXe( String tenLoaiXe, int soLuongGhe) {
 
         this.tenLoaiXe = tenLoaiXe;
