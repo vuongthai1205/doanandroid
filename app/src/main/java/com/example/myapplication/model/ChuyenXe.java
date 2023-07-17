@@ -2,6 +2,7 @@ package com.example.myapplication.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
@@ -9,13 +10,20 @@ import androidx.room.PrimaryKey;
 import java.util.Date;
 
 
-@Entity(tableName = "table_chuyenxe"
-
+@Entity(tableName = "table_chuyenxe",
+        foreignKeys = {
+            @ForeignKey(entity = LoaiXe.class, parentColumns = "id_loai_xe", childColumns = "id_loai_xe")
+        },
+        indices = {
+            @Index(name = "index_id_loai_xe", value = "id_loai_xe")
+        }
 )
 public class ChuyenXe {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_chuyen_xe")
     private int idChuyenXe;
+    @ColumnInfo(name = "id_loai_xe")
+    private int idLoaiXe;
     @ColumnInfo(name = "ten_chuyen")
     private String tenChuyen;
     @ColumnInfo(name = "hinh_anh")
@@ -121,5 +129,13 @@ public class ChuyenXe {
 
     public void setNgayVe(String ngayVe) {
         this.ngayVe = ngayVe;
+    }
+
+    public int getIdLoaiXe() {
+        return idLoaiXe;
+    }
+
+    public void setIdLoaiXe(int idLoaiXe) {
+        this.idLoaiXe = idLoaiXe;
     }
 }
