@@ -7,12 +7,14 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "table_thanhvien"
     ,foreignKeys = @ForeignKey(entity = Quyen.class, parentColumns = "id_quyen", childColumns = "id_quyen"),
         indices = {@Index(name = "index_id_quyen", value = "id_quyen")}
 )
 
-public class ThanhVien {
+public class ThanhVien implements Serializable {
 
 
     @PrimaryKey(autoGenerate = true)
@@ -29,6 +31,8 @@ public class ThanhVien {
     private String avatar;
     @ColumnInfo(name = "id_quyen")
     private int idQuyenThanhVien;
+    @ColumnInfo(name = "ngay_sinh")
+    private String ngaySinh;
     private String email;
     @ColumnInfo(name = "so_dien_thoai")
     private String soDienThoai;
@@ -78,6 +82,14 @@ public class ThanhVien {
 
 
     // Các phương thức truy cập (getter) và cập nhật (setter) cho các trường
+
+    public String getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(String ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
 
     public int getId() {
         return id;
