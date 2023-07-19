@@ -1,42 +1,39 @@
 package com.example.myapplication.view;
 
 import android.os.Bundle;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
-
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentHomeAdminBinding;
+import com.example.myapplication.viewmodel.HomeAdminViewModel;
 
 
 public class HomeAdminFragment extends Fragment {
-    FragmentHomeAdminBinding fragmentHomeAdminBinding;
 
 
-
-
-
+    private FragmentHomeAdminBinding fragmentHomeAdminBinding;
+    private HomeAdminViewModel homeAdminViewModel = new HomeAdminViewModel();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        fragmentHomeAdminBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_home_admin,container,false);
-//        fragmentHomeAdminBinding.imgQuanLiChuyenXe.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ChuyenXeAdminFragment chuyenXeAdminFragment = new ChuyenXeAdminFragment();
-//                FragmentManager fragmentManager = getChildFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragmentAdmin, chuyenXeAdminFragment);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//            }
-//        });
-
-
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_admin, container, false);
+        fragmentHomeAdminBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_home_admin, container,false);
 
+        fragmentHomeAdminBinding.setHomeAdminViewModel(homeAdminViewModel);
+
+        fragmentHomeAdminBinding.layoutManagerUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homeAdminViewModel.onClick(getContext());
+            }
+        });
+
+        return fragmentHomeAdminBinding.getRoot();
     }
 }
