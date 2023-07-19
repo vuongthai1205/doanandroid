@@ -7,8 +7,6 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 
 @Entity(tableName = "table_chuyenxe",
         foreignKeys = {
@@ -53,6 +51,13 @@ public class ChuyenXe {
         this.thoiGianKetThuc = thoiGianKetThuc;
         this.ngayDi = ngayDi;
         this.ngayVe = ngayVe;
+        this.diaDiemDi = diaDiemDi;
+        this.diaDiemDen = diaDiemDen;
+    }
+
+    @Ignore
+    public ChuyenXe(String tenChuyen,String diaDiemDi, String diaDiemDen){
+        this.tenChuyen = tenChuyen;
         this.diaDiemDi = diaDiemDi;
         this.diaDiemDen = diaDiemDen;
     }
