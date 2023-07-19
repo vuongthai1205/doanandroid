@@ -16,8 +16,8 @@ import com.example.myapplication.R;
 import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.FunctionPublic;
 import com.example.myapplication.config.VariableGlobal;
+import com.example.myapplication.model.DAO.QuyenDao;
 import com.example.myapplication.model.DAO.ThanhVienDAO;
-import com.example.myapplication.model.Quyen;
 import com.example.myapplication.model.ThanhVien;
 import com.example.myapplication.view.ListThanhVienFragment;
 
@@ -25,7 +25,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class AddThanhVienViewModel extends BaseObservable {
+public class UpdateThanhVienViewModel extends BaseObservable {
     private String tenDangNhap;
     private String ho;
     private String ten;
@@ -35,6 +35,60 @@ public class AddThanhVienViewModel extends BaseObservable {
     private String email;
     private String avatar;
     private String ngaySinh;
+
+
+    public void setDetailThanhVien(ThanhVien thanhVien, Context context){
+
+
+        this.setTenDangNhap(thanhVien.getTenDangNhap());
+        this.setHo(thanhVien.getHo());
+        this.setTen(thanhVien.getTen());
+        this.setMatKhau(thanhVien.getMatKhau());
+        this.setSoDienThoai(thanhVien.getSoDienThoai());
+        this.setEmail(thanhVien.getEmail());
+        this.setNgaySinh(thanhVien.getNgaySinh());
+        this.setAvatar(thanhVien.getAvatar());
+    }
+
+    public void updateThanhVien(ThanhVien thanhVien, Context context){
+        if (!FunctionPublic.isTenDangNhapValid(tenDangNhap)){
+            Toast.makeText(context, "Tên đăng nhập sai định dạng, hãy viết liền không dấu", Toast.LENGTH_LONG).show();
+            return;
+        }
+        else if(!FunctionPublic.isPasswordValid(matKhau)){
+            Toast.makeText(context, "Độ dài mật khẩu phải lớn hơn hoặc bằng 5 ký tự", Toast.LENGTH_LONG).show();
+            return;
+        }
+        else if (!FunctionPublic.isEmailValid(email)){
+            Toast.makeText(context, "Email sai định dạng, example@gmail.com", Toast.LENGTH_LONG).show();
+            return;
+        }
+        else{
+            ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(context).getThanhVienDAO();
+            Date date = new Date();
+            thanhVien.setTen(getTen());
+            thanhVien.setHo(getHo());
+            thanhVien.setMatKhau(getMatKhau());
+            thanhVien.setIdQuyenThanhVien(getIdQuyen());
+            thanhVien.setSoDienThoai(getSoDienThoai());
+            thanhVien.setEmail(getEmail());
+            thanhVien.setNgaySinh(getNgaySinh());
+            thanhVien.setAvatar(getAvatar());
+            thanhVien.setNgayCapNhat(VariableGlobal.dateFormat.format(date));
+
+            thanhVienDAO.updateThanhVien(thanhVien);
+
+            Toast.makeText(context, "Chỉnh sửa thành công", Toast.LENGTH_LONG).show();
+
+            goToListFragment(context);
+        }
+    }
+    public void goToListFragment(Context context){
+        ListThanhVienFragment listThanhVienFragment =new ListThanhVienFragment();
+        FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.containerThanhVienManager, listThanhVienFragment);
+        fragmentTransaction.commit();
+    }
 
     public void showDatePickerDialog(Context context) {
         // Lấy ngày hiện tại để hiển thị trong DatePicker
@@ -67,88 +121,16 @@ public class AddThanhVienViewModel extends BaseObservable {
         datePickerDialog.show();
     }
 
-    public List<String> getListTenQuyen(Context context){
-        List<String> tenQuyen = AppDatabase.getInstance(context).getQuyenDAO().getTenQuyen();
-        return tenQuyen;
-    }
-
-    public void handleAddThanhVien(Context context){
-        if (TextUtils.isEmpty(tenDangNhap) || TextUtils.isEmpty(ho)|| TextUtils.isEmpty(ten) || TextUtils.isEmpty(matKhau) ||
-            TextUtils.isEmpty(ngaySinh) || TextUtils.isEmpty(soDienThoai) || TextUtils.isEmpty(email) || TextUtils.isEmpty(avatar)
-        ){
-            Toast.makeText(context, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_LONG).show();
-            return;
-        }else if (!FunctionPublic.isTenDangNhapValid(tenDangNhap)){
-            Toast.makeText(context, "Tên đăng nhập sai định dạng, hãy viết liền không dấu", Toast.LENGTH_LONG).show();
-            return;
-        }
-        else if(!FunctionPublic.isPasswordValid(matKhau)){
-            Toast.makeText(context, "Độ dài mật khẩu phải lớn hơn hoặc bằng 5 ký tự", Toast.LENGTH_LONG).show();
-            return;
-        }
-        else if (!FunctionPublic.isEmailValid(email)){
-            Toast.makeText(context, "Email sai định dạng, example@gmail.com", Toast.LENGTH_LONG).show();
-            return;
-        }
-        else {
-            Date date = new Date();
-
-
-            ThanhVien thanhVien = new ThanhVien();
-            thanhVien.setTenDangNhap(getTenDangNhap());
-            thanhVien.setTen(getTen());
-            thanhVien.setHo(getHo());
-            thanhVien.setMatKhau(getMatKhau());
-            thanhVien.setIdQuyenThanhVien(getIdQuyen());
-            thanhVien.setSoDienThoai(getSoDienThoai());
-            thanhVien.setEmail(getEmail());
-            thanhVien.setNgaySinh(getNgaySinh());
-            thanhVien.setAvatar(getAvatar());
-            thanhVien.setNgayTao(VariableGlobal.dateFormat.format(date));
-            thanhVien.setNgayCapNhat(VariableGlobal.dateFormat.format(date));
-
-            ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(context).getThanhVienDAO();
-
-            if (thanhVienDAO.isThanhVienExist(thanhVien.getTenDangNhap(), thanhVien.getEmail(), thanhVien.getSoDienThoai())){
-                Toast.makeText(context, "Người dùng đã tồn tại, vui lòng kiểm tra lại: tên đăng nhập, số điện thoại, email", Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            thanhVienDAO.insertAll(thanhVien);
-
-
-
-            this.setTenDangNhap("");
-            this.setIdQuyen(1);
-            this.setTen("");
-            this.setAvatar("");
-            this.setEmail("");
-            this.setSoDienThoai("");
-            this.setNgaySinh("");
-            this.setMatKhau("");
-            this.setHo("");
-
-            Toast.makeText(context, "Thêm thành công", Toast.LENGTH_LONG).show();
-            goToListFragment(context);
-
-        }
-
-
-
-    }
-
-    public void goToListFragment(Context context){
-        ListThanhVienFragment listThanhVienFragment =new ListThanhVienFragment();
-        FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.containerThanhVienManager, listThanhVienFragment);
-        fragmentTransaction.commit();
-    }
-
     public int getIdQuyenThanhVien(String tenQuyen, Context context){
         int id = AppDatabase.getInstance(context).getQuyenDAO().getIdQuyen(tenQuyen);
         setIdQuyen(id);
         return id;
     }
+    public List<String> getListTenQuyen(Context context){
+        List<String> tenQuyen = AppDatabase.getInstance(context).getQuyenDAO().getTenQuyen();
+        return tenQuyen;
+    }
+
 
     @Bindable
     public String getNgaySinh() {
