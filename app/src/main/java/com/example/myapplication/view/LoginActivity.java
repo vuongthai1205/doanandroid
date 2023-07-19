@@ -29,16 +29,12 @@ public class LoginActivity extends AppCompatActivity {
         activityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login);
         activityLoginBinding.setLoginViewModel(loginViewModel);
 
-        AppDatabase appDatabase = AppDatabase.getInstance(getBaseContext());
-        ThanhVienDAO thanhVienDAO = appDatabase.getThanhVienDAO();
-        QuyenDao quyenDao = appDatabase.getQuyenDAO();
+
         // Xử lí button đăng nhập
         activityLoginBinding.btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String tenDangNhap = loginViewModel.getTenDangNhap();
-                String password = loginViewModel.getPassword();
 
                 loginViewModel.handleLogin(getApplicationContext());
                 if(loginViewModel.isCheck()==true)
