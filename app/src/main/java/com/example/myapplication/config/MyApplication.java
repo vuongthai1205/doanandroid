@@ -2,14 +2,18 @@ package com.example.myapplication.config;
 
 import android.app.Application;
 
-//import com.example.myapplication.model.ChuyenXe;
-//import com.example.myapplication.model.DAO.ChuyenXeDAO;
-//import com.example.myapplication.model.DAO.LoaiXeDAO;
-//import com.example.myapplication.model.DAO.QuyenDao;
-//import com.example.myapplication.model.DAO.ThanhVienDAO;
-//import com.example.myapplication.model.LoaiXe;
-//import com.example.myapplication.model.Quyen;
-//import com.example.myapplication.model.ThanhVien;
+import androidx.room.Room;
+
+
+import com.google.firebase.FirebaseApp;
+import com.example.myapplication.model.ChuyenXe;
+import com.example.myapplication.model.DAO.ChuyenXeDAO;
+import com.example.myapplication.model.DAO.LoaiXeDAO;
+import com.example.myapplication.model.DAO.QuyenDao;
+import com.example.myapplication.model.DAO.ThanhVienDAO;
+import com.example.myapplication.model.LoaiXe;
+import com.example.myapplication.model.Quyen;
+import com.example.myapplication.model.ThanhVien;
 
 
 public class MyApplication extends Application {
@@ -18,6 +22,13 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         DataLocalManager.init(getApplicationContext());
+
+
+        FirebaseApp.initializeApp(getApplicationContext());
+
+
+
+
 //        ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(getApplicationContext()).getThanhVienDAO();
 //        QuyenDao quyenDao = AppDatabase.getInstance(getApplicationContext()).getQuyenDAO();
 //        Quyen q1 = new Quyen("ROLE_ADMIN");
@@ -71,6 +82,7 @@ public class MyApplication extends Application {
 //        chuyenXe4.setIdLoaiXe(3);
 //
 //        chuyenXeDAO.insert(chuyenXe1,chuyenXe2,chuyenXe3,chuyenXe4);
+
     }
 
 }
