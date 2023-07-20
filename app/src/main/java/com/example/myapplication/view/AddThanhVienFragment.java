@@ -1,11 +1,18 @@
 package com.example.myapplication.view;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +25,9 @@ import com.example.myapplication.R;
 import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.databinding.FragmentAddThanhVienBinding;
 import com.example.myapplication.viewmodel.AddThanhVienViewModel;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Calendar;
 
@@ -25,10 +35,12 @@ import java.util.Calendar;
 public class AddThanhVienFragment extends Fragment {
     FragmentAddThanhVienBinding fragmentAddThanhVienBinding;
     AddThanhVienViewModel addThanhVienViewModel = new AddThanhVienViewModel();
+    private ActivityResultLauncher<Intent> imagePickerLauncher;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         fragmentAddThanhVienBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_thanh_vien, container, false);
         fragmentAddThanhVienBinding.setAddThanhVienViewModel(addThanhVienViewModel);
 
@@ -63,6 +75,53 @@ public class AddThanhVienFragment extends Fragment {
             }
         });
 
+        imagePickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Uri selectedImageUri = result.getData().getData();
+                        // Tham chiếu đến Firebase Storage
+                        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+
+                        // Tạo tên file duy nhất cho hình ảnh (ví dụ: sử dụng thời gian hiện tại làm tên file)
+                        String fileName = System.currentTimeMillis() + ".jpg";
+
+                        // Tạo tham chiếu đến file trên Firebase Storage
+                        StorageReference imageRef = storageRef.child("images/" + fileName);
+
+                        // Upload hình ảnh lên Firebase Storage
+                        imageRef.putFile(selectedImageUri)
+                                .addOnSuccessListener(taskSnapshot -> {
+                                    // Upload thành công, tiến hành hiển thị hình ảnh
+                                    displayImageFromFirebaseStorage(imageRef);
+                                })
+                                .addOnFailureListener(e -> {
+                                    // Upload thất bại, xử lý lỗi tại đây (nếu cần)
+                                });
+                        // Gọi phương thức xử lý ảnh được chọn
+
+                    }
+                }
+        );
+
+        fragmentAddThanhVienBinding.edtAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                imagePickerLauncher.launch(intent);
+            }
+        });
+
         return fragmentAddThanhVienBinding.getRoot();
+    }
+    private void displayImageFromFirebaseStorage(StorageReference imageRef) {
+        // Lấy URL của hình ảnh đã tải lên từ Firebase Storage
+        imageRef.getDownloadUrl()
+                .addOnSuccessListener(uri -> {
+                    fragmentAddThanhVienBinding.edtAvatar.setText(String.valueOf(uri));
+                })
+                .addOnFailureListener(e -> {
+                    // Xử lý lỗi nếu không thể lấy URL hình ảnh (nếu cần)
+                });
     }
 }

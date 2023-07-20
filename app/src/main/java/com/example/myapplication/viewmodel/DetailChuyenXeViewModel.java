@@ -39,11 +39,11 @@ public class DetailChuyenXeViewModel extends BaseObservable {
         this.setNgayDi(chuyenXe.getNgayDi());
         this.setNgayVe(chuyenXe.getNgayVe());
         this.setTenLoaiXe(tenLoaiXe);
-        if(getGiaTien()==null){
+        if(chuyenXe.getGiaTien()==null){
             this.setGiaTien("Chưa cập nhật");
         }else
             this.setGiaTien(String.valueOf(chuyenXe.getGiaTien()));
-        this.setMoTa(getMoTa());
+        this.setMoTa(chuyenXe.getMoTa());
     }
 
     @Bindable
