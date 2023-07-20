@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.AccountFragment">
     <data>
         <variable
@@ -146,11 +147,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Ảnh đại diện"/>
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/avatarImg"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/color_manager_chuyen_xe"
                 />
             <Button
                 android:layout_width="wrap_content"

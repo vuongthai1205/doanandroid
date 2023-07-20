@@ -80,26 +80,7 @@ public class AddThanhVienFragment extends Fragment {
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         Uri selectedImageUri = result.getData().getData();
-                        // Tham chiếu đến Firebase Storage
-                        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-
-                        // Tạo tên file duy nhất cho hình ảnh (ví dụ: sử dụng thời gian hiện tại làm tên file)
-                        String fileName = System.currentTimeMillis() + ".jpg";
-
-                        // Tạo tham chiếu đến file trên Firebase Storage
-                        StorageReference imageRef = storageRef.child("images/" + fileName);
-
-                        // Upload hình ảnh lên Firebase Storage
-                        imageRef.putFile(selectedImageUri)
-                                .addOnSuccessListener(taskSnapshot -> {
-                                    // Upload thành công, tiến hành hiển thị hình ảnh
-                                    displayImageFromFirebaseStorage(imageRef);
-                                })
-                                .addOnFailureListener(e -> {
-                                    // Upload thất bại, xử lý lỗi tại đây (nếu cần)
-                                });
-                        // Gọi phương thức xử lý ảnh được chọn
-
+                        addThanhVienViewModel.uploadImageToFireBase(selectedImageUri, getContext());
                     }
                 }
         );
@@ -114,14 +95,5 @@ public class AddThanhVienFragment extends Fragment {
 
         return fragmentAddThanhVienBinding.getRoot();
     }
-    private void displayImageFromFirebaseStorage(StorageReference imageRef) {
-        // Lấy URL của hình ảnh đã tải lên từ Firebase Storage
-        imageRef.getDownloadUrl()
-                .addOnSuccessListener(uri -> {
-                    fragmentAddThanhVienBinding.edtAvatar.setText(String.valueOf(uri));
-                })
-                .addOnFailureListener(e -> {
-                    // Xử lý lỗi nếu không thể lấy URL hình ảnh (nếu cần)
-                });
-    }
+
 }

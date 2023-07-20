@@ -275,14 +275,12 @@
                         android:layout_weight="2"
                         android:text="Ảnh đại diện: " />
 
-                    <EditText
-                        android:id="@+id/edtAvatar"
+                    <ImageView
+                        android:src="@drawable/avatar"
+                        android:id="@+id/avatarImg"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:hint="Nhập Ảnh đại diện"
-                        android:text="@={UpdateThanhVienViewModel.avatar}"
-                        android:textSize="13sp" />
+                        android:layout_height="200dp"
+                        android:layout_weight="5"/>
                 </LinearLayout>
             </LinearLayout>
 
