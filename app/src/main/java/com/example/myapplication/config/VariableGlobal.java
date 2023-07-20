@@ -40,6 +40,8 @@ public class VariableGlobal {
     public static final String COLUMN_THOI_GIAN_BAT_DAU = "thoi_gian_bat_dau";
     public static final String COLUMN_DIA_DIEM_DI = "dia_diem_di";
     public static final String COLUMN_DIA_DIEM_DEN = "dia_diem_den";
+    public static final String COLUMN_GIA_TIEN = "gia_tien";
+    public static final String COLUMN_MO_TA = "mo_ta";
 
     public static final String COLUMN_ID_VEXE = "id_ve_xe";
     public static final String COLUMN_ID_THANHVIEN_VEXE = "id_thanh_vien";

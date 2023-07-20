@@ -7,6 +7,8 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 
 @Entity(tableName = "table_chuyenxe",
         foreignKeys = {
@@ -16,7 +18,7 @@ import androidx.room.PrimaryKey;
             @Index(name = "index_id_loai_xe", value = "id_loai_xe")
         }
 )
-public class ChuyenXe {
+public class ChuyenXe implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_chuyen_xe")
     private int idChuyenXe;
@@ -38,12 +40,17 @@ public class ChuyenXe {
     private String diaDiemDi;
     @ColumnInfo(name = "dia_diem_den")
     private String diaDiemDen;
+    @ColumnInfo(name = "gia_tien")
+    private Double giaTien;
+    @ColumnInfo(name = "mo_ta")
+    private  String moTa;
+
 
     public ChuyenXe(){
 
     }
     @Ignore
-    public ChuyenXe( String tenChuyen, String hinhAnh, String thoiGianBatDau, String thoiGianKetThuc,String ngayDi, String ngayVe, String diaDiemDi, String diaDiemDen) {
+    public ChuyenXe( String tenChuyen, String hinhAnh, String thoiGianBatDau, String thoiGianKetThuc,String ngayDi, String ngayVe, String diaDiemDi, String diaDiemDen,Double giaTien,String moTa) {
 
         this.tenChuyen = tenChuyen;
         this.hinhAnh = hinhAnh;
@@ -53,13 +60,17 @@ public class ChuyenXe {
         this.ngayVe = ngayVe;
         this.diaDiemDi = diaDiemDi;
         this.diaDiemDen = diaDiemDen;
+        this.giaTien = giaTien;
+        this.moTa = moTa;
     }
 
     @Ignore
-    public ChuyenXe(String tenChuyen,String diaDiemDi, String diaDiemDen){
+    public ChuyenXe(String tenChuyen,String diaDiemDi, String diaDiemDen,String thoiGianBatDau,String thoiGianKetThuc){
         this.tenChuyen = tenChuyen;
         this.diaDiemDi = diaDiemDi;
         this.diaDiemDen = diaDiemDen;
+        this.thoiGianBatDau = thoiGianBatDau;
+        this.thoiGianKetThuc = thoiGianKetThuc;
     }
 
     // Các phương thức truy cập (getter) và cập nhật (setter) cho các trường dữ liệu
@@ -142,5 +153,21 @@ public class ChuyenXe {
 
     public void setIdLoaiXe(int idLoaiXe) {
         this.idLoaiXe = idLoaiXe;
+    }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
+    public Double getGiaTien() {
+        return giaTien;
+    }
+
+    public void setGiaTien(Double giaTien) {
+        this.giaTien = giaTien;
     }
 }
