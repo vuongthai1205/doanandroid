@@ -1,5 +1,11 @@
 package com.example.myapplication.config;
 
+import android.content.Context;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+
+import com.bumptech.glide.Glide;
+
 public class FunctionPublic {
     public static boolean isTenDangNhapValid(String tenDangNhap) {
         // Biểu thức chính quy kiểm tra viết liền không dấu
@@ -24,5 +30,11 @@ public class FunctionPublic {
         } else {
             return false;
         }
+    }
+
+    public static void loadAvatar(String url, ImageView imageView, Context context){
+        Glide.with(context)
+                .load(url)
+                .into(imageView);
     }
 }

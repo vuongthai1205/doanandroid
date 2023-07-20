@@ -1,10 +1,17 @@
 package com.example.myapplication.view;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.example.myapplication.R;
+import com.example.myapplication.config.FunctionPublic;
 import com.example.myapplication.databinding.FragmentUpdateThanhVienBinding;
 import com.example.myapplication.model.ThanhVien;
 import com.example.myapplication.viewmodel.UpdateThanhVienViewModel;
@@ -21,6 +29,8 @@ public class UpdateThanhVienFragment extends Fragment {
 
     private FragmentUpdateThanhVienBinding fragmentUpdateThanhVienBinding;
     private UpdateThanhVienViewModel updateThanhVienViewModel = new UpdateThanhVienViewModel();
+
+    private ActivityResultLauncher<Intent> imagePickerLauncher;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,8 +76,28 @@ public class UpdateThanhVienFragment extends Fragment {
             }
         });
 
+        imagePickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Uri selectedImageUri = result.getData().getData();
+                        updateThanhVienViewModel.uploadImageToFireBase(selectedImageUri, getContext());
+                    }
+                }
+        );
 
+        FunctionPublic.loadAvatar(updateThanhVienViewModel.getAvatar(),fragmentUpdateThanhVienBinding.avatarImg,getContext());
+
+        fragmentUpdateThanhVienBinding.avatarImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                imagePickerLauncher.launch(intent);
+            }
+        });
         // Inflate the layout for this fragment
         return fragmentUpdateThanhVienBinding.getRoot();
     }
+
+
 }

@@ -24,7 +24,6 @@ public class DetailThanhVienViewModel extends BaseObservable {
     private String ngaySinh;
     private String avatar;
 
-
     public void setDetailThanhVien(ThanhVien thanhVien, Context context){
         QuyenDao quyenDao = AppDatabase.getInstance(context).getQuyenDAO();
 
