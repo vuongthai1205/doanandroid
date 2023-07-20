@@ -1,20 +1,16 @@
 package com.example.myapplication.view;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.ActivityAdminManagerBinding;
 import com.example.myapplication.viewmodel.AdminManagerViewModel;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class AdminManagerActivity extends AppCompatActivity {
@@ -31,6 +27,7 @@ public class AdminManagerActivity extends AppCompatActivity {
         fragmentTransaction.replace(activityAdminManagerBinding.fragmentAdmin.getId(),new HomeAdminFragment());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+
 
 
         activityAdminManagerBinding.tabAdmin.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
