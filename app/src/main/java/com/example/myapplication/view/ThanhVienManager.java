@@ -16,6 +16,15 @@ import com.google.android.material.navigation.NavigationBarView;
 public class ThanhVienManager extends AppCompatActivity {
     private boolean isRootFragmentAdded = false;
     @Override
+    public void onBackPressed() {
+        // Xử lý sự kiện khi người dùng nhấn nút Back trên thiết bị
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ThanhVienManagerViewModel thanhVienManagerViewModel = new ThanhVienManagerViewModel();
@@ -26,7 +35,7 @@ public class ThanhVienManager extends AppCompatActivity {
             // Nếu fragment gốc chưa được thêm vào, thêm nó vào container
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(activityThanhVienManagerBinding.containerThanhVienManager.getId(), ListThanhVienFragment.class, null);
-            fragmentTransaction.addToBackStack(null);
+
             fragmentTransaction.commit();
 
             // Đánh dấu rằng fragment gốc đã được thêm vào
@@ -38,13 +47,13 @@ public class ThanhVienManager extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.action_show){
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(activityThanhVienManagerBinding.containerThanhVienManager.getId(), ListThanhVienFragment.class, null).addToBackStack(null);
+                    fragmentTransaction.replace(activityThanhVienManagerBinding.containerThanhVienManager.getId(), ListThanhVienFragment.class, null);
                     fragmentTransaction.commit();
                     return true;
                 }
                 else if(item.getItemId() == R.id.action_add){
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(activityThanhVienManagerBinding.containerThanhVienManager.getId(), AddThanhVienFragment.class, null).addToBackStack(null);
+                    fragmentTransaction.replace(activityThanhVienManagerBinding.containerThanhVienManager.getId(), AddThanhVienFragment.class, null);
                     fragmentTransaction.commit();
                     return true;
                 }
