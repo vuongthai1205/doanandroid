@@ -5,18 +5,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.view.DetailChuyenXeFragment;
-
 
 import java.util.List;
 
@@ -59,7 +61,31 @@ public class ChuyenXeAdapter extends RecyclerView.Adapter<ChuyenXeAdapter.Chuyen
                 showDetail(chuyenXe);
             }
         });
+        holder.imgDeleteChuyenXe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showConfirmationDialog(chuyenXe,position);
+            }
+        });
 
+    }
+
+    private void showConfirmationDialog(ChuyenXe chuyenXe, int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Xác nhận xóa");
+        builder.setMessage("Bạn có muốn xóa chuyến xe này?");
+        builder.setPositiveButton("Đồng ý", (dialogInterface, i) -> {
+            chuyenXes.remove(position);
+            AppDatabase.getInstance(context).getChuyenXeDAO().delete(chuyenXe);
+            notifyDataSetChanged(); // Cập nhật giao diện sau khi xóa
+
+
+        });
+        builder.setNegativeButton("Hủy", (dialogInterface, i) -> {
+            // Đóng hộp thoại khi người dùng không đồng ý xóa
+            dialogInterface.dismiss();
+        });
+        builder.create().show();
     }
 
     private void showDetail(ChuyenXe chuyenXe) {
@@ -89,12 +115,16 @@ public class ChuyenXeAdapter extends RecyclerView.Adapter<ChuyenXeAdapter.Chuyen
         TextView thoiGianBatDau;
         TextView diaDiemDi;
         CardView itemChuyenXe;
+        ImageView imgDeleteChuyenXe;
+        ImageView imgEditChuyenXe;
         public ChuyenXeHolder(@NonNull View itemView) {
             super(itemView);
             tenChuyenXe = itemView.findViewById(R.id.tenChuyenXe);
             thoiGianBatDau = itemView.findViewById(R.id.thoiGianBatDau);
             diaDiemDi = itemView.findViewById(R.id.diaDiemDi);
             itemChuyenXe = itemView.findViewById(R.id.itemChuyenXe);
+            imgDeleteChuyenXe = itemView.findViewById(R.id.btnDeleteChuyenXe);
+            imgEditChuyenXe = itemView.findViewById(R.id.btnEditChuyenXe);
         }
     }
 }
