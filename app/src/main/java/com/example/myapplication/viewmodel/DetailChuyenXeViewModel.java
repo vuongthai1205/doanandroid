@@ -23,6 +23,7 @@ public class DetailChuyenXeViewModel extends BaseObservable {
     private String tenLoaiXe;
     private String giaTien;
     private String moTa;
+    private String hinhAnh;
 
     public void setDetailChuyenXe(ChuyenXe chuyenXe, Context context){
 
@@ -44,6 +45,7 @@ public class DetailChuyenXeViewModel extends BaseObservable {
         }else
             this.setGiaTien(String.valueOf(chuyenXe.getGiaTien()));
         this.setMoTa(chuyenXe.getMoTa());
+        this.setHinhAnh(getHinhAnh());
     }
 
     @Bindable
@@ -153,5 +155,14 @@ public class DetailChuyenXeViewModel extends BaseObservable {
     public void setMoTa(String moTa) {
         this.moTa = moTa;
         notifyPropertyChanged(BR.moTa);
+    }
+    @Bindable
+    public String getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
+        notifyPropertyChanged(BR.hinhAnh);
     }
 }
