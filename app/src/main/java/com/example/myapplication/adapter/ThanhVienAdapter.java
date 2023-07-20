@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
 import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.DataLocalManager;
@@ -27,6 +28,8 @@ import com.example.myapplication.view.DetailThanhVienFragment;
 import com.example.myapplication.view.UpdateThanhVienFragment;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.ThanhVienHolder> {
 
@@ -75,6 +78,10 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
             UpdateThanhVienFragment updateThanhVienFragment = new UpdateThanhVienFragment();
             showDetail(thanhVien,updateThanhVienFragment );
         });
+        String imageUrl =  thanhVien.getAvatar();
+        Glide.with(this.context)
+                .load(imageUrl)
+                .into(holder.avt);
     }
 
     private void showConfirmationDialog(ThanhVien thanhVien, int position) {
@@ -131,6 +138,7 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
         CardView itemThanhVien;
         ImageView btnEdit;
         ImageView btnDelete;
+        CircleImageView avt;
         public ThanhVienHolder(@NonNull View itemView) {
             super(itemView);
             id = itemView.findViewById(R.id.idThanhVien);
@@ -139,6 +147,7 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
             itemThanhVien = itemView.findViewById(R.id.itemThanhVien);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             btnEdit = itemView.findViewById(R.id.btnEdit);
+            avt = itemView.findViewById(R.id.avt_thanhVien);
         }
     }
 }
