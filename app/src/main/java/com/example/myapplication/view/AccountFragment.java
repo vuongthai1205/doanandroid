@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.DataLocalManager;
+import com.example.myapplication.config.FunctionPublic;
+import com.example.myapplication.config.VariableGlobal;
 import com.example.myapplication.databinding.FragmentAccountBinding;
 import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.ThanhVien;
@@ -34,7 +36,8 @@ public class AccountFragment extends Fragment {
 
         ThanhVien thanhVien = thanhVienDAO.getThanhVienByUserName(DataLocalManager.getNameUser());
 
-        accountViewModel.showAccount(thanhVien);
+        accountViewModel.showAccount(thanhVien, getContext());
+        FunctionPublic.loadAvatar(accountViewModel.getAvatar(),fragmentAccountBinding.avatarImg,getContext());
 
         fragmentAccountBinding.btnUpdateAccount.setOnClickListener(new View.OnClickListener() {
             @Override

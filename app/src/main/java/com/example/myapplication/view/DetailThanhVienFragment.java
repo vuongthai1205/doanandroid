@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.R;
+import com.example.myapplication.config.FunctionPublic;
+import com.example.myapplication.config.VariableGlobal;
 import com.example.myapplication.databinding.FragmentDetailThanhVienBinding;
 import com.example.myapplication.model.ThanhVien;
 import com.example.myapplication.viewmodel.DetailThanhVienViewModel;
@@ -31,6 +33,8 @@ public class DetailThanhVienFragment extends Fragment {
             ThanhVien thanhVien = (ThanhVien) bundle.getSerializable("thanhVien");
             detailThanhVienViewModel.setDetailThanhVien(thanhVien, getContext());
         }
+
+        FunctionPublic.loadAvatar(detailThanhVienViewModel.getAvatar(),fragmentDetailThanhVienBinding.avatarImg,getContext());
 
 
         // Inflate the layout for this fragment
