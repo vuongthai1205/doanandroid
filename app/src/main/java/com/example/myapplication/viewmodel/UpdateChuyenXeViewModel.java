@@ -94,8 +94,14 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
                 month,
                 dayOfMonth
         );
-        //Giới hạn DatePickerDialog không cho phép chọn các ngày trước ngày hôm nay
-        datePickerDialogNgayVe.getDatePicker().setMinDate(selectedCalendarDi.getTimeInMillis());
+
+        if  (getNgayDi() != null && !getNgayDi().isEmpty()){
+            //Giới hạn DatePickerDialog không cho phép chọn các ngày trước ngày hôm nay
+            datePickerDialogNgayVe.getDatePicker().setMinDate(selectedCalendarDi.getTimeInMillis());
+        }
+
+        datePickerDialogNgayVe.getDatePicker().setMinDate(System.currentTimeMillis());
+
         // Hiển thị DatePickerDialog
         datePickerDialogNgayVe.show();
     }
