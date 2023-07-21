@@ -1,24 +1,32 @@
 package com.example.myapplication.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
+import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.view.DetailChuyenXeFragment;
-
+import com.example.myapplication.view.UpdateChuyenXeFragment;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChuyenXeAdapter extends RecyclerView.Adapter<ChuyenXeAdapter.ChuyenXeHolder> {
 
@@ -46,7 +54,7 @@ public class ChuyenXeAdapter extends RecyclerView.Adapter<ChuyenXeAdapter.Chuyen
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChuyenXeHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ChuyenXeHolder holder, @SuppressLint("RecyclerView") int position) {
         ChuyenXe chuyenXe = chuyenXes.get(position);
 
         holder.tenChuyenXe.setText(chuyenXe.getTenChuyen());
@@ -56,23 +64,55 @@ public class ChuyenXeAdapter extends RecyclerView.Adapter<ChuyenXeAdapter.Chuyen
         holder.itemChuyenXe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDetail(chuyenXe);
+                DetailChuyenXeFragment detailChuyenXeFragment = new DetailChuyenXeFragment();
+                showDetail(chuyenXe,detailChuyenXeFragment);
             }
         });
-
+        holder.imgDeleteChuyenXe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showConfirmationDialog(chuyenXe,position);
+            }
+        });
+        holder.imgEditChuyenXe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpdateChuyenXeFragment updateChuyenXeFragment = new UpdateChuyenXeFragment();
+                showDetail(chuyenXe,updateChuyenXeFragment );
+            }
+        });
+        String imageUrl =  chuyenXe.getHinhAnh();
+        Glide.with(this.context)
+                .load(imageUrl)
+                .into(holder.imgChuyenXe);
     }
 
-    private void showDetail(ChuyenXe chuyenXe) {
+    private void showConfirmationDialog(ChuyenXe chuyenXe, int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Xác nhận xóa");
+        builder.setMessage("Bạn có muốn xóa chuyến xe này?");
+        builder.setPositiveButton("Đồng ý", (dialogInterface, i) -> {
+            chuyenXes.remove(position);
+            AppDatabase.getInstance(context).getChuyenXeDAO().delete(chuyenXe);
+            notifyDataSetChanged(); // Cập nhật giao diện sau khi xóa
+
+
+        });
+        builder.setNegativeButton("Hủy", (dialogInterface, i) -> {
+            // Đóng hộp thoại khi người dùng không đồng ý xóa
+            dialogInterface.dismiss();
+        });
+        builder.create().show();
+    }
+
+    private void showDetail(ChuyenXe chuyenXe , Fragment fragment) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("chuyenXe", chuyenXe);
 
-        DetailChuyenXeFragment detailChuyenXeFragment = new DetailChuyenXeFragment();
-        detailChuyenXeFragment.setArguments(bundle);
-
+        fragment.setArguments(bundle);
 
         FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.containerChuyenXeManager, detailChuyenXeFragment);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.containerChuyenXeManager, fragment);
         fragmentTransaction.commit();
     }
 
@@ -89,12 +129,18 @@ public class ChuyenXeAdapter extends RecyclerView.Adapter<ChuyenXeAdapter.Chuyen
         TextView thoiGianBatDau;
         TextView diaDiemDi;
         CardView itemChuyenXe;
+        ImageView imgDeleteChuyenXe;
+        ImageView imgEditChuyenXe;
+        CircleImageView imgChuyenXe;
         public ChuyenXeHolder(@NonNull View itemView) {
             super(itemView);
             tenChuyenXe = itemView.findViewById(R.id.tenChuyenXe);
             thoiGianBatDau = itemView.findViewById(R.id.thoiGianBatDau);
             diaDiemDi = itemView.findViewById(R.id.diaDiemDi);
             itemChuyenXe = itemView.findViewById(R.id.itemChuyenXe);
+            imgDeleteChuyenXe = itemView.findViewById(R.id.btnDeleteChuyenXe);
+            imgEditChuyenXe = itemView.findViewById(R.id.btnEditChuyenXe);
+            imgChuyenXe = itemView.findViewById(R.id.img_chuyenXe);
         }
     }
 }

@@ -36,13 +36,13 @@ public class ChuyenXeManager extends AppCompatActivity {
         activityChuyenXeManagerBinding.menuChuyenXeManager.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.action_show){
+                if (item.getItemId() == R.id.action_show_chuyen_xe){
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(activityChuyenXeManagerBinding.containerChuyenXeManager.getId(), ListChuyenXeFragment.class, null).addToBackStack(null);
                     fragmentTransaction.commit();
                     return true;
                 }
-                else if(item.getItemId() == R.id.action_add){
+                else if(item.getItemId() == R.id.action_add_chuyen_xe){
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(activityChuyenXeManagerBinding.containerChuyenXeManager.getId(), AddChuyenXeFragment.class, null).addToBackStack(null);
                     fragmentTransaction.commit();
@@ -52,4 +52,5 @@ public class ChuyenXeManager extends AppCompatActivity {
             }
         });
     }
+
 }

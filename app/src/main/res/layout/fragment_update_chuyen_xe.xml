@@ -2,11 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
-    tools:context=".view.AddChuyenXeFragment">
+    tools:context=".view.UpdateChuyenXeFragment">
     <data>
         <variable
-            name="AddChuyenXeViewModel"
-            type="com.example.myapplication.viewmodel.AddChuyenXeViewModel" />
+            name="UpdateChuyenXeViewModel"
+            type="com.example.myapplication.viewmodel.UpdateChuyenXeViewModel" />
     </data>
 
     <ScrollView
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
                     android:hint="Nhập tên chuyến xe"
-                    android:text="@={AddChuyenXeViewModel.tenChuyenXe}"
+                    android:text="@={UpdateChuyenXeViewModel.tenChuyenXe}"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -73,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
                         android:hint="Nhập địa điểm xuất phát"
-                        android:text="@={AddChuyenXeViewModel.diaDiemDi}"
+                        android:text="@={UpdateChuyenXeViewModel.diaDiemDi}"
                         android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
                         android:hint="Nhập địa điểm kết thúc"
-                        android:text="@={AddChuyenXeViewModel.diaDiemDen}"
+                        android:text="@={UpdateChuyenXeViewModel.diaDiemDen}"
                         android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -132,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
                         android:hint="Nhập thời gian xuất phát"
-                        android:text="@={AddChuyenXeViewModel.thoiGianDi}"
+                        android:text="@={UpdateChuyenXeViewModel.thoiGianDi}"
                         android:textSize="13sp" />
 
 
@@ -165,7 +165,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
                         android:hint="Nhập thời gian kết thúc"
-                        android:text="@={AddChuyenXeViewModel.thoiGianDen}"
+                        android:text="@={UpdateChuyenXeViewModel.thoiGianDen}"
                         android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -195,7 +195,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@={AddChuyenXeViewModel.ngayDi}"
+                        android:text="@={UpdateChuyenXeViewModel.ngayDi}"
                         android:hint="Nhập ngày đi"
 
                         android:textSize="13sp"/>
@@ -226,7 +226,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@={AddChuyenXeViewModel.ngayVe}"
+                        android:text="@={UpdateChuyenXeViewModel.ngayVe}"
                         android:hint="Nhập ngày về"
 
                         android:textSize="13sp"/>
@@ -257,7 +257,7 @@
                             android:layout_weight="5"
                             android:hint="Nhập giá tiền"
                             android:inputType="number"
-                            android:text="@={AddChuyenXeViewModel.giaTien}"
+                            android:text="@={UpdateChuyenXeViewModel.giaTien}"
                             android:textSize="13sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -287,7 +287,7 @@
                             android:layout_weight="5"
                             android:hint="Nhập mô tả"
                             android:inputType="textMultiLine"
-                            android:text="@={AddChuyenXeViewModel.moTa}"
+                            android:text="@={UpdateChuyenXeViewModel.moTa}"
                             android:textSize="13sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -341,7 +341,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
                         android:hint="Chưa cập nhật"
-                        android:text="@={AddChuyenXeViewModel.hinhAnh}"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -349,12 +348,12 @@
 
             <Button
                 android:layout_marginTop="5dp"
-                android:id="@+id/btnThemChuyenXe"
+                android:id="@+id/btnUpdateChuyenXe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round"
                 android:paddingHorizontal="12dp"
-                android:text="Thêm Chuyến Xe"
+                android:text="Cập nhật"
                 android:textColor="@color/white" />
         </LinearLayout>
 

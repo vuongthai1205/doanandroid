@@ -364,6 +364,15 @@
                         android:text="Hình ảnh: "
                         android:textStyle="bold" />
 
+                    <ImageView
+                        android:id="@+id/imgChuyenXe"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="5"
+                        tools:ignore="InvalidId">
+                    </ImageView>
+
                 </LinearLayout>
             </LinearLayout>
 
