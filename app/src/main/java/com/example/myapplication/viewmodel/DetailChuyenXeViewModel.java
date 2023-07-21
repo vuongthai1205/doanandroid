@@ -10,6 +10,10 @@ import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.model.DAO.LoaiXeDAO;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 
 public class DetailChuyenXeViewModel extends BaseObservable {
     private String idChuyenXe;
@@ -42,8 +46,14 @@ public class DetailChuyenXeViewModel extends BaseObservable {
         this.setTenLoaiXe(tenLoaiXe);
         if(chuyenXe.getGiaTien()==null){
             this.setGiaTien("Chưa cập nhật");
-        }else
+        }else {
             this.setGiaTien(String.valueOf(chuyenXe.getGiaTien()));
+            DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
+            decimalFormat.applyPattern("#,###.##");
+            String giaTienFormatted = decimalFormat.format(chuyenXe.getGiaTien());
+            giaTienFormatted += " VND";
+            this.setGiaTien(giaTienFormatted);
+        }
         this.setMoTa(chuyenXe.getMoTa());
         this.setHinhAnh(getHinhAnh());
     }

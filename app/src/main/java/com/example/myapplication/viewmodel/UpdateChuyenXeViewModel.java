@@ -19,8 +19,11 @@ import com.example.myapplication.model.DAO.ChuyenXeDAO;
 import com.example.myapplication.model.DAO.LoaiXeDAO;
 import com.example.myapplication.view.ListChuyenXeFragment;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class UpdateChuyenXeViewModel extends BaseObservable {
     private String tenChuyenXe;
@@ -129,6 +132,11 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
         this.setNgayDi(chuyenXe.getNgayDi());
         this.setNgayVe(chuyenXe.getNgayVe());
         this.setGiaTien(String.valueOf(chuyenXe.getGiaTien()));
+        DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
+        decimalFormat.applyPattern("#,###.##");
+        String giaTienFormatted = decimalFormat.format(chuyenXe.getGiaTien());
+        giaTienFormatted += " VND";
+        this.setGiaTien(giaTienFormatted);
         this.setMoTa(chuyenXe.getMoTa());
 
     }
