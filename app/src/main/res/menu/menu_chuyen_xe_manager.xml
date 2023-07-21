@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_back_home"
-        android:title="Quay Lại"
-        android:icon="@drawable/them"/>
+
 
     <item android:id="@+id/action_show_chuyen_xe"
         android:title="Danh Sách"

@@ -2,6 +2,7 @@ package com.example.myapplication.view;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +40,20 @@ public class ListThanhVienFragment extends Fragment {
         listThanhVienViewModel.renderAdapter(getContext());
         fragmentListThanhVienBinding.rcvThanhVien.setAdapter(listThanhVienViewModel.getThanhVienAdapter());
 
+
+        fragmentListThanhVienBinding.searchTen.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                listThanhVienViewModel.getThanhVienAdapter().getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                listThanhVienViewModel.getThanhVienAdapter().getFilter().filter(newText);
+                return false;
+            }
+        });
 
         return fragmentListThanhVienBinding.getRoot();
     }
