@@ -140,44 +140,6 @@ public class UpdateThanhVienViewModel extends BaseObservable {
         return tenQuyen;
     }
 
-    public void uploadImageToFireBase(Uri uri, Context context){
-        // Tham chiếu đến Firebase Storage
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-
-        // Tạo tên file duy nhất cho hình ảnh (ví dụ: sử dụng thời gian hiện tại làm tên file)
-        String fileName = System.currentTimeMillis() + ".jpg";
-
-        // Tạo tham chiếu đến file trên Firebase Storage
-        StorageReference imageRef = storageRef.child("images/" + fileName);
-
-        // Upload hình ảnh lên Firebase Storage
-        imageRef.putFile(uri)
-                .addOnProgressListener(snapshot -> {
-                    Toast.makeText(context, "Đang tải ảnh ", Toast.LENGTH_LONG).show();
-                })
-                .addOnSuccessListener(taskSnapshot -> {
-                    // Upload thành công, tiến hành hiển thị hình ảnh
-                    displayImageFromFirebaseStorage(imageRef);
-                    Toast.makeText(context, "Tải ảnh thành công ", Toast.LENGTH_LONG).show();
-                })
-                .addOnFailureListener(e -> {
-                    // Upload thất bại, xử lý lỗi tại đây (nếu cần)
-                });
-        // Gọi phương thức xử lý ảnh được chọn
-
-    }
-
-    private void displayImageFromFirebaseStorage(StorageReference imageRef) {
-        // Lấy URL của hình ảnh đã tải lên từ Firebase Storage
-        imageRef.getDownloadUrl()
-                .addOnSuccessListener(uri -> {
-                    setAvatar(String.valueOf(uri));
-                })
-                .addOnFailureListener(e -> {
-                    // Xử lý lỗi nếu không thể lấy URL hình ảnh (nếu cần)
-                });
-    }
-
     @Bindable
     public String getNgaySinh() {
         return ngaySinh;
