@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
 import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.DataLocalManager;
+import com.example.myapplication.config.FunctionPublic;
 import com.example.myapplication.model.ThanhVien;
 import com.example.myapplication.view.DetailThanhVienFragment;
 import com.example.myapplication.view.UpdateThanhVienFragment;
@@ -85,9 +86,7 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
             showDetail(thanhVien,updateThanhVienFragment );
         });
         String imageUrl =  thanhVien.getAvatar();
-        Glide.with(this.context)
-                .load(imageUrl)
-                .into(holder.avt);
+        FunctionPublic.loadAvatar(imageUrl,holder.avt,this.context);
     }
 
     private void showConfirmationDialog(ThanhVien thanhVien, int position) {
