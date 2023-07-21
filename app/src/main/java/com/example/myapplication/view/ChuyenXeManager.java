@@ -16,6 +16,15 @@ import com.google.android.material.navigation.NavigationBarView;
 public class ChuyenXeManager extends AppCompatActivity {
     private boolean isRootFragmentAdded = false;
     @Override
+    public void onBackPressed() {
+        // Xử lý sự kiện khi người dùng nhấn nút Back trên thiết bị
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ChuyenXeManagerViewModel chuyenXeManagerViewModel = new ChuyenXeManagerViewModel();
@@ -26,7 +35,7 @@ public class ChuyenXeManager extends AppCompatActivity {
             // Nếu fragment gốc chưa được thêm vào, thêm nó vào container
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(activityChuyenXeManagerBinding.containerChuyenXeManager.getId(), ListChuyenXeFragment.class, null);
-            fragmentTransaction.addToBackStack(null);
+
             fragmentTransaction.commit();
 
             // Đánh dấu rằng fragment gốc đã được thêm vào
@@ -38,13 +47,13 @@ public class ChuyenXeManager extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.action_show_chuyen_xe){
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(activityChuyenXeManagerBinding.containerChuyenXeManager.getId(), ListChuyenXeFragment.class, null).addToBackStack(null);
+                    fragmentTransaction.replace(activityChuyenXeManagerBinding.containerChuyenXeManager.getId(), ListChuyenXeFragment.class, null);
                     fragmentTransaction.commit();
                     return true;
                 }
                 else if(item.getItemId() == R.id.action_add_chuyen_xe){
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(activityChuyenXeManagerBinding.containerChuyenXeManager.getId(), AddChuyenXeFragment.class, null).addToBackStack(null);
+                    fragmentTransaction.replace(activityChuyenXeManagerBinding.containerChuyenXeManager.getId(), AddChuyenXeFragment.class, null);
                     fragmentTransaction.commit();
                     return true;
                 }

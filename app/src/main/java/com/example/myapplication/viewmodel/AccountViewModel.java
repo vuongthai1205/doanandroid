@@ -50,7 +50,15 @@ public class AccountViewModel extends BaseObservable {
         thanhVien.setSoDienThoai(soDienThoai);
         thanhVien.setEmail(email);
 
-        thanhVienDAO.update(thanhVien);
+        try {
+            thanhVienDAO.update(thanhVien);
+            Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_LONG).show();
+        }catch (Exception e){
+            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+        }
+
+
+
     }
 
     
