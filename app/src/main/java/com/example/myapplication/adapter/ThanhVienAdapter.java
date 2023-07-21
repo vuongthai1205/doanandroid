@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,17 +29,21 @@ import com.example.myapplication.model.ThanhVien;
 import com.example.myapplication.view.DetailThanhVienFragment;
 import com.example.myapplication.view.UpdateThanhVienFragment;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.ThanhVienHolder> {
+public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.ThanhVienHolder> implements Filterable {
 
     private List<ThanhVien> thanhViens;
+    private List<ThanhVien> thanhViensOld;
     private Context context;
 
     public void setData(List<ThanhVien> list){
         this.thanhViens = list;
+        this.thanhViensOld = list;
         notifyDataSetChanged();
     }
 
@@ -131,6 +137,8 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
         return 0;
     }
 
+
+
     public static class ThanhVienHolder extends RecyclerView.ViewHolder{
         TextView id;
         TextView tenDangNhap;
@@ -149,5 +157,38 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
             btnEdit = itemView.findViewById(R.id.btnEdit);
             avt = itemView.findViewById(R.id.avt_thanhVien);
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String strSearch = charSequence.toString();
+                if (strSearch.isEmpty()){
+                    thanhViens = thanhViensOld;
+                }
+                else {
+                    List<ThanhVien> list = new ArrayList<>();
+                    for (ThanhVien thanhVien : thanhViensOld){
+                        if (thanhVien.getTenDangNhap().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(thanhVien);
+                        }
+                    }
+
+                    thanhViens = list;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = thanhViens;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                thanhViens = (List<ThanhVien>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }
