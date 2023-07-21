@@ -49,6 +49,7 @@ public class AccountViewModel extends BaseObservable {
         thanhVien.setTen(ten);
         thanhVien.setSoDienThoai(soDienThoai);
         thanhVien.setEmail(email);
+        thanhVien.setAvatar(avatar);
 
         try {
             thanhVienDAO.update(thanhVien);

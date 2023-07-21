@@ -24,6 +24,5 @@ public interface QuyenDao {
     @Query("select id_quyen from table_quyen where ten_quyen = :tenQuyen")
     int getIdQuyen(String tenQuyen);
 
-    @Query("select * from table_quyen where id_quyen = :id")
-    Quyen getQuyen(int id);
+
 }
