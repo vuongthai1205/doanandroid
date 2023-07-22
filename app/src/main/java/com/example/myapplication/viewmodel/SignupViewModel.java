@@ -166,7 +166,6 @@ public class SignupViewModel extends BaseObservable {
     public void setTen(String ten) {
         this.ten = ten;
         notifyPropertyChanged(BR.ten);
-
     }
 
     @Bindable

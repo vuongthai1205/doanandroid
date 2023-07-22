@@ -82,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         builder.show();
     }
 
+
     public void chuyenTrangTheoQuyen(int quyen){
         if(quyen == 1 || quyen == 2){
             Intent intent = new Intent(LoginActivity.this, AdminManagerActivity.class);
