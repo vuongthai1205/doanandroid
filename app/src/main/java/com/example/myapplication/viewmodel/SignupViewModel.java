@@ -12,6 +12,7 @@ import androidx.databinding.Bindable;
 
 import com.example.myapplication.BR;
 import com.example.myapplication.config.AppDatabase;
+import com.example.myapplication.config.FunctionPublic;
 import com.example.myapplication.config.VariableGlobal;
 import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.ThanhVien;
@@ -37,17 +38,17 @@ public class SignupViewModel extends BaseObservable {
             Toast.makeText(context, showRowEmpty(), Toast.LENGTH_LONG).show();
             return;
         }
-        if (!isTenDangNhapValid(tenDangNhap)){
+        if (!FunctionPublic.isTenDangNhapValid(tenDangNhap)){
             Toast.makeText(context, "Tên đăng nhập sai định dạng, hãy viết liền không dấu", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if (!isEmailValid(email)){
+        if (!FunctionPublic.isEmailValid(email)){
             Toast.makeText(context, "Email sai định dạng, example@gmail.com", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if (!isPasswordValid(password)){
+        if (!FunctionPublic.isPasswordValid(password)){
             Toast.makeText(context, "Độ dài mật khẩu phải lớn hơn hoặc bằng 5 ký tự", Toast.LENGTH_LONG).show();
             return;
         }
@@ -80,30 +81,7 @@ public class SignupViewModel extends BaseObservable {
         context.startActivity(newActivityIntent);
     }
 
-    private boolean isTenDangNhapValid(String tenDangNhap) {
-        // Biểu thức chính quy kiểm tra viết liền không dấu
-        String regex = "^[a-zA-Z0-9]+$";
 
-        // Kiểm tra trường "tenDangNhap" với biểu thức chính quy
-        return tenDangNhap.matches(regex);
-    }
-
-    private boolean isEmailValid(String email) {
-        // Biểu thức chính quy kiểm tra định dạng email
-        String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-
-        // Kiểm tra trường "email" với biểu thức chính quy
-        return email.matches(regex);
-    }
-
-    private boolean isPasswordValid(String password) {
-        // Kiểm tra độ dài mật khẩu
-        if (password.length() >= 5) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     private boolean isPasswordAgainValid(String passwordAgain){
         if (password.equals(passwordAgain)){

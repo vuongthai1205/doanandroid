@@ -1,5 +1,6 @@
 package com.example.myapplication.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -21,12 +22,14 @@ public class ThanhVien implements Serializable {
     @ColumnInfo(name = "id_thanh_vien")
     private int id;
     @ColumnInfo(name = "ten_dang_nhap")
+    @NonNull
     private String tenDangNhap;
     @ColumnInfo(name = "ho_thanh_vien")
     private String ho;
     @ColumnInfo(name = "ten_thanh_vien")
     private String ten;
     @ColumnInfo(name = "mat_khau")
+    @NonNull
     private String matKhau;
     private String avatar;
     @ColumnInfo(name = "id_quyen")

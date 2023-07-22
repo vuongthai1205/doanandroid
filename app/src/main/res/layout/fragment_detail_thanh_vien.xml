@@ -159,6 +159,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_weight="5"
                         android:hint="Chưa cập nhật"
+                        android:inputType="textPassword"
                         android:text="@={DetailThanhVienViewModel.matKhau}" />
                 </LinearLayout>
             </LinearLayout>
@@ -360,14 +361,12 @@
                         android:text="Ảnh đại diện: "
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/edtNgayTao"
+                    <ImageView
+                        android:id="@+id/avatarImg"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="200dp"
                         android:layout_marginStart="8dp"
-                        android:layout_weight="5"
-                        android:hint="Chưa cập nhật"
-                        android:text="@={DetailThanhVienViewModel.avatar}" />
+                        android:layout_weight="5" />
                 </LinearLayout>
             </LinearLayout>
 

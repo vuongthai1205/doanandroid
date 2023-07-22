@@ -15,4 +15,13 @@ public interface LoaiXeDAO {
 
     @Query("select * from table_loaixe")
     List<LoaiXe> getAll();
+
+    @Query("select ten_loai_xe from table_loaixe where id_loai_xe= :idLoaiXe")
+    String getTenLoaiXeByID(int idLoaiXe);
+
+    @Query("select ten_loai_xe from table_loaixe")
+    List<String> getTenLoaiXe();
+
+    @Query("select id_loai_xe from table_loaixe where ten_loai_xe= :tenLoaiXe")
+    int getIDLoaiXe(String tenLoaiXe);
 }

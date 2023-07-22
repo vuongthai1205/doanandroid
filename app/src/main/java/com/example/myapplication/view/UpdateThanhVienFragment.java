@@ -2,64 +2,81 @@ package com.example.myapplication.view;
 
 import static android.app.Activity.RESULT_OK;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.myapplication.config.AppDatabase;
-import com.example.myapplication.config.DataLocalManager;
+import com.example.myapplication.R;
 import com.example.myapplication.config.FunctionPublic;
-import com.example.myapplication.config.VariableGlobal;
-import com.example.myapplication.databinding.FragmentAccountBinding;
-import com.example.myapplication.model.DAO.ThanhVienDAO;
+import com.example.myapplication.databinding.FragmentUpdateThanhVienBinding;
 import com.example.myapplication.model.ThanhVien;
-import com.example.myapplication.viewmodel.AccountViewModel;
+import com.example.myapplication.viewmodel.UpdateThanhVienViewModel;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class AccountFragment extends Fragment {
-    private FragmentAccountBinding fragmentAccountBinding;
-    AccountViewModel accountViewModel = new AccountViewModel();
+
+public class UpdateThanhVienFragment extends Fragment {
+
+    private FragmentUpdateThanhVienBinding fragmentUpdateThanhVienBinding;
+    private UpdateThanhVienViewModel updateThanhVienViewModel = new UpdateThanhVienViewModel();
+
     private ActivityResultLauncher<Intent> imagePickerLauncher;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        fragmentAccountBinding = FragmentAccountBinding.inflate(inflater,container, false );
 
-        fragmentAccountBinding.setAccountViewModel(accountViewModel);
-
-        ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(getContext()).getThanhVienDAO();
-
+        fragmentUpdateThanhVienBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_update_thanh_vien, container, false);
+        fragmentUpdateThanhVienBinding.setUpdateThanhVienViewModel(updateThanhVienViewModel);
+        Bundle bundle = getArguments();
 
 
-        ThanhVien thanhVien = thanhVienDAO.getThanhVienByUserName(DataLocalManager.getNameUser());
-
-        accountViewModel.showAccount(thanhVien, getContext());
-        FunctionPublic.loadAvatar(accountViewModel.getAvatar(),fragmentAccountBinding.avatarImg,getContext());
-
-        fragmentAccountBinding.btnUpdateAccount.setOnClickListener(new View.OnClickListener() {
+        fragmentUpdateThanhVienBinding.edtNgaySinh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                accountViewModel.updateAccount(getContext());
+                updateThanhVienViewModel.showDatePickerDialog(getContext());
             }
         });
 
-        fragmentAccountBinding.btnLogout.setOnClickListener(new View.OnClickListener() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, updateThanhVienViewModel.getListTenQuyen(getContext()));
+
+        fragmentUpdateThanhVienBinding.spnerTenQuyen.setAdapter(adapter);
+        if (bundle != null) {
+            ThanhVien thanhVien = (ThanhVien) bundle.getSerializable("thanhVien");
+            updateThanhVienViewModel.setDetailThanhVien(thanhVien, getContext());
+            fragmentUpdateThanhVienBinding.spnerTenQuyen.setSelection(thanhVien.getIdQuyenThanhVien() - 1);
+        }
+        fragmentUpdateThanhVienBinding.spnerTenQuyen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                updateThanhVienViewModel.getIdQuyenThanhVien((String) adapterView.getItemAtPosition(i), getContext());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        fragmentUpdateThanhVienBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Logout();
+                ThanhVien thanhVien = (ThanhVien) bundle.getSerializable("thanhVien");
+                updateThanhVienViewModel.updateThanhVien(thanhVien, getContext());
             }
         });
 
@@ -73,28 +90,17 @@ public class AccountFragment extends Fragment {
                 }
         );
 
-        fragmentAccountBinding.avatarImg.setOnClickListener(new View.OnClickListener() {
+        FunctionPublic.loadAvatar(updateThanhVienViewModel.getAvatar(),fragmentUpdateThanhVienBinding.avatarImg,getContext());
+
+        fragmentUpdateThanhVienBinding.avatarImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 imagePickerLauncher.launch(intent);
             }
         });
-
-
-        return fragmentAccountBinding.getRoot();
-
-
-
-    }
-
-
-
-
-    private void Logout() {
-        DataLocalManager.setIsLogin(false);
-        Intent intent = new Intent(getContext(),LoginActivity.class);
-        startActivity(intent);
+        // Inflate the layout for this fragment
+        return fragmentUpdateThanhVienBinding.getRoot();
     }
 
     public void uploadImageToFireBase(Uri uri){
@@ -128,12 +134,13 @@ public class AccountFragment extends Fragment {
         // Lấy URL của hình ảnh đã tải lên từ Firebase Storage
         imageRef.getDownloadUrl()
                 .addOnSuccessListener(uri -> {
-                    accountViewModel.setAvatar(String.valueOf(uri));
-                    Glide.with(getContext()).load(accountViewModel.getAvatar()).into(fragmentAccountBinding.avatarImg);
+                    updateThanhVienViewModel.setAvatar(String.valueOf(uri));
+                    Glide.with(getContext()).load(updateThanhVienViewModel.getAvatar()).into(fragmentUpdateThanhVienBinding.avatarImg);
                 })
                 .addOnFailureListener(e -> {
                     // Xử lý lỗi nếu không thể lấy URL hình ảnh (nếu cần)
                 });
     }
+
 
 }

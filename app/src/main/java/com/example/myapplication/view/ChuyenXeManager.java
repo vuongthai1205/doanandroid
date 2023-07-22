@@ -1,19 +1,19 @@
 package com.example.myapplication.view;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.example.myapplication.R;
-import com.example.myapplication.databinding.ActivityThanhVienManagerBinding;
-import com.example.myapplication.viewmodel.ThanhVienManagerViewModel;
+import com.example.myapplication.databinding.ActivityChuyenXeManagerBinding;
+import com.example.myapplication.viewmodel.ChuyenXeManagerViewModel;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class ThanhVienManager extends AppCompatActivity {
+public class ChuyenXeManager extends AppCompatActivity {
     private boolean isRootFragmentAdded = false;
     @Override
     public void onBackPressed() {
@@ -27,14 +27,14 @@ public class ThanhVienManager extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ThanhVienManagerViewModel thanhVienManagerViewModel = new ThanhVienManagerViewModel();
-        ActivityThanhVienManagerBinding activityThanhVienManagerBinding = DataBindingUtil.setContentView(this, R.layout.activity_thanh_vien_manager);
-        activityThanhVienManagerBinding.setThanhVienManagerViewModel(thanhVienManagerViewModel);
+        ChuyenXeManagerViewModel chuyenXeManagerViewModel = new ChuyenXeManagerViewModel();
+        ActivityChuyenXeManagerBinding activityChuyenXeManagerBinding = DataBindingUtil.setContentView(this, R.layout.activity_chuyen_xe_manager);
+        activityChuyenXeManagerBinding.setChuyenXeManagerViewModel(chuyenXeManagerViewModel);
 
         if (!isRootFragmentAdded) {
             // Nếu fragment gốc chưa được thêm vào, thêm nó vào container
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(activityThanhVienManagerBinding.containerThanhVienManager.getId(), ListThanhVienFragment.class, null);
+            fragmentTransaction.replace(activityChuyenXeManagerBinding.containerChuyenXeManager.getId(), ListChuyenXeFragment.class, null);
 
             fragmentTransaction.commit();
 
@@ -42,18 +42,18 @@ public class ThanhVienManager extends AppCompatActivity {
             isRootFragmentAdded = true;
         }
 
-        activityThanhVienManagerBinding.menuThanhVienManager.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        activityChuyenXeManagerBinding.menuChuyenXeManager.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.action_show){
+                if (item.getItemId() == R.id.action_show_chuyen_xe){
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(activityThanhVienManagerBinding.containerThanhVienManager.getId(), ListThanhVienFragment.class, null);
+                    fragmentTransaction.replace(activityChuyenXeManagerBinding.containerChuyenXeManager.getId(), ListChuyenXeFragment.class, null);
                     fragmentTransaction.commit();
                     return true;
                 }
-                else if(item.getItemId() == R.id.action_add){
+                else if(item.getItemId() == R.id.action_add_chuyen_xe){
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(activityThanhVienManagerBinding.containerThanhVienManager.getId(), AddThanhVienFragment.class, null);
+                    fragmentTransaction.replace(activityChuyenXeManagerBinding.containerChuyenXeManager.getId(), AddChuyenXeFragment.class, null);
                     fragmentTransaction.commit();
                     return true;
                 }
@@ -61,6 +61,5 @@ public class ThanhVienManager extends AppCompatActivity {
             }
         });
     }
-
 
 }
