@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +31,21 @@ public class ListChuyenXeFragment extends Fragment {
         fragmentListChuyenXeBinding.rcvChuyenXe.setLayoutManager(linearLayoutManager);
         listChuyenXeViewModel.renderAdapter(getContext());
         fragmentListChuyenXeBinding.rcvChuyenXe.setAdapter(listChuyenXeViewModel.getChuyenXeAdapter());
+
+
+        fragmentListChuyenXeBinding.searchChuyenXe.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                listChuyenXeViewModel.getChuyenXeAdapter().getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                listChuyenXeViewModel.getChuyenXeAdapter().getFilter().filter(newText);
+                return false;
+            }
+        });
 
         return fragmentListChuyenXeBinding.getRoot();
     }

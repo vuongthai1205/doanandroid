@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,17 +26,20 @@ import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.view.DetailChuyenXeFragment;
 import com.example.myapplication.view.UpdateChuyenXeFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ChuyenXeAdapter extends RecyclerView.Adapter<ChuyenXeAdapter.ChuyenXeHolder> {
+public class ChuyenXeAdapter extends RecyclerView.Adapter<ChuyenXeAdapter.ChuyenXeHolder> implements Filterable {
 
     private List<ChuyenXe> chuyenXes;
+    private List<ChuyenXe> chuyenXeSearch;
     private Context context;
 
     public void setData(List<ChuyenXe> list){
         this.chuyenXes = list;
+        this.chuyenXeSearch = list;
         notifyDataSetChanged();
     }
 
@@ -142,5 +147,37 @@ public class ChuyenXeAdapter extends RecyclerView.Adapter<ChuyenXeAdapter.Chuyen
             imgEditChuyenXe = itemView.findViewById(R.id.btnEditChuyenXe);
             imgChuyenXe = itemView.findViewById(R.id.img_chuyenXe);
         }
+    }
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String strChuyenXeSearch = charSequence.toString();
+                if (strChuyenXeSearch.isEmpty()){
+                    chuyenXes = chuyenXeSearch;
+                }
+                else {
+                    List<ChuyenXe> list = new ArrayList<>();
+                    for (ChuyenXe chuyenXe : chuyenXeSearch){
+                        if (chuyenXe.getTenChuyen().toLowerCase().contains(strChuyenXeSearch.toLowerCase())){
+                            list.add(chuyenXe);
+                        }
+                    }
+
+                    chuyenXes = list;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = chuyenXes;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                chuyenXes = (List<ChuyenXe>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }
