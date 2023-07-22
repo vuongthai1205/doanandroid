@@ -34,6 +34,14 @@ public class HomeAdminFragment extends Fragment {
             }
         });
 
+        fragmentHomeAdminBinding.layoutManagerLoaiXe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homeAdminViewModel.quanLyLoaiXe(getContext());
+            }
+        });
+
         return fragmentHomeAdminBinding.getRoot();
     }
+
 }
