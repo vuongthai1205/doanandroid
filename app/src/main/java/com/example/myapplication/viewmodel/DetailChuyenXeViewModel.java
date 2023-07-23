@@ -7,6 +7,7 @@ import androidx.databinding.Bindable;
 
 import com.example.myapplication.BR;
 import com.example.myapplication.config.AppDatabase;
+import com.example.myapplication.config.FunctionPublic;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.model.DAO.LoaiXeDAO;
 
@@ -47,12 +48,9 @@ public class DetailChuyenXeViewModel extends BaseObservable {
         if(chuyenXe.getGiaTien()==null){
             this.setGiaTien("Chưa cập nhật");
         }else {
-            this.setGiaTien(String.valueOf(chuyenXe.getGiaTien()));
-            DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
-            decimalFormat.applyPattern("#,###.##");
-            String giaTienFormatted = decimalFormat.format(chuyenXe.getGiaTien());
-            giaTienFormatted += " VND";
-            this.setGiaTien(giaTienFormatted);
+
+
+            this.setGiaTien(FunctionPublic.formatMoney(chuyenXe.getGiaTien()));
         }
         this.setMoTa(chuyenXe.getMoTa());
         this.setHinhAnh(getHinhAnh());

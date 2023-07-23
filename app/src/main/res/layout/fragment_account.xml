@@ -51,22 +51,26 @@
 
                     app:layout_constraintTop_toBottomOf="@+id/avatarImg"
                     android:gravity="center_horizontal">
+
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
-                        android:text="@={AccountViewModel.ho}"
                         android:background="#00FFFFFF"
                         android:hint="Họ "
-                        android:paddingHorizontal="2dp"/>
+                        android:paddingHorizontal="2dp"
+                        android:text="@={AccountViewModel.ho}"
+                        tools:ignore="TouchTargetSizeCheck" />
+
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
-                        android:text="@={AccountViewModel.ten}"
                         android:background="#00FFFFFF"
+                        android:hint="Tên "
                         android:paddingHorizontal="2dp"
-                        android:hint="Tên "/>
+                        android:text="@={AccountViewModel.ten}"
+                        tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -173,7 +177,9 @@
                         android:layout_height="wrap_content"
                         android:background="#00FFFFFF"
                         android:textColor="@color/white"
-                        android:hint="Tên đăng nhập"
+                        android:hint="chưa cập nhật"
+
+                        android:textColorHint="@color/white"
                         android:paddingVertical="2dp"
                         android:textSize="15sp"
                         android:text="@={AccountViewModel.tenDangNhap}"
@@ -201,12 +207,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#00FFFFFF"
-                        android:textColor="@color/white"
-
-                        android:textSize="15sp"
+                        android:hint="chưa cập nhật"
+                        android:textColorHint="@color/white"
                         android:paddingVertical="2dp"
-                        android:hint="Email"
-                        android:text="@={AccountViewModel.soDienThoai}"/>
+                        android:text="@={AccountViewModel.soDienThoai}"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        tools:ignore="TouchTargetSizeCheck" />
 
                 </LinearLayout>
                 <View
@@ -230,11 +237,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#00FFFFFF"
+                        android:hint="chưa cập nhật"
+
+                        android:textColorHint="@color/white"
+                        android:paddingVertical="2dp"
+                        android:text="@={AccountViewModel.email}"
                         android:textColor="@color/white"
                         android:textSize="15sp"
-                        android:paddingVertical="2dp"
-                        android:hint="Email"
-                        android:text="@={AccountViewModel.email}"/>
+                        tools:ignore="TouchTargetSizeCheck" />
 
                 </LinearLayout>
                 <View
@@ -261,7 +271,9 @@
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:paddingVertical="2dp"
-                        android:hint="ngày tạo"
+                        android:hint="chưa cập nhật"
+
+                        android:textColorHint="@color/white"
                         android:text="@={AccountViewModel.ngayTao}"
                         android:inputType="none"/>
 
@@ -290,7 +302,9 @@
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:paddingVertical="2dp"
-                        android:hint="Email"
+                        android:hint="chưa cập nhật"
+
+                        android:textColorHint="@color/white"
                         android:text="@={AccountViewModel.ngayCapNhat}"
                         android:inputType="none"/>
 
