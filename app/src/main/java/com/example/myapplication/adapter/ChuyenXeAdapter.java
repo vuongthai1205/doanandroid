@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
 import com.example.myapplication.config.AppDatabase;
+import com.example.myapplication.config.FunctionPublic;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.view.DetailChuyenXeFragment;
 import com.example.myapplication.view.UpdateChuyenXeFragment;
@@ -87,9 +88,8 @@ public class ChuyenXeAdapter extends RecyclerView.Adapter<ChuyenXeAdapter.Chuyen
             }
         });
         String imageUrl =  chuyenXe.getHinhAnh();
-        Glide.with(this.context)
-                .load(imageUrl)
-                .into(holder.imgChuyenXe);
+        FunctionPublic.loadAvatar(imageUrl, holder.imgChuyenXe,context);
+
     }
 
     private void showConfirmationDialog(ChuyenXe chuyenXe, int position) {

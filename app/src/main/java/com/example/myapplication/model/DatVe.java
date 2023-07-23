@@ -9,10 +9,12 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "table_dat_ve",
         foreignKeys = {@ForeignKey(entity = ThanhVien.class, parentColumns = "id_thanh_vien", childColumns = "id_thanh_vien"),
-                @ForeignKey(entity = ChuyenXe.class, parentColumns = "id_chuyen_xe", childColumns = "id_chuyen_xe")
+                @ForeignKey(entity = ChuyenXe.class, parentColumns = "id_chuyen_xe", childColumns = "id_chuyen_xe"),
+                @ForeignKey(entity = TrangThai.class, parentColumns = "id_trang_thai", childColumns = "id_trang_thai")
         }
         ,indices = {@Index(name = "index_id_thanhvien_vexe", value = "id_thanh_vien"),
-        @Index(name = "index_id_chuyen_xe_vexe", value = "id_chuyen_xe") }
+        @Index(name = "index_id_chuyen_xe_vexe", value = "id_chuyen_xe") ,
+        @Index(name = "index_id_trang_thai", value = "id_trang_thai")}
 )
 public class DatVe {
 
@@ -27,6 +29,8 @@ public class DatVe {
     private int soLuongVe;
     @ColumnInfo(name = "ngay_gio_dat")
     private String ngayGioDat;
+    @ColumnInfo(name = "id_trang_thai")
+    private int idTrangThai;
     @ColumnInfo(name="thong_tin_khac")
     private String thongTinKhac;
     public DatVe(){
@@ -90,6 +94,14 @@ public class DatVe {
 
     public void setThongTinKhac(String thongTinKhac) {
         this.thongTinKhac = thongTinKhac;
+    }
+
+    public int getIdTrangThai() {
+        return idTrangThai;
+    }
+
+    public void setIdTrangThai(int idTrangThai) {
+        this.idTrangThai = idTrangThai;
     }
 }
 

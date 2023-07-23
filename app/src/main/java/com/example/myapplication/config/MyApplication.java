@@ -2,6 +2,16 @@ package com.example.myapplication.config;
 
 import android.app.Application;
 
+import com.example.myapplication.model.ChuyenXe;
+import com.example.myapplication.model.DAO.ChuyenXeDAO;
+import com.example.myapplication.model.DAO.DanhGiaDAO;
+import com.example.myapplication.model.DAO.LoaiXeDAO;
+import com.example.myapplication.model.DAO.QuyenDao;
+import com.example.myapplication.model.DAO.ThanhVienDAO;
+import com.example.myapplication.model.DanhGia;
+import com.example.myapplication.model.LoaiXe;
+import com.example.myapplication.model.Quyen;
+import com.example.myapplication.model.ThanhVien;
 import com.google.firebase.FirebaseApp;
 
 
@@ -82,6 +92,13 @@ public class MyApplication extends Application {
 //        chuyenXe4.setHinhAnh("https://firebasestorage.googleapis.com/v0/b/doanandroid-c9b13.appspot.com/o/xe_35_cho.jpg?alt=media&token=89119ebf-e6a8-4c0a-af7e-0b3fac672114");
 //
 //        chuyenXeDAO.insert(chuyenXe1,chuyenXe2,chuyenXe3,chuyenXe4);
+
+//        DanhGia danhGia =new DanhGia(1,2,4,"Quá tuyệt vời luôn");
+//                DanhGia danhGia1 =new DanhGia(2,2,3,"Quá tuyệt vời luôn haha");
+//                DanhGia danhGia2 =new DanhGia(1,2,2,"Quá tuyệt vời luôn hihi");
+//                DanhGia danhGia3 =new DanhGia(1,3,1,"Quá tuyệt vời luôn hihi");
+//        DanhGiaDAO danhGiaDAO =AppDatabase.getInstance(getApplicationContext()).getDanhGiaDAO();
+//        danhGiaDAO.insert(danhGia, danhGia1, danhGia2, danhGia3);
 
     }
 

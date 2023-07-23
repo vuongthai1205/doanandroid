@@ -12,4 +12,5 @@
     <color name="color_manager_chuyen_xe">#1A3850</color>
     <color name="color_manager_loai_xe">#144A9C</color>
     <color name="color_manager_ve_dat">#9D2929</color>
+    <color name="color_btn_dat_ve">#008FA0</color>
 </resources>
