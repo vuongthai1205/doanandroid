@@ -29,7 +29,6 @@ public class LoaiXeAdapter extends RecyclerView.Adapter<LoaiXeAdapter.LoaiXeHold
         this.loaixes = list;
         notifyDataSetChanged();
     }
-
     public LoaiXeAdapter(Context context) {
         this.context = context;
     }
@@ -55,19 +54,6 @@ public class LoaiXeAdapter extends RecyclerView.Adapter<LoaiXeAdapter.LoaiXeHold
 
 
 
-    }
-
-    private void showDetail(ThanhVien thanhVien) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("thanhVien", thanhVien);
-
-        DetailThanhVienFragment detailThanhVienFragment = new DetailThanhVienFragment();
-        detailThanhVienFragment.setArguments(bundle);
-
-        FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.containerThanhVienManager, detailThanhVienFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
     }
 
     @Override

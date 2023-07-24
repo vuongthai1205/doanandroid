@@ -2,6 +2,14 @@ package com.example.myapplication.config;
 
 import android.app.Application;
 
+import com.example.myapplication.model.ChuyenXe;
+import com.example.myapplication.model.DAO.ChuyenXeDAO;
+import com.example.myapplication.model.DAO.LoaiXeDAO;
+import com.example.myapplication.model.DAO.QuyenDao;
+import com.example.myapplication.model.DAO.ThanhVienDAO;
+import com.example.myapplication.model.LoaiXe;
+import com.example.myapplication.model.Quyen;
+import com.example.myapplication.model.ThanhVien;
 import com.google.firebase.FirebaseApp;
 
 
