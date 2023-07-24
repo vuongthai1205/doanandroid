@@ -13,11 +13,13 @@ import com.example.myapplication.model.DAO.DatVeDAO;
 import com.example.myapplication.model.DAO.LoaiXeDAO;
 import com.example.myapplication.model.DAO.QuyenDao;
 import com.example.myapplication.model.DAO.ThanhVienDAO;
+import com.example.myapplication.model.DAO.TrangThaiDAO;
 import com.example.myapplication.model.DanhGia;
 import com.example.myapplication.model.LoaiXe;
 import com.example.myapplication.model.Quyen;
 import com.example.myapplication.model.ThanhVien;
 import com.example.myapplication.model.DatVe;
+import com.example.myapplication.model.TrangThai;
 
 @Database(version = 1,
     entities = {
@@ -27,6 +29,7 @@ import com.example.myapplication.model.DatVe;
             LoaiXe.class,
             DanhGia.class,
             DatVe.class,
+            TrangThai.class,
     }
     , exportSchema = false
 )
@@ -39,6 +42,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract LoaiXeDAO getLoaiXeDAO();
     public abstract DanhGiaDAO getDanhGiaDAO();
     public abstract DatVeDAO getVeXeDAO();
+    public abstract TrangThaiDAO getTrangThaiDAO();
     private static AppDatabase instance;
     public static AppDatabase getInstance(Context context) {
         if (instance == null) {

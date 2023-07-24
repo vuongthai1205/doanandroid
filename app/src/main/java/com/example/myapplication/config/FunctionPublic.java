@@ -6,6 +6,10 @@ import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class FunctionPublic {
     public static boolean isTenDangNhapValid(String tenDangNhap) {
         // Biểu thức chính quy kiểm tra viết liền không dấu
@@ -36,5 +40,14 @@ public class FunctionPublic {
         Glide.with(context)
                 .load(url)
                 .into(imageView);
+    }
+
+    public static String formatMoney(Double money){
+        String moneyString = "";
+        DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
+        decimalFormat.applyPattern("#,###.##");
+        moneyString = decimalFormat.format(money);
+        moneyString += " VND";
+        return moneyString;
     }
 }
