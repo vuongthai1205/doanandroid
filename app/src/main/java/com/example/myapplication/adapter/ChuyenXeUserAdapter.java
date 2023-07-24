@@ -52,7 +52,7 @@ public class ChuyenXeUserAdapter  extends RecyclerView.Adapter<ChuyenXeUserAdapt
         Double danhGiaTrungBinh = danhGiaDAO.tinhDiemDanhGiaTrungBinhTheoChuyenXe(chuyenXe.getIdChuyenXe());
         holder.tenChuyenXe.setText(chuyenXe.getTenChuyen());
         holder.giaChuyenXe.setText(FunctionPublic.formatMoney(chuyenXe.getGiaTien()));
-        holder.danhGia.setText(String.valueOf(danhGiaTrungBinh));
+        holder.danhGia.setText(FunctionPublic.formatDouble(danhGiaTrungBinh));
         FunctionPublic.loadAvatar(chuyenXe.getHinhAnh(), holder.hinhAnh,context);
 
         holder.itemChuyenXe.setOnClickListener(view -> {

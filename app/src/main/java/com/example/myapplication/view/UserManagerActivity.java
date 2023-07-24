@@ -3,13 +3,10 @@ package com.example.myapplication.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.ActivityUserManagerBinding;
@@ -49,6 +46,13 @@ public class UserManagerActivity extends AppCompatActivity {
                 }else if (itemId == R.id.action_filter) {
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(activityUserManagerBinding.fragmentAdmin.getId(),new FilterFragment());
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    return true;
+                }
+                else if (itemId == R.id.action_history) {
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(activityUserManagerBinding.fragmentAdmin.getId(),new HistoryBookFragment());
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                     return true;

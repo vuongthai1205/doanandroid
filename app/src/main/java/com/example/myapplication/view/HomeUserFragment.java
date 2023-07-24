@@ -35,11 +35,20 @@ public class HomeUserFragment extends Fragment {
 
 //        render ra adapter
 
+        setAdapterForChuyenXe();
+        return fragmentHomeUserBinding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setAdapterForChuyenXe();
+    }
+
+    private void setAdapterForChuyenXe(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         fragmentHomeUserBinding.rcvChuyenXe.setLayoutManager(linearLayoutManager);
         homeUserViewModel.renderAdapter(getContext());
         fragmentHomeUserBinding.rcvChuyenXe.setAdapter(homeUserViewModel.getChuyenXeUserAdapter());
-        return fragmentHomeUserBinding.getRoot();
     }
-
 }

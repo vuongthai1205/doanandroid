@@ -50,4 +50,17 @@ public class FunctionPublic {
         moneyString += " VND";
         return moneyString;
     }
+
+    public static String formatDouble(double so){
+        String result = "";
+        if (so >0){
+            DecimalFormat decimalFormat = new DecimalFormat("#.0");
+            result = decimalFormat.format(so);
+        }
+        else {
+            result ="0";
+        }
+
+        return result;
+    }
 }
