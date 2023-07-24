@@ -12,7 +12,8 @@ import java.util.List;
 public interface LoaiXeDAO {
     @Insert
     void insert(LoaiXe... loaiXes);
-
+    @Query("SELECT EXISTS(SELECT 1 FROM table_loaixe WHERE ten_loai_xe = :tenLoaiXe )")
+    boolean isLoaiXeExist(String tenLoaiXe);
     @Query("select * from table_loaixe")
     List<LoaiXe> getAll();
 

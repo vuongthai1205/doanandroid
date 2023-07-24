@@ -5,7 +5,7 @@
     tools:context=".view.AddLoaiXeFagment">
     <data>
         <variable
-            name="AddLoaiViewModel"
+            name="AddLoaiXeViewModel"
             type="com.example.myapplication.viewmodel.AddLoaiXeViewModel" />
     </data>
     <ScrollView
@@ -40,6 +40,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
+                    android:text="@={AddLoaiXeViewModel.tenLoaiXe}"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -63,10 +64,12 @@
                         android:text="Số lượng ghế : " />
 
                     <EditText
+                        android:text="@={AddLoaiXeViewModel.soLuongGhe}"
                         android:id="@+id/edtSoLuongGhe"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
+                        android:inputType="number"
                         android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -74,6 +77,7 @@
 
 
             <Button
+                android:id="@+id/btnThemLoaiXe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round"
