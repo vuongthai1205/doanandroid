@@ -30,19 +30,30 @@ public class DanhGia {
     private int diemDanhGia;
     @ColumnInfo(name = "nhan_xet")
     private String nhanXet;
+    @ColumnInfo(name = "thoi_gian_danh_gia")
+    private String thoiGianDanhGia;
     public DanhGia(){
 
     }
     @Ignore
-    public DanhGia(int idThanhVienDanhGia, int idChuyenXeDanhGia, int diemDanhGia, String nhanXet) {
+    public DanhGia(int idThanhVienDanhGia, int idChuyenXeDanhGia, int diemDanhGia, String nhanXet, String thoiGianDanhGia) {
 
         this.idThanhVienDanhGia = idThanhVienDanhGia;
         this.idChuyenXeDanhGia = idChuyenXeDanhGia;
         this.diemDanhGia = diemDanhGia;
         this.nhanXet = nhanXet;
+        this.thoiGianDanhGia = thoiGianDanhGia;
     }
 
     // Các phương thức truy cập (getter) và cập nhật (setter) cho các trường
+
+    public String getThoiGianDanhGia() {
+        return thoiGianDanhGia;
+    }
+
+    public void setThoiGianDanhGia(String thoiGianDanhGia) {
+        this.thoiGianDanhGia = thoiGianDanhGia;
+    }
 
     public int getIdDanhGia() {
         return idDanhGia;

@@ -50,24 +50,11 @@
                         android:layout_below="@id/tvWelcome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@={HomeUserViewModel.ho }"
-                        android:hint="Họ"
+                        android:text="@={HomeUserViewModel.hoTen }"
                         android:textColorHint="@color/white"
                         android:textSize="16sp"
                         android:textColor="@color/white"
                         android:id="@+id/tvHo"/>
-                    <TextView
-                        android:layout_toRightOf="@id/tvHo"
-                        android:layout_below="@id/tvWelcome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@={HomeUserViewModel.ten}"
-                        android:layout_marginStart="3dp"
-                        android:textSize="16sp"
-                        android:hint="Tên"
-                        android:textColorHint="@color/white"
-                        android:textColor="@color/white"
-                        android:id="@+id/tvTen"/>
                 </RelativeLayout>
 
             </RelativeLayout>

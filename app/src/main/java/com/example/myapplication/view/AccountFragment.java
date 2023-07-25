@@ -47,7 +47,7 @@ public class AccountFragment extends Fragment {
         ThanhVien thanhVien = thanhVienDAO.getThanhVienByUserName(DataLocalManager.getNameUser());
 
         accountViewModel.showAccount(thanhVien, getContext());
-        FunctionPublic.loadAvatar(accountViewModel.getAvatar(),fragmentAccountBinding.avatarImg,getContext());
+        FunctionPublic.loadImage(accountViewModel.getAvatar(),fragmentAccountBinding.avatarImg,getContext());
 
         fragmentAccountBinding.btnUpdateAccount.setOnClickListener(new View.OnClickListener() {
             @Override

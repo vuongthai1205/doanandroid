@@ -90,7 +90,7 @@ public class UpdateThanhVienFragment extends Fragment {
                 }
         );
 
-        FunctionPublic.loadAvatar(updateThanhVienViewModel.getAvatar(),fragmentUpdateThanhVienBinding.avatarImg,getContext());
+        FunctionPublic.loadImage(updateThanhVienViewModel.getAvatar(),fragmentUpdateThanhVienBinding.avatarImg,getContext());
 
         fragmentUpdateThanhVienBinding.avatarImg.setOnClickListener(new View.OnClickListener() {
             @Override

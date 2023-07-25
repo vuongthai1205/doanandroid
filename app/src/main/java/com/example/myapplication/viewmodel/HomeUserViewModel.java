@@ -22,8 +22,8 @@ import java.util.List;
 
 public class HomeUserViewModel extends BaseObservable {
 
-    private String ten;
-    private String ho;
+
+    private String hoTen;
     private String avatar;
     private ChuyenXeUserAdapter chuyenXeUserAdapter;
     public void renderAdapter(Context context){
@@ -36,8 +36,7 @@ public class HomeUserViewModel extends BaseObservable {
     public void getWelcome(Context context){
         ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(context).getThanhVienDAO();
         ThanhVien thanhVien = thanhVienDAO.getThanhVienByUserName(DataLocalManager.getNameUser());
-        setHo(thanhVien.getHo());
-        setTen(thanhVien.getTen());
+        setHoTen(thanhVien.getHoTen());
         setAvatar(thanhVien.getAvatar());
     }
 
@@ -57,24 +56,16 @@ public class HomeUserViewModel extends BaseObservable {
         this.chuyenXeUserAdapter = chuyenXeUserAdapter;
     }
 
-    @Bindable
-    public String getTen() {
-        return ten;
-    }
 
-    public void setTen(String ten) {
-        this.ten = ten;
-        notifyPropertyChanged(BR.ten);
-    }
 
     @Bindable
-    public String getHo() {
-        return ho;
+    public String getHoTen() {
+        return hoTen;
     }
 
-    public void setHo(String ho) {
-        this.ho = ho;
-        notifyPropertyChanged(BR.ho);
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
+        notifyPropertyChanged(BR.hoTen);
     }
 
     @Bindable

@@ -34,7 +34,7 @@ public class DetailThanhVienFragment extends Fragment {
             detailThanhVienViewModel.setDetailThanhVien(thanhVien, getContext());
         }
 
-        FunctionPublic.loadAvatar(detailThanhVienViewModel.getAvatar(),fragmentDetailThanhVienBinding.avatarImg,getContext());
+        FunctionPublic.loadImage(detailThanhVienViewModel.getAvatar(),fragmentDetailThanhVienBinding.avatarImg,getContext());
 
 
         // Inflate the layout for this fragment
