@@ -9,9 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
+import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.FunctionPublic;
+import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.DanhGia;
+import com.example.myapplication.model.ThanhVien;
 
 import java.util.List;
 
@@ -39,10 +43,14 @@ public class DanhGiaAdapter extends RecyclerView.Adapter<DanhGiaAdapter.DanhGiaV
     @Override
     public void onBindViewHolder(@NonNull DanhGiaViewHolder holder, int position) {
         DanhGia danhGia = danhGias.get(position);
+        ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(context).getThanhVienDAO();
 
+        ThanhVien t =thanhVienDAO.getThanhVienById(danhGia.getIdThanhVienDanhGia());
         holder.diemDanhGia.setText(FunctionPublic.formatDouble(danhGia.getDiemDanhGia()));
         holder.nhanXet.setText(danhGia.getNhanXet());
-
+        FunctionPublic.loadImage(t.getAvatar(),holder.avatar,context);
+        holder.tenThanhVien.setText(t.getHoTen());
+        holder.thoiGianDanhGia.setText(danhGia.getThoiGianDanhGia());
     }
 
     @Override

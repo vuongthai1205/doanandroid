@@ -32,6 +32,14 @@ public class DataLocalManager {
     public static boolean getIsLogin(){
         return DataLocalManager.getInstance().mySharePreferences.getBooleanValue(IS_LOGIN);
     }
+
+    public static void setIsFirst(boolean isFirst){
+        DataLocalManager.getInstance().mySharePreferences.putBooleanValue(PREF_FIRST_INSTALL,isFirst);
+    }
+
+    public static boolean getIsFirst(){
+        return DataLocalManager.getInstance().mySharePreferences.getBooleanValue(PREF_FIRST_INSTALL);
+    }
     public static void setNameUser(String name){
         DataLocalManager.getInstance().mySharePreferences.putStringValue(USER_NAME,name);
 

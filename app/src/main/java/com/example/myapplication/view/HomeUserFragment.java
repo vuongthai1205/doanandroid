@@ -28,7 +28,7 @@ public class HomeUserFragment extends Fragment {
         // Inflate the layout for this fragment
         fragmentHomeUserBinding.setHomeUserViewModel(homeUserViewModel);
         homeUserViewModel.getWelcome(getContext());
-        FunctionPublic.loadAvatar(homeUserViewModel.getAvatar(),fragmentHomeUserBinding.avatarImg,getContext());
+        FunctionPublic.loadImage(homeUserViewModel.getAvatar(),fragmentHomeUserBinding.avatarImg,getContext());
 
 //        slide ở đây
         fragmentHomeUserBinding.imageSlider.setImageList(homeUserViewModel.listImage(), ScaleTypes.FIT);

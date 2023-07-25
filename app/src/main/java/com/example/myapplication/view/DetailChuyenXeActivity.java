@@ -31,7 +31,7 @@ public class DetailChuyenXeActivity extends AppCompatActivity {
 
             aDetailChuyenXeViewModel.layThongTinChuyenXe(chuyenXe, getApplicationContext());
 
-            FunctionPublic.loadAvatar(aDetailChuyenXeViewModel.getHinhAnh(), detailThanhVienBinding.hinhAnhChuyenXe, getApplicationContext());
+            FunctionPublic.loadImage(aDetailChuyenXeViewModel.getHinhAnh(), detailThanhVienBinding.hinhAnhChuyenXe, getApplicationContext());
             detailThanhVienBinding.danhgiaGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -49,6 +49,7 @@ public class DetailChuyenXeActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     aDetailChuyenXeViewModel.luuDanhGia(chuyenXe, getApplicationContext());
+                    setAdapterForDanhGia(chuyenXe.getIdChuyenXe());
                 }
             });
             setAdapterForDanhGia(chuyenXe.getIdChuyenXe());

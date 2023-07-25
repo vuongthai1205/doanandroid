@@ -10,11 +10,14 @@ import com.example.myapplication.adapter.DanhGiaAdapter;
 import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.DataLocalManager;
 import com.example.myapplication.config.FunctionPublic;
+import com.example.myapplication.config.VariableGlobal;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.model.DAO.DanhGiaDAO;
 import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.DanhGia;
 import com.example.myapplication.model.ThanhVien;
+
+import java.util.Date;
 
 public class ADetailChuyenXeViewModel extends BaseObservable {
     private String tenChuyenXe;
@@ -42,15 +45,14 @@ public class ADetailChuyenXeViewModel extends BaseObservable {
     }
 
     public void luuDanhGia(ChuyenXe chuyenXe,Context context){
-        DanhGia danhGia = new DanhGia();
         ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(context).getThanhVienDAO();
-
-
-        danhGia.setNhanXet(getNhanXet());
-        danhGia.setDiemDanhGia(Integer.parseInt(getThemDiemDanhGia()));
-        danhGia.setIdChuyenXeDanhGia(chuyenXe.getIdChuyenXe());
-        danhGia.setIdThanhVienDanhGia(thanhVienDAO.getThanhVienByUserName(DataLocalManager.getNameUser()).getId());
-
+        Date date = new Date();
+        String thoiGianDanhGia = VariableGlobal.dateFormat.format(date);
+        DanhGia danhGia = new DanhGia(thanhVienDAO.getThanhVienByUserName(DataLocalManager.getNameUser()).getId(),
+                chuyenXe.getIdChuyenXe(),
+                Integer.parseInt(getThemDiemDanhGia()),
+                getNhanXet(),
+                thoiGianDanhGia);
 
         DanhGiaDAO danhGiaDAO = AppDatabase.getInstance(context).getDanhGiaDAO();
         danhGiaDAO.insert(danhGia);
