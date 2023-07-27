@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -46,37 +48,30 @@ public class DatVeActivity extends AppCompatActivity {
 
             datVeViewModel.xulyThongTin(chuyenXe,getApplicationContext());
 
-            activityDatVeBinding.soLuongVe.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    if (charSequence.toString() != null && !charSequence.toString().isEmpty()){
-
-
-                        datVeViewModel.setSoLuongVe(charSequence.toString());
-                        int soLuong = Integer.parseInt(charSequence.toString()) ;
-
-                        double tongTien = FunctionPublic.tinhTongTien(soLuong, chuyenXe.getGiaTien());
-
-                        datVeViewModel.setTongTien(FunctionPublic.formatMoney(tongTien));
-                    }
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-
-                }
-            });
-
             activityDatVeBinding.xacNhan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     datVeViewModel.luuDatVe(getApplicationContext(),chuyenXe);
+                }
+            });
+
+            ArrayAdapter<Integer> listSoLuongVe = new ArrayAdapter<>(getApplicationContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,datVeViewModel.setSpinner(getBaseContext(),chuyenXe));
+
+            activityDatVeBinding.soLuongVe.setAdapter(listSoLuongVe);
+
+            activityDatVeBinding.soLuongVe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    datVeViewModel.setSoLuongVe(String.valueOf(i+1));
+
+                    double tongTien = FunctionPublic.tinhTongTien(Integer.parseInt(datVeViewModel.getSoLuongVe()) , chuyenXe.getGiaTien());
+
+                    datVeViewModel.setTongTien(FunctionPublic.formatMoney(tongTien));
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
                 }
             });
         }

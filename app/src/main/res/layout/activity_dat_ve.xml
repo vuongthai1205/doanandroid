@@ -101,20 +101,12 @@
 
                         android:text="Chọn số lượng vé: "/>
                     <Spinner
-                        android:id="@+id/slv"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/soLuongVe"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/soLuongVe"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#00ffffff"
-                    android:inputType="number"
-                    android:text="@={DatVeViewModel.soLuongVe}"
-                    android:hint="Nhập số lượng vé"
-                    android:textSize="14sp" />
+
                 <EditText
                     android:id="@+id/edtNgayDi"
                     android:layout_width="match_parent"

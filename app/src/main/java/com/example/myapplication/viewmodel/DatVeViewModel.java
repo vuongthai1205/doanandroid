@@ -17,12 +17,15 @@ import com.example.myapplication.config.VariableGlobal;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.model.DAO.ChuyenXeDAO;
 import com.example.myapplication.model.DAO.DatVeDAO;
+import com.example.myapplication.model.DAO.LoaiXeDAO;
 import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.DatVe;
 import com.example.myapplication.model.ThanhVien;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class DatVeViewModel extends BaseObservable {
     private String hoTen;
@@ -84,6 +87,22 @@ public class DatVeViewModel extends BaseObservable {
         }
 
 
+    }
+
+    public List<Integer> setSpinner(Context context, ChuyenXe chuyenXe){
+        DatVeDAO datVeDAO = AppDatabase.getInstance(context).getVeXeDAO();
+        int tongSlVe = datVeDAO.tongSoLuongVe(chuyenXe.getIdChuyenXe());
+
+        LoaiXeDAO loaiXeDAO = AppDatabase.getInstance(context).getLoaiXeDAO();
+        int soLuongGhe = loaiXeDAO.getSoLuongGheByID(chuyenXe.getIdLoaiXe());
+        int gheTrong = soLuongGhe - tongSlVe;
+
+        List<Integer> list = new ArrayList<>();
+        for (int i =1 ; i <= gheTrong; i++){
+            list.add(i);
+        }
+
+        return list;
     }
     private void scheduleUpdateStatus(Context context, String datVeId) {
         // Cancel any previously scheduled updates

@@ -32,6 +32,7 @@ public class ADetailChuyenXeViewModel extends BaseObservable {
     private String themDiemDanhGia;
     private String choTrong;
     private DanhGiaAdapter danhGiaAdapter;
+    private int gheTrong;
 
     public void layThongTinChuyenXe(ChuyenXe chuyenXe, Context context){
         DanhGiaDAO danhGiaDAO = AppDatabase.getInstance(context).getDanhGiaDAO();
@@ -42,12 +43,12 @@ public class ADetailChuyenXeViewModel extends BaseObservable {
 
         LoaiXeDAO loaiXeDAO = AppDatabase.getInstance(context).getLoaiXeDAO();
         int soLuongGhe = loaiXeDAO.getSoLuongGheByID(chuyenXe.getIdLoaiXe());
-        int  gheTrong = soLuongGhe - tongSlVe;
-        if (gheTrong <=0 ){
+        setGheTrong(soLuongGhe - tongSlVe);
+        if (getGheTrong() <=0 ){
             setChoTrong("Số vé còn lại: hết vé");
         }
         else{
-            setChoTrong("Số vé còn lại: " + gheTrong);
+            setChoTrong("Số vé còn lại: " + getGheTrong());
         }
         setDiemDanhGia(FunctionPublic.formatDouble(diem));
         setTenChuyenXe(chuyenXe.getTenChuyen());
@@ -88,6 +89,14 @@ public class ADetailChuyenXeViewModel extends BaseObservable {
 
     public void setDanhGiaAdapter(DanhGiaAdapter danhGiaAdapter) {
         this.danhGiaAdapter = danhGiaAdapter;
+    }
+
+    public int getGheTrong() {
+        return gheTrong;
+    }
+
+    public void setGheTrong(int gheTrong) {
+        this.gheTrong = gheTrong;
     }
 
     @Bindable
