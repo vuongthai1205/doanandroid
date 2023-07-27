@@ -19,7 +19,9 @@ import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.FunctionPublic;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.model.DAO.DanhGiaDAO;
-import com.example.myapplication.view.DetailFilterChuyenXeActivity;
+import com.example.myapplication.model.DAO.LoaiXeDAO;
+import com.example.myapplication.view.DetailChuyenXeActivity;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,15 +51,22 @@ public class ChuyenXeFilterAdapter extends RecyclerView.Adapter<ChuyenXeFilterAd
     public void onBindViewHolder(@NonNull ChuyenXeFilterAdapter.ChuyenXeFilterAdapterViewHolder holder, int position) {
         ChuyenXe chuyenXe = chuyenXes.get(position);
         DanhGiaDAO danhGiaDAO = AppDatabase.getInstance(context).getDanhGiaDAO();
+        LoaiXeDAO loaiXeDAO = AppDatabase.getInstance(context).getLoaiXeDAO();
+
+        String tenLoaiXe = loaiXeDAO.getTenLoaiXeByID(chuyenXe.getIdLoaiXe());
         Double danhGiaTrungBinh = danhGiaDAO.tinhDiemDanhGiaTrungBinhTheoChuyenXe(chuyenXe.getIdChuyenXe());
         holder.tenChuyenXe.setText(chuyenXe.getTenChuyen());
+        holder.noiXuatPhat.setText(chuyenXe.getDiaDiemDi());
+        holder.noiDen.setText(chuyenXe.getDiaDiemDen());
+        holder.loaiXe.setText(tenLoaiXe);
+        holder.thoiGianDi.setText(chuyenXe.getThoiGianBatDau());
         holder.giaChuyenXe.setText(FunctionPublic.formatMoney(chuyenXe.getGiaTien()));
         holder.danhGia.setText(String.valueOf(danhGiaTrungBinh));
-        FunctionPublic.loadAvatar(chuyenXe.getHinhAnh(), holder.hinhAnh,context);
+        FunctionPublic.loadImage(chuyenXe.getHinhAnh(), holder.hinhAnh,context);
 
         holder.itemChuyenXe.setOnClickListener(view -> {
-            DetailFilterChuyenXeActivity detailFilterChuyenXeActivity = new DetailFilterChuyenXeActivity();
-            showDetail(chuyenXe, detailFilterChuyenXeActivity);
+            DetailChuyenXeActivity detailChuyenXeActivity = new DetailChuyenXeActivity();
+            showDetail(chuyenXe, detailChuyenXeActivity);
         });
 
     }
@@ -78,16 +87,15 @@ public class ChuyenXeFilterAdapter extends RecyclerView.Adapter<ChuyenXeFilterAd
         }
         return 0;
     }
-    public void filterChuyenXe(String diaDiemDi, String diaDiemDen, int idLoaiXe, String ngayDi, String gioDi) {
+    public void filterChuyenXe(String diaDiemDi, String diaDiemDen, int idLoaiXe, String gioDi) {
         List<ChuyenXe> filteredList = new ArrayList<>();
 
         for (ChuyenXe chuyenXe : chuyenXes) {
             // Kiểm tra các điều kiện để tìm chuyến xe phù hợp
             if (chuyenXe.getDiaDiemDi().equals(diaDiemDi)
                     && chuyenXe.getDiaDiemDen().equals(diaDiemDen)
-                    && chuyenXe.getIdLoaiXe()==(idLoaiXe)
-                    && chuyenXe.getNgayDi().equals(ngayDi)
-                    && chuyenXe.getThoiGianBatDau().equals(gioDi)) {
+                    && chuyenXe.getIdLoaiXe() == idLoaiXe
+                    && chuyenXe.getThoiGianBatDau().equalsIgnoreCase(gioDi)) {
                 filteredList.add(chuyenXe);
             }
         }
@@ -100,6 +108,10 @@ public class ChuyenXeFilterAdapter extends RecyclerView.Adapter<ChuyenXeFilterAd
     public static class ChuyenXeFilterAdapterViewHolder extends RecyclerView.ViewHolder{
         ImageView hinhAnh;
         TextView tenChuyenXe;
+        TextView noiXuatPhat;
+        TextView noiDen;
+        TextView loaiXe;
+        TextView thoiGianDi;
         TextView giaChuyenXe;
         TextView danhGia;
         CardView itemChuyenXe;
@@ -108,6 +120,10 @@ public class ChuyenXeFilterAdapter extends RecyclerView.Adapter<ChuyenXeFilterAd
 
             hinhAnh = itemView.findViewById(R.id.hinhAnhChuyenXe);
             tenChuyenXe = itemView.findViewById(R.id.tenChuyenXe);
+            noiXuatPhat = itemView.findViewById(R.id.noiDi);
+            noiDen = itemView.findViewById(R.id.noiDen);
+            loaiXe = itemView.findViewById(R.id.loaiXeItem);
+            thoiGianDi = itemView.findViewById(R.id.thoiGianDi);
             danhGia =itemView.findViewById(R.id.tvDanhgia);
             giaChuyenXe = itemView.findViewById(R.id.giaChuyenXe);
             itemChuyenXe = itemView.findViewById(R.id.itemFilterChuyenXe);

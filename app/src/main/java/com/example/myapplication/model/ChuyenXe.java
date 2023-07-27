@@ -8,6 +8,7 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 
 @Entity(tableName = "table_chuyenxe",
@@ -169,5 +170,18 @@ public class ChuyenXe implements Serializable {
 
     public void setGiaTien(Double giaTien) {
         this.giaTien = giaTien;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChuyenXe)) return false;
+        ChuyenXe chuyenXe = (ChuyenXe) o;
+        return getIdLoaiXe() == chuyenXe.getIdLoaiXe() && getThoiGianBatDau().equals(chuyenXe.getThoiGianBatDau()) && getDiaDiemDi().equals(chuyenXe.getDiaDiemDi()) && getDiaDiemDen().equals(chuyenXe.getDiaDiemDen());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdLoaiXe(), getThoiGianBatDau(), getDiaDiemDi(), getDiaDiemDen());
     }
 }

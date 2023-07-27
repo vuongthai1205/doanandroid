@@ -24,9 +24,9 @@ public interface ChuyenXeDAO {
     List<ChuyenXe> getAll();
 
     @Query("select dia_diem_di from table_chuyenxe")
-    Set<String> getListDiaDiemDi();
+    List<String> getListDiaDiemDi();
 
     @Query("select dia_diem_den from table_chuyenxe")
-    Set<String> getListDiaDiemDen();
+    List<String> getListDiaDiemDen();
 
 }

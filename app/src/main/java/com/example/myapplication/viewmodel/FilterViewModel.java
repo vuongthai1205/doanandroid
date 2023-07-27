@@ -9,7 +9,10 @@ import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.model.DAO.ChuyenXeDAO;
 import com.example.myapplication.model.DAO.LoaiXeDAO;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FilterViewModel extends BaseObservable {
     private ChuyenXeFilterAdapter chuyenXeFilterAdapter;
@@ -19,6 +22,7 @@ public class FilterViewModel extends BaseObservable {
         chuyenXeFilterAdapter.setData(chuyenXeDAO.getAll());
         setChuyenXeFilterAdapter(chuyenXeFilterAdapter);
     }
+
 
     public ChuyenXeFilterAdapter getChuyenXeFilterAdapter() {
         return chuyenXeFilterAdapter;
@@ -36,12 +40,14 @@ public class FilterViewModel extends BaseObservable {
     public List<String> getListDiaDiemDi(Context context){
 
         List<String> diaDiemDi = AppDatabase.getInstance(context).getChuyenXeDAO().getListDiaDiemDi();
-        return diaDiemDi;
+        Set<String> uniqueDiaDiemDiSet = new HashSet<>(diaDiemDi);
+        return new ArrayList<>(uniqueDiaDiemDiSet);
     }
     public List<String> getListDiaDiemDen(Context context){
 
         List<String> diaDiemDen = AppDatabase.getInstance(context).getChuyenXeDAO().getListDiaDiemDen();
-        return diaDiemDen;
+        Set<String> uniqueDiaDiemDenSet = new HashSet<>(diaDiemDen);
+        return new ArrayList<>(uniqueDiaDiemDenSet);
     }
 
     public int getIdLoaiXeByName(Context context,String tenLoaiXe){

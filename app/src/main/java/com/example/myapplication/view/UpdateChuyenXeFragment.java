@@ -19,7 +19,9 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
+import com.example.myapplication.config.FunctionPublic;
 import com.example.myapplication.databinding.FragmentUpdateChuyenXeBinding;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.viewmodel.UpdateChuyenXeViewModel;
@@ -109,8 +111,9 @@ public class UpdateChuyenXeFragment extends Fragment {
                     }
                 }
         );
+        FunctionPublic.loadImage(updateChuyenXeViewModel.getHinhAnh(),fragmentUpdateChuyenXeBinding.imgChuyenXe,getContext());
 
-        fragmentUpdateChuyenXeBinding.edtHinhAnhXe.setOnClickListener(new View.OnClickListener() {
+        fragmentUpdateChuyenXeBinding.imgChuyenXe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -124,7 +127,8 @@ public class UpdateChuyenXeFragment extends Fragment {
         // Lấy URL của hình ảnh đã tải lên từ Firebase Storage
         imageRef.getDownloadUrl()
                 .addOnSuccessListener(uri -> {
-                    fragmentUpdateChuyenXeBinding.edtHinhAnhXe.setText(String.valueOf(uri));
+                    updateChuyenXeViewModel.setHinhAnh(String.valueOf(uri));
+                    Glide.with(getContext()).load(updateChuyenXeViewModel.getHinhAnh()).into(fragmentUpdateChuyenXeBinding.imgChuyenXe);
                 })
                 .addOnFailureListener(e -> {
                     // Xử lý lỗi nếu không thể lấy URL hình ảnh (nếu cần)
