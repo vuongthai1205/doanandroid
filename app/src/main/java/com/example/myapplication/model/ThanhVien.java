@@ -180,4 +180,27 @@ public class ThanhVien implements Serializable {
     public void setNgayCapNhat(String ngayCapNhat) {
         this.ngayCapNhat = ngayCapNhat;
     }
+
+    public String getHoTen() {
+        if (ho == null && ten == null) {
+            return "Ẩn Danh";
+        } else if (ho == null) {
+            return ten;
+        } else if (ten == null) {
+            return ho;
+        } else {
+            return ho + " " + ten;
+        }
+    }
+
+    // Setter để thiết lập "Ẩn Danh" nếu họ và tên đều trống
+    public void setHoTen(String ho, String ten) {
+        if (ho == null && ten == null) {
+            this.ho = "Ẩn Danh";
+            this.ten = null;
+        } else {
+            this.ho = ho;
+            this.ten = ten;
+        }
+    }
 }

@@ -86,7 +86,7 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
             showDetail(thanhVien,updateThanhVienFragment );
         });
         String imageUrl =  thanhVien.getAvatar();
-        FunctionPublic.loadAvatar(imageUrl,holder.avt,this.context);
+        FunctionPublic.loadImage(imageUrl,holder.avt,this.context);
     }
 
     private void showConfirmationDialog(ThanhVien thanhVien, int position) {

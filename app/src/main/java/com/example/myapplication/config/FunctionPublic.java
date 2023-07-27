@@ -36,7 +36,11 @@ public class FunctionPublic {
         }
     }
 
-    public static void loadAvatar(String url, ImageView imageView, Context context){
+    public static void loadImage(String url, ImageView imageView, Context context){
+        if (url == null || url.isEmpty()) {
+            // Sử dụng URL mặc định hoặc URL của ảnh mặc định bạn muốn load
+            url = "https://i.pinimg.com/originals/c6/e5/65/c6e56503cfdd87da299f72dc416023d4.jpg"; // Thay thế bằng URL mặc định của bạn
+        }
         Glide.with(context)
                 .load(url)
                 .into(imageView);
@@ -49,5 +53,18 @@ public class FunctionPublic {
         moneyString = decimalFormat.format(money);
         moneyString += " VND";
         return moneyString;
+    }
+
+    public static String formatDouble(double so){
+        String result = "";
+        if (so >0){
+            DecimalFormat decimalFormat = new DecimalFormat("#.0");
+            result = decimalFormat.format(so);
+        }
+        else {
+            result ="0";
+        }
+
+        return result;
     }
 }

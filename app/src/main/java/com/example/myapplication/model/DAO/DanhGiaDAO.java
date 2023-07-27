@@ -16,7 +16,7 @@ public interface DanhGiaDAO {
     @Query("select * from table_danh_gia")
     List<DanhGia> getAll();
 
-    @Query("SELECT * FROM table_danh_gia WHERE id_chuyen_xe = :idChuyenXe")
+    @Query("SELECT * FROM table_danh_gia WHERE id_chuyen_xe = :idChuyenXe ORDER BY id_danh_gia DESC")
     List<DanhGia> layDanhSachDanhGiaTheoChuyenXe(int idChuyenXe);
 
     // Phương thức tính điểm đánh giá trung bình cho một chuyến xe dựa vào id_chuyen_xe
