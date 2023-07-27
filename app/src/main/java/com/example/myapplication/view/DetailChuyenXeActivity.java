@@ -51,6 +51,10 @@ public class DetailChuyenXeActivity extends AppCompatActivity {
             setAdapterForDanhGia(chuyenXe.getIdChuyenXe());
 
             detailThanhVienBinding.btnDatVe.setOnClickListener(view -> {
+                if (aDetailChuyenXeViewModel.getGheTrong() <=0 ){
+                    Toast.makeText(getApplicationContext(), "Bạn không thể đặt chuyến xe này vì hết vế", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Intent i = new Intent(getApplicationContext(), DatVeActivity.class);
 
                 Bundle bundle = new Bundle();
