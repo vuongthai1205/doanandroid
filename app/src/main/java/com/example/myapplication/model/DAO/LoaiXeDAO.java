@@ -1,6 +1,7 @@
 package com.example.myapplication.model.DAO;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -12,6 +13,8 @@ import java.util.List;
 public interface LoaiXeDAO {
     @Insert
     void insert(LoaiXe... loaiXes);
+    @Delete
+    void delete(LoaiXe loaiXe);
     @Query("SELECT EXISTS(SELECT 1 FROM table_loaixe WHERE ten_loai_xe = :tenLoaiXe )")
     boolean isLoaiXeExist(String tenLoaiXe);
     @Query("select * from table_loaixe")
