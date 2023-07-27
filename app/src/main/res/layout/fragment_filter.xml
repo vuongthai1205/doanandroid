@@ -26,6 +26,7 @@
             <Spinner
                 android:id="@+id/spinnerDiaDiemDi"
                 android:layout_width="280dp"
+
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:minHeight="32dp"
@@ -47,14 +48,11 @@
                 android:id="@+id/spinnerDiaDiemDen"
                 android:layout_marginStart="11dp"
                 android:layout_width="280dp"
+
                 android:layout_height="wrap_content"
                 android:minHeight="32dp" />
         </LinearLayout>
-<!--        <LinearLayout-->
-<!--            android:layout_marginLeft="5dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical">-->
+
 
 
         <LinearLayout
@@ -96,6 +94,7 @@
                 android:id="@+id/edtGioDi"
                 android:layout_marginStart="57dp"
                 android:layout_width="180dp"
+                android:text="@={FilterViewModel.gioDi}"
                 android:layout_height="wrap_content"
                 android:textSize="13sp" />
             <Button
