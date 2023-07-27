@@ -4,8 +4,10 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.myapplication.model.LoaiXe;
+import com.example.myapplication.model.ThanhVien;
 
 import java.util.List;
 
@@ -19,7 +21,8 @@ public interface LoaiXeDAO {
     boolean isLoaiXeExist(String tenLoaiXe);
     @Query("select * from table_loaixe")
     List<LoaiXe> getAll();
-
+    @Update
+    void updateLoaiXe(LoaiXe loaiXe);
     @Query("select ten_loai_xe from table_loaixe where id_loai_xe= :idLoaiXe")
     String getTenLoaiXeByID(int idLoaiXe);
 
