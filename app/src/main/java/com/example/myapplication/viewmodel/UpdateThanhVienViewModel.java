@@ -12,11 +12,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.databinding.library.baseAdapters.BR;
-import androidx.fragment.app.FragmentTransaction;
+ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
+import com.example.myapplication.BR;
 import com.example.myapplication.R;
 import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.FunctionPublic;

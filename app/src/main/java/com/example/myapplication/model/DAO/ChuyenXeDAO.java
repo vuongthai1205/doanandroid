@@ -9,6 +9,7 @@ import androidx.room.Update;
 import com.example.myapplication.model.ChuyenXe;
 
 import java.util.List;
+import java.util.Set;
 
 @Dao
 public interface ChuyenXeDAO {
@@ -27,4 +28,11 @@ public interface ChuyenXeDAO {
 
     @Query("select * from table_chuyenxe")
     List<ChuyenXe> getAll();
+
+    @Query("select dia_diem_di from table_chuyenxe")
+    List<String> getListDiaDiemDi();
+
+    @Query("select dia_diem_den from table_chuyenxe")
+    List<String> getListDiaDiemDen();
+
 }

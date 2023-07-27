@@ -5,19 +5,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.config.AppDatabase;
+import com.example.myapplication.config.DataLocalManager;
 import com.example.myapplication.model.LoaiXe;
 import com.example.myapplication.model.ThanhVien;
 import com.example.myapplication.view.DetailThanhVienFragment;
+import com.example.myapplication.view.UpdateLoaiXeFragment;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class LoaiXeAdapter extends RecyclerView.Adapter<LoaiXeAdapter.LoaiXeHolder> {
@@ -29,7 +36,6 @@ public class LoaiXeAdapter extends RecyclerView.Adapter<LoaiXeAdapter.LoaiXeHold
         this.loaixes = list;
         notifyDataSetChanged();
     }
-
     public LoaiXeAdapter(Context context) {
         this.context = context;
     }
@@ -51,25 +57,37 @@ public class LoaiXeAdapter extends RecyclerView.Adapter<LoaiXeAdapter.LoaiXeHold
 
         holder.maSoLoaiXe.setText(String.valueOf(loaiXe.getIdLoaiXe()));
         holder.tenLoaiXe.setText(loaiXe.getTenLoaiXe());
-
-
-
+        holder.btnDelete.setOnClickListener(view -> showDiaLog(loaiXe, position));
+        holder.btnEdit.setOnClickListener(view -> {
+            UpdateLoaiXeFragment updateLoaiXeFragment = new UpdateLoaiXeFragment();
+            showDetail(loaiXe,updateLoaiXeFragment);
+        });
 
     }
-
-    private void showDetail(ThanhVien thanhVien) {
+    private void showDetail(LoaiXe loaiXe, Fragment fragment) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("thanhVien", thanhVien);
-
-        DetailThanhVienFragment detailThanhVienFragment = new DetailThanhVienFragment();
-        detailThanhVienFragment.setArguments(bundle);
+        bundle.putSerializable("loaiXe", loaiXe);
+        fragment.setArguments(bundle);
 
         FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.containerThanhVienManager, detailThanhVienFragment);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.containerLoaiXeManager, fragment);
         fragmentTransaction.commit();
     }
-
+    private void showDiaLog(LoaiXe loaiXe, int posiotion){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Xác nhận xóa");
+        builder.setMessage("Bạn có muốn xóa loại xe này");
+        builder.setPositiveButton("Đồng ý",(dialogInterface, i) -> {
+           loaixes.remove(posiotion);
+            AppDatabase.getInstance(context).getLoaiXeDAO().delete(loaiXe);
+            notifyDataSetChanged(); // cập nhật giao diện sao khi xóa
+        });
+        builder.setNegativeButton("Hủy", (dialogInterface, i) -> {
+            // Đóng hộp thoại khi người dùng không đồng ý xóa
+            dialogInterface.dismiss();
+        });
+        builder.create().show();
+     }
     @Override
     public int getItemCount() {
         if (loaixes != null){
@@ -77,16 +95,27 @@ public class LoaiXeAdapter extends RecyclerView.Adapter<LoaiXeAdapter.LoaiXeHold
         }
         return 0;
     }
+    private  void ShowDetail(LoaiXe loaiXe, Fragment fragment){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("loaiXe",  loaiXe);
+        fragment.setArguments(bundle);
 
+        FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.containerLoaiXeManager,fragment);
+        fragmentTransaction.commit();
+    }
     public static class LoaiXeHolder extends RecyclerView.ViewHolder{
         TextView tenLoaiXe;
         TextView maSoLoaiXe;
+        ImageView btnDelete;
+        ImageView btnEdit;
 
         public LoaiXeHolder(@NonNull View itemView) {
             super(itemView);
             tenLoaiXe = itemView.findViewById(R.id.tenLoaiXe);
             maSoLoaiXe = itemView.findViewById(R.id.idLoaiXe);
-
+            btnDelete = itemView.findViewById(R.id.btnDelete);
+            btnEdit = itemView.findViewById(R.id.btnEdit);
         }
     }
 }

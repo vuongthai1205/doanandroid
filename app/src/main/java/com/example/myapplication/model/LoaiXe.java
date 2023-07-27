@@ -4,12 +4,13 @@ package com.example.myapplication.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
+
+import java.io.Serializable;
 
 @Entity(tableName = "table_loaixe"
 )
-public class LoaiXe {
+public class LoaiXe implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_loai_xe")
     private int idLoaiXe;

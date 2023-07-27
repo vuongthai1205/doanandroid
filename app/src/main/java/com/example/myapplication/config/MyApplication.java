@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.model.DAO.ChuyenXeDAO;
+
 import com.example.myapplication.model.DAO.DanhGiaDAO;
 import com.example.myapplication.model.DAO.LoaiXeDAO;
 import com.example.myapplication.model.DAO.QuyenDao;
@@ -26,6 +27,9 @@ public class MyApplication extends Application {
 
 
         FirebaseApp.initializeApp(getApplicationContext());
+
+
+
 
         if (!DataLocalManager.getIsFirst())
         {
@@ -79,16 +83,16 @@ public class MyApplication extends Application {
             loaiXeDAO.insert(loaiXe1,loaiXe2,loaiXe3);
 
 
-            ChuyenXe chuyenXe1 = new ChuyenXe("TP.Hồ Chí Minh - TP.Nha Trang","null","8h00","12h00","27/02/2023","28/02/2023","Bến xe Miền Đông","Bến xe Nha Trang",500000.00,"mô tả");
+            ChuyenXe chuyenXe1 = new ChuyenXe("TP.Hồ Chí Minh - TP.Nha Trang","null","8h00","12h00","27/02/2023","28/02/2023","Bến xe Miền Tây","Bến xe Nha Trang",500000.00,"mô tả");
             chuyenXe1.setIdLoaiXe(1);
             chuyenXe1.setHinhAnh("https://firebasestorage.googleapis.com/v0/b/doanandroid-c9b13.appspot.com/o/xe_35_cho.jpg?alt=media&token=89119ebf-e6a8-4c0a-af7e-0b3fac672114");
-            ChuyenXe chuyenXe2 = new ChuyenXe("TP.Hồ Chí Minh - TP.Cần Thơ","null","8h00","12h00","27/02/2023","28/02/2023","Bến xe Miền Đông","Bến xe Nha Trang",500000.00,"mô tả");
+            ChuyenXe chuyenXe2 = new ChuyenXe("TP.Hồ Chí Minh - TP.Cần Thơ","null","9h00","12h00","27/02/2023","28/02/2023","Bến xe Miền Đông","Bến xe Cần Thơ",500000.00,"mô tả");
             chuyenXe2.setIdLoaiXe(2);
             chuyenXe2.setHinhAnh("https://firebasestorage.googleapis.com/v0/b/doanandroid-c9b13.appspot.com/o/xe_35_cho.jpg?alt=media&token=89119ebf-e6a8-4c0a-af7e-0b3fac672114");
-            ChuyenXe chuyenXe3 = new ChuyenXe("TP.Hồ Chí Minh - Tây Ninh","null","8h00","12h00","27/02/2023","28/02/2023","Bến xe Miền Đông","Bến xe Nha Trang",500000.00,"mô tả");
+            ChuyenXe chuyenXe3 = new ChuyenXe("TP.Hồ Chí Minh - Tây Ninh","null","10h00","12h00","27/02/2023","28/02/2023","Bến xe Miền Đông","Bến xe Tây Ninh",500000.00,"mô tả");
             chuyenXe3.setIdLoaiXe(3);
             chuyenXe3.setHinhAnh("https://firebasestorage.googleapis.com/v0/b/doanandroid-c9b13.appspot.com/o/xe_35_cho.jpg?alt=media&token=89119ebf-e6a8-4c0a-af7e-0b3fac672114");
-            ChuyenXe chuyenXe4 = new ChuyenXe("TP.Hồ Chí Minh - TP.Gia Nghĩa","null","8h00","12h00","27/02/2023","28/02/2023","Bến xe Miền Đông","Bến xe Nha Trang",500000.00,"mô tả");
+            ChuyenXe chuyenXe4 = new ChuyenXe("TP.Hồ Chí Minh - TP.Gia Nghĩa","null","11h00","12h00","27/02/2023","28/02/2023","Bến xe Miền Đông","Bến xe Gia Nghĩa",500000.00,"mô tả");
             chuyenXe4.setIdLoaiXe(3);
             chuyenXe4.setHinhAnh("https://firebasestorage.googleapis.com/v0/b/doanandroid-c9b13.appspot.com/o/xe_35_cho.jpg?alt=media&token=89119ebf-e6a8-4c0a-af7e-0b3fac672114");
 
@@ -108,12 +112,6 @@ public class MyApplication extends Application {
             trangThaiDAO.insert(trangThai1,trangThai2,trangThai3, trangThai4);
             DataLocalManager.setIsFirst(true);
         }
-
-
-
-
-
-
 
     }
 
