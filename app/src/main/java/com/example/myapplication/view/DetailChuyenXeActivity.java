@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
@@ -32,27 +33,31 @@ public class DetailChuyenXeActivity extends AppCompatActivity {
             aDetailChuyenXeViewModel.layThongTinChuyenXe(chuyenXe, getApplicationContext());
 
             FunctionPublic.loadImage(aDetailChuyenXeViewModel.getHinhAnh(), detailThanhVienBinding.hinhAnhChuyenXe, getApplicationContext());
-            detailThanhVienBinding.danhgiaGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                    RadioButton radioButton = findViewById(i);
-                    if (radioButton != null && radioButton.isChecked()) {
-                        // Xử lý sự kiện khi người dùng chọn một Radio Button
-                        int selectedOption = Integer.parseInt(radioButton.getHint().toString());
-                        aDetailChuyenXeViewModel.setThemDiemDanhGia(String.valueOf(selectedOption));
+            detailThanhVienBinding.danhgiaGroup.setOnCheckedChangeListener((radioGroup, i) -> {
+                RadioButton radioButton = findViewById(i);
+                if (radioButton != null && radioButton.isChecked()) {
+                    // Xử lý sự kiện khi người dùng chọn một Radio Button
+                    int selectedOption = Integer.parseInt(radioButton.getHint().toString());
+                    aDetailChuyenXeViewModel.setThemDiemDanhGia(String.valueOf(selectedOption));
 
-                    }
                 }
             });
 
-            detailThanhVienBinding.btnGui.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    aDetailChuyenXeViewModel.luuDanhGia(chuyenXe, getApplicationContext());
-                    setAdapterForDanhGia(chuyenXe.getIdChuyenXe());
-                }
+            detailThanhVienBinding.btnGui.setOnClickListener(view -> {
+                aDetailChuyenXeViewModel.luuDanhGia(chuyenXe, getApplicationContext());
+                setAdapterForDanhGia(chuyenXe.getIdChuyenXe());
+                anHienNhanXet();
             });
             setAdapterForDanhGia(chuyenXe.getIdChuyenXe());
+
+            detailThanhVienBinding.btnDatVe.setOnClickListener(view -> {
+                Intent i = new Intent(getApplicationContext(), DatVeActivity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("chuyen_xe", chuyenXe);
+                i.putExtras(bundle);
+                startActivity(i);
+            });
         }
         detailThanhVienBinding.btnAddNhanXet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,13 +65,7 @@ public class DetailChuyenXeActivity extends AppCompatActivity {
                 anHienNhanXet();
 
             }
-
-
         });
-
-
-
-
     }
     private void anHienNhanXet() {
         if (detailThanhVienBinding.layoutNhanXet.getVisibility() == View.VISIBLE) {
@@ -75,7 +74,6 @@ public class DetailChuyenXeActivity extends AppCompatActivity {
             detailThanhVienBinding.layoutNhanXet.setVisibility(View.VISIBLE);
         }
     }
-
     public void setAdapterForDanhGia(int id ){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 

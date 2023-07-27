@@ -9,10 +9,12 @@ import com.example.myapplication.model.DAO.DanhGiaDAO;
 import com.example.myapplication.model.DAO.LoaiXeDAO;
 import com.example.myapplication.model.DAO.QuyenDao;
 import com.example.myapplication.model.DAO.ThanhVienDAO;
+import com.example.myapplication.model.DAO.TrangThaiDAO;
 import com.example.myapplication.model.DanhGia;
 import com.example.myapplication.model.LoaiXe;
 import com.example.myapplication.model.Quyen;
 import com.example.myapplication.model.ThanhVien;
+import com.example.myapplication.model.TrangThai;
 import com.google.firebase.FirebaseApp;
 
 
@@ -96,6 +98,18 @@ public class MyApplication extends Application {
 
             chuyenXeDAO.insert(chuyenXe1,chuyenXe2,chuyenXe3,chuyenXe4);
 
+
+            TrangThai trangThai1 = new TrangThai();
+            trangThai1.setTenTrangThai("Đang chờ");
+            TrangThai trangThai2 = new TrangThai();
+            trangThai2.setTenTrangThai("Đang chờ duyệt");
+            TrangThai trangThai3 = new TrangThai();
+            trangThai3.setTenTrangThai("Đã hủy");
+            TrangThai trangThai4 = new TrangThai();
+            trangThai4.setTenTrangThai("Chấp thuận");
+
+            TrangThaiDAO trangThaiDAO = AppDatabase.getInstance(getApplicationContext()).getTrangThaiDAO();
+            trangThaiDAO.insert(trangThai1,trangThai2,trangThai3, trangThai4);
             DataLocalManager.setIsFirst(true);
         }
 

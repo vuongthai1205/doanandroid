@@ -13,6 +13,9 @@ public interface TrangThaiDAO {
     @Insert
     void insert(TrangThai... trangThais);
 
+    @Query("select ten_trang_thai from table_trang_thai where id_trang_thai = :id ")
+    String getTrangThaiById(int id);
+
     @Query("select * from table_trang_thai")
     List<TrangThai> getAll();
 }

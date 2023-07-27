@@ -1,11 +1,14 @@
 package com.example.myapplication.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+
+import com.example.myapplication.config.SoLuongVeDaTaoSingleton;
 
 @Entity(tableName = "table_dat_ve",
         foreignKeys = {@ForeignKey(entity = ThanhVien.class, parentColumns = "id_thanh_vien", childColumns = "id_thanh_vien"),
@@ -17,10 +20,12 @@ import androidx.room.PrimaryKey;
         @Index(name = "index_id_trang_thai", value = "id_trang_thai")}
 )
 public class DatVe {
+    private static int soLuongVeDaTao = 1;
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id_ve_xe")
-    private int idVeXe;
+    @NonNull
+    private String id;
     @ColumnInfo(name = "id_thanh_vien")
     private int idThanhVienVeXe;
     @ColumnInfo(name = "id_chuyen_xe")
@@ -29,6 +34,10 @@ public class DatVe {
     private int soLuongVe;
     @ColumnInfo(name = "ngay_gio_dat")
     private String ngayGioDat;
+    @ColumnInfo(name = "ngay_gio_di")
+    private String ngayGioDi;
+    @ColumnInfo(name = "ngay_gio_ve")
+    private String ngayGioVe;
     @ColumnInfo(name = "id_trang_thai")
     private int idTrangThai;
     @ColumnInfo(name="thong_tin_khac")
@@ -37,13 +46,21 @@ public class DatVe {
 
     }
     @Ignore
-    public DatVe(int idThanhVienVeXe,int idChuyenXeVeXe, int soLuongVe, String ngayGioDat, String thongTinKhac) {
+    public DatVe(int idThanhVienVeXe,int idChuyenXeVeXe, int soLuongVe, String ngayGioDat, String ngayGioDi, String ngayGioVe, String thongTinKhac, int idTrangThai) {
+        SoLuongVeDaTaoSingleton soLuongVeDaTaoSingleton = SoLuongVeDaTaoSingleton.getInstance();
 
+        this.id = "VX" + soLuongVeDaTaoSingleton.getSoLuongVeDaTao();
+
+        // Tăng giá trị biến số lượng vé sau khi đã tạo mã vé
+        soLuongVeDaTaoSingleton.tangSoLuongVeDaTao();
         this.idThanhVienVeXe = idThanhVienVeXe;
         this.idChuyenXeVeXe = idChuyenXeVeXe;
         this.soLuongVe = soLuongVe;
         this.ngayGioDat = ngayGioDat;
         this.thongTinKhac = thongTinKhac;
+        this.ngayGioDi = ngayGioDi;
+        this.ngayGioVe =ngayGioVe;
+        this.idTrangThai = idTrangThai;
     }
 
     public int getSoLuongVe() {
@@ -55,12 +72,12 @@ public class DatVe {
     }
     // Các phương thức truy cập (getter) và cập nhật (setter) cho các trường
 
-    public int getIdVeXe() {
-        return idVeXe;
+    public String getId() {
+        return id;
     }
 
-    public void setIdVeXe(int idVeXe) {
-        this.idVeXe = idVeXe;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getIdThanhVienVeXe() {
@@ -102,6 +119,22 @@ public class DatVe {
 
     public void setIdTrangThai(int idTrangThai) {
         this.idTrangThai = idTrangThai;
+    }
+
+    public String getNgayGioDi() {
+        return ngayGioDi;
+    }
+
+    public void setNgayGioDi(String ngayGioDi) {
+        this.ngayGioDi = ngayGioDi;
+    }
+
+    public String getNgayGioVe() {
+        return ngayGioVe;
+    }
+
+    public void setNgayGioVe(String ngayGioVe) {
+        this.ngayGioVe = ngayGioVe;
     }
 }
 

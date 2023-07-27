@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -19,6 +21,9 @@ import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.FunctionPublic;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.model.DAO.DanhGiaDAO;
+import com.example.myapplication.model.DAO.DatVeDAO;
+import com.example.myapplication.model.DAO.LoaiXeDAO;
+import com.example.myapplication.view.DatVeActivity;
 import com.example.myapplication.view.DetailChuyenXeActivity;
 
 import java.util.List;
@@ -60,6 +65,27 @@ public class ChuyenXeUserAdapter  extends RecyclerView.Adapter<ChuyenXeUserAdapt
             showDetail(chuyenXe, detailChuyenXeActivity);
         });
 
+        DatVeDAO datVeDAO = AppDatabase.getInstance(context).getVeXeDAO();
+        int tongSlVe = datVeDAO.tongSoLuongVe(chuyenXe.getIdChuyenXe());
+
+        LoaiXeDAO loaiXeDAO = AppDatabase.getInstance(context).getLoaiXeDAO();
+        int soLuongGhe = loaiXeDAO.getSoLuongGheByID(chuyenXe.getIdLoaiXe());
+        int gheTrong = soLuongGhe - tongSlVe;
+        if (gheTrong <= 0 ){
+            holder.choTrong.setText("Hết vé");
+        }
+        else {
+            holder.choTrong.setText(String.valueOf(gheTrong));
+        }
+        holder.btnDatVe.setOnClickListener(view -> {
+            if (gheTrong <=0 ){
+                Toast.makeText(context, "Bạn không thể đặt chuyến xe này vì hết vế", Toast.LENGTH_LONG).show();
+                return;
+            }
+            DatVeActivity datVeActivity =new DatVeActivity();
+            showDetail(chuyenXe, datVeActivity);
+        });
+
     }
 
     private void showDetail(ChuyenXe chuyenXe , Activity activity){
@@ -86,6 +112,8 @@ public class ChuyenXeUserAdapter  extends RecyclerView.Adapter<ChuyenXeUserAdapt
 
          TextView danhGia;
          CardView itemChuyenXe;
+         Button btnDatVe;
+         TextView choTrong;
         public ChuyenXeUserAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -94,6 +122,8 @@ public class ChuyenXeUserAdapter  extends RecyclerView.Adapter<ChuyenXeUserAdapt
             danhGia =itemView.findViewById(R.id.tvDanhgia);
             giaChuyenXe = itemView.findViewById(R.id.giaChuyenXe);
             itemChuyenXe = itemView.findViewById(R.id.itemChuyenXe);
+            btnDatVe = itemView.findViewById(R.id.btnDatVe);
+            choTrong = itemView.findViewById(R.id.choTrong);
         }
     }
 }
