@@ -25,4 +25,6 @@ public interface LoaiXeDAO {
 
     @Query("select id_loai_xe from table_loaixe where ten_loai_xe= :tenLoaiXe")
     int getIDLoaiXe(String tenLoaiXe);
+//    @Query("select ten_loai_xe from table_loaixe where chuyenXe.")
+//    String getTenLoaiXeByChuyenXe(ChuyenXe chuyenXe);
 }

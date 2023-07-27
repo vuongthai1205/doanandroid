@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginRight="20dp"
-    android:layout_height="wrap_content"
-    android:id="@+id/detailItemFilterChuyenXe"
-    app:cardCornerRadius="10dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.DetailFilterChuyenXeActivity">
+    <data>
+        <variable
+            name="DetailFilterChuyenXeViewModel"
+            type="com.example.myapplication.viewmodel.DetailFilterChuyenXeViewModel" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="5dp"
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/hinhAnhChuyenXe"
+            android:id="@+id/imgFilterChuyenXe"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
@@ -46,10 +48,10 @@
 
             <TextView
                 android:id="@+id/giaChuyenXe"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Giá Chuyến Xe"
+                android:text="@={DetailFilterChuyenXeViewModel.tenChuyenXe}"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -75,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Địa điểm đi"
+                android:text="@={DetailFilterChuyenXeViewModel.diaDiemDi}"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -100,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Địa điểm đến"
+                android:text="@={DetailFilterChuyenXeViewModel.diaDiemDen}"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -125,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Ngày đi"
+                android:text="@={DetailFilterChuyenXeViewModel.ngayDi}"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -150,7 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Thơi gian xuất phát"
+                android:text="@={DetailFilterChuyenXeViewModel.gioDi}"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -175,7 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Loại xe"
+                android:text="@={DetailFilterChuyenXeViewModel.tenLoaiXe}"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -201,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:inputType="textMultiLine"
-                android:text="Mô tả"
+                android:text="@={DetailFilterChuyenXeViewModel.moTa}"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -246,4 +248,4 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</layout>
