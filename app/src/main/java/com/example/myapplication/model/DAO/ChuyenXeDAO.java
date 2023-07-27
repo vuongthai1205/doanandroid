@@ -19,6 +19,12 @@ public interface ChuyenXeDAO {
     @Update
     void updateChuyenXe(ChuyenXe chuyenXe);
 
+    @Query("select ten_chuyen from table_chuyenxe where id_chuyen_xe = :id")
+    String getTenChuyenById(int id);
+
+    @Query("select gia_tien from table_chuyenxe where id_chuyen_xe = :id")
+    double getGiaVeById(int id);
+
     @Query("select * from table_chuyenxe")
     List<ChuyenXe> getAll();
 }

@@ -142,7 +142,7 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
     }
 
     public void UpdateChuyenXe(ChuyenXe chuyenXe,Context context){
-        if (kiemTraNhap(tenChuyenXe,diaDiemDi,diaDiemDen,thoiGianDi,thoiGianDen,ngayDi,ngayVe,giaTien,moTa,hinhAnh)==false) {
+        if (!kiemTraNhap(getTenChuyenXe(),getDiaDiemDi(),getDiaDiemDen(),getThoiGianDi(),getThoiGianDen(),getNgayDi(),getNgayVe(),getGiaTien(),getMoTa(),getHinhAnh())) {
             Toast.makeText(context,"Vui lòng nhập đầy đủ dữ liệu",Toast.LENGTH_SHORT).show();
             return;
         }

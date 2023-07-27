@@ -13,6 +13,8 @@ import com.example.myapplication.config.FunctionPublic;
 import com.example.myapplication.config.VariableGlobal;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.model.DAO.DanhGiaDAO;
+import com.example.myapplication.model.DAO.DatVeDAO;
+import com.example.myapplication.model.DAO.LoaiXeDAO;
 import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.DanhGia;
 import com.example.myapplication.model.ThanhVien;
@@ -28,14 +30,25 @@ public class ADetailChuyenXeViewModel extends BaseObservable {
     private String nhanXet;
     private String diemDanhGia;
     private String themDiemDanhGia;
-
+    private String choTrong;
     private DanhGiaAdapter danhGiaAdapter;
 
     public void layThongTinChuyenXe(ChuyenXe chuyenXe, Context context){
         DanhGiaDAO danhGiaDAO = AppDatabase.getInstance(context).getDanhGiaDAO();
         double diem = danhGiaDAO.tinhDiemDanhGiaTrungBinhTheoChuyenXe(chuyenXe.getIdChuyenXe());
 
+        DatVeDAO datVeDAO = AppDatabase.getInstance(context).getVeXeDAO();
+        int tongSlVe = datVeDAO.tongSoLuongVe(chuyenXe.getIdChuyenXe());
 
+        LoaiXeDAO loaiXeDAO = AppDatabase.getInstance(context).getLoaiXeDAO();
+        int soLuongGhe = loaiXeDAO.getSoLuongGheByID(chuyenXe.getIdLoaiXe());
+        int  gheTrong = soLuongGhe - tongSlVe;
+        if (gheTrong <=0 ){
+            setChoTrong("Số vé còn lại: hết vé");
+        }
+        else{
+            setChoTrong("Số vé còn lại: " + gheTrong);
+        }
         setDiemDanhGia(FunctionPublic.formatDouble(diem));
         setTenChuyenXe(chuyenXe.getTenChuyen());
         setDiaDiemDi("Địa điểm: " + chuyenXe.getDiaDiemDi());
@@ -56,6 +69,8 @@ public class ADetailChuyenXeViewModel extends BaseObservable {
 
         DanhGiaDAO danhGiaDAO = AppDatabase.getInstance(context).getDanhGiaDAO();
         danhGiaDAO.insert(danhGia);
+
+        setNhanXet("");
     }
 
     public void renderAdapter(Context context, int id){
@@ -149,5 +164,15 @@ public class ADetailChuyenXeViewModel extends BaseObservable {
     public void setMoTa(String moTa) {
         this.moTa = moTa;
         notifyPropertyChanged(BR.moTa);
+    }
+
+    @Bindable
+    public String getChoTrong() {
+        return choTrong;
+    }
+
+    public void setChoTrong(String choTrong) {
+        this.choTrong = choTrong;
+        notifyPropertyChanged(BR.choTrong);
     }
 }
