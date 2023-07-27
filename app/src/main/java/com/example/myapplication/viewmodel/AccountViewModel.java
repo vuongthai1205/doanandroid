@@ -1,14 +1,12 @@
 package com.example.myapplication.viewmodel;
 
 import android.content.Context;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-
-import com.bumptech.glide.Glide;
 import com.example.myapplication.BR;
+
 import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.VariableGlobal;
 import com.example.myapplication.model.DAO.ThanhVienDAO;

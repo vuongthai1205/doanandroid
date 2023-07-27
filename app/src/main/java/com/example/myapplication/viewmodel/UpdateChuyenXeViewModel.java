@@ -39,6 +39,7 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
     private String moTa;
     private Calendar calendarNgayDi;
     private Calendar selectedCalendarDi;
+    private Calendar selectedCalendarVe;
 
 
     public void showDatePickerDialogNgayDi(Context context) {
@@ -87,6 +88,8 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        selectedCalendarVe = Calendar.getInstance();
+                        selectedCalendarVe.set(year, month, dayOfMonth);
                         // Xử lý ngày được chọn bởi người dùng khi ngày về hợp lệ
                         String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
                         // Hiển thị ngày đã chọn trong TextView
@@ -98,12 +101,10 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
                 dayOfMonth
         );
 
-        if  (getNgayDi() != null && !getNgayDi().isEmpty()){
             //Giới hạn DatePickerDialog không cho phép chọn các ngày trước ngày hôm nay
             datePickerDialogNgayVe.getDatePicker().setMinDate(selectedCalendarDi.getTimeInMillis());
-        }
 
-        datePickerDialogNgayVe.getDatePicker().setMinDate(System.currentTimeMillis());
+
 
         // Hiển thị DatePickerDialog
         datePickerDialogNgayVe.show();
@@ -135,14 +136,14 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
         DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
         decimalFormat.applyPattern("#,###.##");
         String giaTienFormatted = decimalFormat.format(chuyenXe.getGiaTien());
-        giaTienFormatted += " VND";
         this.setGiaTien(giaTienFormatted);
         this.setMoTa(chuyenXe.getMoTa());
+        this.setHinhAnh(chuyenXe.getHinhAnh());
 
     }
 
     public void UpdateChuyenXe(ChuyenXe chuyenXe,Context context){
-        if (kiemTraNhap(tenChuyenXe,diaDiemDi,diaDiemDen,thoiGianDi,thoiGianDen,ngayDi,ngayVe,giaTien,moTa,hinhAnh)==false) {
+        if (kiemTraNhap(tenChuyenXe,diaDiemDi,diaDiemDen,thoiGianDi,thoiGianDen,ngayDi,ngayVe,giaTien,moTa)==false) {
             Toast.makeText(context,"Vui lòng nhập đầy đủ dữ liệu",Toast.LENGTH_SHORT).show();
             return;
         }
@@ -156,7 +157,7 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
         chuyenXe.setNgayVe(getNgayVe());
         chuyenXe.setDiaDiemDi(getDiaDiemDi());
         chuyenXe.setDiaDiemDen(getDiaDiemDen());
-        chuyenXe.setGiaTien(Double.parseDouble(getGiaTien()));
+        chuyenXe.setGiaTien(Double.parseDouble(getGiaTien().replace(",","")));
         chuyenXe.setMoTa(getMoTa());
         chuyenXeDAO.updateChuyenXe(chuyenXe);
 
@@ -174,10 +175,10 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
     }
 
 
-    public boolean kiemTraNhap(String tenChuyenXe, String diaDiemDi, String diaDiemDen,String thoiGianDi,String thoiGianDen,String ngayDi,String ngayVe,String giaTien,String moTa,String hinhAnh) {
+    public boolean kiemTraNhap(String tenChuyenXe, String diaDiemDi, String diaDiemDen,String thoiGianDi,String thoiGianDen,String ngayDi,String ngayVe,String giaTien,String moTa) {
         //Tên đăng nhập và mật khẩu trống
         if (TextUtils.isEmpty(tenChuyenXe) || TextUtils.isEmpty(diaDiemDi) || TextUtils.isEmpty(diaDiemDen)|| TextUtils.isEmpty(thoiGianDi)|| TextUtils.isEmpty(thoiGianDen)||
-                TextUtils.isEmpty(ngayDi)|| TextUtils.isEmpty(ngayVe) || TextUtils.isEmpty(giaTien)|| TextUtils.isEmpty(moTa)|| TextUtils.isEmpty(hinhAnh)) {
+                TextUtils.isEmpty(ngayDi)|| TextUtils.isEmpty(ngayVe) || TextUtils.isEmpty(giaTien)|| TextUtils.isEmpty(moTa)) {
             return false;
         }
         return true;
