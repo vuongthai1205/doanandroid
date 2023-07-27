@@ -9,6 +9,8 @@ public class DataLocalManager {
     private static final String ROLE_NAME = "ROLE_NAME";
     private static final String ID_ROLE = "ID_ROLE";
     private static final String IS_LOGIN = "IS_LOGIN";
+    private static final String SO_LUONG_VE_DA_TAO = "SO_LUONG_VE_DA_TAO";
+    private static final String CHECK_SO_LUONG_VE_DA_TAO = "CHECK_SO_LUONG_VE_DA_TAO";
     private static DataLocalManager instance;
     private MySharePreferences mySharePreferences;
 
@@ -40,6 +42,13 @@ public class DataLocalManager {
     public static boolean getIsFirst(){
         return DataLocalManager.getInstance().mySharePreferences.getBooleanValue(PREF_FIRST_INSTALL);
     }
+    public static void setIsSoLuongVeDaTao(boolean is){
+        DataLocalManager.getInstance().mySharePreferences.putBooleanValue(CHECK_SO_LUONG_VE_DA_TAO,is);
+    }
+
+    public static boolean getIsSoLuongVeDaTao(){
+        return DataLocalManager.getInstance().mySharePreferences.getBooleanValue(CHECK_SO_LUONG_VE_DA_TAO);
+    }
     public static void setNameUser(String name){
         DataLocalManager.getInstance().mySharePreferences.putStringValue(USER_NAME,name);
 
@@ -63,6 +72,15 @@ public class DataLocalManager {
     }
     public static int getIdRole(){
         return DataLocalManager.getInstance().mySharePreferences.getIntValue(ID_ROLE);
+
+    }
+
+     public static void setSoLuongVeDaTao(int id){
+        DataLocalManager.getInstance().mySharePreferences.putIntValue(SO_LUONG_VE_DA_TAO,id);
+
+    }
+    public static int getSoLuongVeDaTao(){
+        return DataLocalManager.getInstance().mySharePreferences.getIntValue(SO_LUONG_VE_DA_TAO);
 
     }
 }

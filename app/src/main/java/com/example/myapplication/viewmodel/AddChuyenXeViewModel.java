@@ -93,10 +93,12 @@ public class AddChuyenXeViewModel extends BaseObservable {
                 month,
                 dayOfMonth
         );
-         //Giới hạn DatePickerDialog không cho phép chọn các ngày trước ngày hôm nay
-        datePickerDialogNgayVe.getDatePicker().setMinDate(selectedCalendarDi.getTimeInMillis());
-        // Hiển thị DatePickerDialog
-        datePickerDialogNgayVe.show();
+
+            //Giới hạn DatePickerDialog không cho phép chọn các ngày trước ngày hôm nay
+            datePickerDialogNgayVe.getDatePicker().setMinDate(selectedCalendarDi.getTimeInMillis());
+            // Hiển thị DatePickerDialog
+            datePickerDialogNgayVe.show();
+
     }
 
     public List<String> getListTenLoaiXe(Context context){

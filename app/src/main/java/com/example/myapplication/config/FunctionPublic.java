@@ -67,4 +67,9 @@ public class FunctionPublic {
 
         return result;
     }
+
+    public static double tinhTongTien(int soluongve, double giave){
+        double result = soluongve * giave;
+        return result;
+    }
 }

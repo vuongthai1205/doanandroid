@@ -59,6 +59,28 @@
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Ghế trống: "/>
+
+            <TextView
+                android:id="@+id/choTrong"
+                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ghế"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="6dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Đánh giá:  "/>
 
             <TextView
@@ -77,6 +99,7 @@
 
         </LinearLayout>
         <Button
+            android:id="@+id/btnDatVe"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
