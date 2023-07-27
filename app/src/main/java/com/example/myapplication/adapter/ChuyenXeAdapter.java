@@ -88,7 +88,7 @@ public class ChuyenXeAdapter extends RecyclerView.Adapter<ChuyenXeAdapter.Chuyen
             }
         });
         String imageUrl =  chuyenXe.getHinhAnh();
-        FunctionPublic.loadAvatar(imageUrl, holder.imgChuyenXe,context);
+        FunctionPublic.loadImage(imageUrl, holder.imgChuyenXe,context);
 
     }
 

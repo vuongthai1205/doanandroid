@@ -38,4 +38,7 @@ public interface ThanhVienDAO {
     ThanhVien getThanhVienByEmail(String inputEmail);
     @Query("SELECT * FROM table_thanhvien WHERE ten_dang_nhap = :username LIMIT 1")
     ThanhVien getThanhVienByUserName(String username);
+
+    @Query("SELECT * FROM table_thanhvien WHERE id_thanh_vien = :id LIMIT 1")
+    ThanhVien getThanhVienById(int id);
 }
