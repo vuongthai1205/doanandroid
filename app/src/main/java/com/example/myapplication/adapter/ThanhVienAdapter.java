@@ -137,7 +137,6 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
     }
 
 
-
     public static class ThanhVienHolder extends RecyclerView.ViewHolder{
         TextView id;
         TextView tenDangNhap;
