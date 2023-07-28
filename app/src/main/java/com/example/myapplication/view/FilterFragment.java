@@ -95,15 +95,26 @@ public class FilterFragment extends Fragment {
                 // Xử lý khi không có mục nào được chọn (nếu cần)
             }
         });
-
-        // Lấy giá trị gioDi từ EditText
+        fragmentFilterBinding.edtGioDi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterViewModel.showTimePickerDialog(getContext());
+            }
+        });
 
         // Lắng nghe sự kiện khi người dùng nhấn nút "Lọc"
         fragmentFilterBinding.btnLoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 List<ChuyenXe> chuyenXes = filterViewModel.listFilterChuyenXe(getContext());
-                filterViewModel.getChuyenXeFilterAdapter().setData(chuyenXes);
+                if (chuyenXes.isEmpty()) {
+                    filterViewModel.getChuyenXeFilterAdapter().setData(new ArrayList<>());
+                    fragmentFilterBinding.tvThongBao.setVisibility(View.VISIBLE); // Hiển thị tvThongBao nếu danh sách rỗng
+                    fragmentFilterBinding.tvThongBao.setText("Không tìm thấy chuyến xe"); // Đặt thông báo "Không tìm thấy chuyến xe"
+                }else {
+                    fragmentFilterBinding.tvThongBao.setVisibility(View.GONE);
+                    filterViewModel.getChuyenXeFilterAdapter().setData(chuyenXes);
+                }
                 hideKeyboard();
             }
 

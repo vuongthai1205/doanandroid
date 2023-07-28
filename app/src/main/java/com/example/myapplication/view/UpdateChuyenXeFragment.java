@@ -41,19 +41,6 @@ public class UpdateChuyenXeFragment extends Fragment {
         fragmentUpdateChuyenXeBinding.setUpdateChuyenXeViewModel(updateChuyenXeViewModel);
         Bundle bundle = getArguments();
 
-        fragmentUpdateChuyenXeBinding.edtNgayDi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateChuyenXeViewModel.showDatePickerDialogNgayDi(getContext());
-            }
-        });
-
-        fragmentUpdateChuyenXeBinding.edtNgayVe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateChuyenXeViewModel.showDatePickerDialogNgayVe(getContext());
-            }
-        });
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, updateChuyenXeViewModel.getListTenLoaiXe(getContext()));
 
         fragmentUpdateChuyenXeBinding.spinnerTenLoaiXe.setAdapter(adapter);
@@ -72,6 +59,19 @@ public class UpdateChuyenXeFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+        fragmentUpdateChuyenXeBinding.edtThoiGianDi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateChuyenXeViewModel.showTimePickerDialogDi(getContext());
+            }
+        });
+
+        fragmentUpdateChuyenXeBinding.edtThoiGianDen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateChuyenXeViewModel.showTimePickerDialogDen(getContext());
             }
         });
 
@@ -134,6 +134,8 @@ public class UpdateChuyenXeFragment extends Fragment {
                     // Xử lý lỗi nếu không thể lấy URL hình ảnh (nếu cần)
                 });
     }
+
+
 }
 
 

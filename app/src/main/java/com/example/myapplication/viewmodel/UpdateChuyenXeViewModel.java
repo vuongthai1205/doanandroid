@@ -1,9 +1,11 @@
 package com.example.myapplication.viewmodel;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.text.TextUtils;
 import android.widget.DatePicker;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,83 +33,95 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
     private String diaDiemDen;
     private String thoiGianDi;
     private String thoiGianDen;
-    private String ngayDi;
-    private String ngayVe;
     private int idLoaiXe;
     private String hinhAnh;
     private String giaTien;
     private String moTa;
-    private Calendar calendarNgayDi;
-    private Calendar selectedCalendarDi;
-    private Calendar selectedCalendarVe;
+
+    private Calendar selectedGioDi;
 
 
-    public void showDatePickerDialogNgayDi(Context context) {
-        // Lấy ngày hiện tại để hiển thị trong DatePicker
-        calendarNgayDi = Calendar.getInstance();
-        int year = calendarNgayDi.get(Calendar.YEAR);
-        int month = calendarNgayDi.get(Calendar.MONTH);
-        int dayOfMonth = calendarNgayDi.get(Calendar.DAY_OF_MONTH);
+    public void showTimePickerDialogDi(Context context) {
+        // Lấy thời gian hiện tại để hiển thị trong TimePicker
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
 
-        // Giới hạn ngày tối đa là ngày hiện tại
-        DatePickerDialog datePickerDialogNgayDi = new DatePickerDialog(
+        // Tạo TimePickerDialog
+        TimePickerDialog timePickerDialogDi = new TimePickerDialog(
                 context,
-                new DatePickerDialog.OnDateSetListener() {
+                new TimePickerDialog.OnTimeSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        selectedCalendarDi = Calendar.getInstance();
-                        selectedCalendarDi.set(year, month, dayOfMonth);
-                        // Xử lý ngày được chọn bởi người dùng ở đây
-                        String selectedDateDi = dayOfMonth + "/" + (month + 1) + "/" + year;
-                        // Hiển thị ngày đã chọn trong TextView
-                        setNgayDi(selectedDateDi);
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        selectedGioDi = Calendar.getInstance();
+                        selectedGioDi.set(Calendar.HOUR_OF_DAY,hourOfDay);
+                        selectedGioDi.set(Calendar.MINUTE,minute);
+                        // Xử lý thời gian được chọn bởi người dùng khi thời gian hợp lệ
+                        String selectedTime = String.format(Locale.getDefault(), "%dh%02d", hourOfDay, minute);                        // Hiển thị thời gian đã chọn trong TextView
+                        setThoiGianDi(selectedTime);
                     }
                 },
-                year,
-                month,
-                dayOfMonth
+                hour,
+                minute,
+                true
         );
+        // Hiển thị TimePickerDialog
+        timePickerDialogDi.show();
+    }
+    public void showTimePickerDialogDen(Context context) {
+        // Lấy thời gian hiện tại để hiển thị trong TimePicker
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
 
+        // Tạo TimePickerDialog
+        TimePickerDialog timePickerDialogVe = new TimePickerDialog(
+                context,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        // Xử lý thời gian được chọn bởi người dùng khi thời gian hợp lệ
+                        if(hourOfDay > selectedGioDi.get(Calendar.HOUR_OF_DAY) ||
+                                (hourOfDay == selectedGioDi.get(Calendar.HOUR_OF_DAY) && minute > selectedGioDi.get(Calendar.MINUTE))){
+                            String selectedTime = String.format(Locale.getDefault(), "%dh%02d", hourOfDay, minute);                            // Hiển thị thời gian đã chọn trong TextView
+                            setThoiGianDen(selectedTime);
+                        }else
+                            Toast.makeText(context,"Vui lòng nhập lại giờ về",Toast.LENGTH_SHORT).show();
 
-        // Giới hạn DatePickerDialog không cho phép chọn các ngày trước ngày hôm nay
-        datePickerDialogNgayDi.getDatePicker().setMinDate(System.currentTimeMillis());
-
-        // Hiển thị DatePickerDialog
-        datePickerDialogNgayDi.show();
+                    }
+                },
+                hour,
+                minute,
+                true
+        );
+        // Hiển thị TimePickerDialog
+        timePickerDialogVe.show();
     }
 
-    public void showDatePickerDialogNgayVe(Context context) {
-        // Lấy ngày hiện tại để hiển thị trong DatePicker
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialogNgayVe = new DatePickerDialog(
-                context,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        selectedCalendarVe = Calendar.getInstance();
-                        selectedCalendarVe.set(year, month, dayOfMonth);
-                        // Xử lý ngày được chọn bởi người dùng khi ngày về hợp lệ
-                        String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
-                        // Hiển thị ngày đã chọn trong TextView
-                        setNgayVe(selectedDate);
-                    }
-                },
-                year,
-                month,
-                dayOfMonth
-        );
+    public Calendar convertStringToTime(String timeString) {
+        // Phân tích chuỗi để lấy giá trị giờ và phút
+        String[] parts = timeString.split("h");
+        if (parts.length != 2) {
+            // Nếu định dạng không hợp lệ, trả về null hoặc xử lý lỗi tùy vào yêu cầu của ứng dụng
+            return null;
+        }
 
-            //Giới hạn DatePickerDialog không cho phép chọn các ngày trước ngày hôm nay
-            datePickerDialogNgayVe.getDatePicker().setMinDate(selectedCalendarDi.getTimeInMillis());
+        try {
+            int hour = Integer.parseInt(parts[0]);
+            int minute = Integer.parseInt(parts[1]);
 
+            // Tạo đối tượng Calendar và đặt giá trị giờ và phút
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+            calendar.set(Calendar.MINUTE, minute);
 
-
-        // Hiển thị DatePickerDialog
-        datePickerDialogNgayVe.show();
+            return calendar;
+        } catch (NumberFormatException e) {
+            // Nếu không thể chuyển đổi giờ và phút thành số nguyên, trả về null hoặc xử lý lỗi tùy vào yêu cầu của ứng dụng
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public List<String> getListTenLoaiXe(Context context){
@@ -130,8 +144,6 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
         this.setDiaDiemDen(chuyenXe.getDiaDiemDen());
         this.setThoiGianDi(chuyenXe.getThoiGianBatDau());
         this.setThoiGianDen(chuyenXe.getThoiGianKetThuc());
-        this.setNgayDi(chuyenXe.getNgayDi());
-        this.setNgayVe(chuyenXe.getNgayVe());
         this.setGiaTien(String.valueOf(chuyenXe.getGiaTien()));
         DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
         decimalFormat.applyPattern("#,###.##");
@@ -144,27 +156,33 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
 
     public void UpdateChuyenXe(ChuyenXe chuyenXe,Context context){
 
-        if (kiemTraNhap(tenChuyenXe,diaDiemDi,diaDiemDen,thoiGianDi,thoiGianDen,ngayDi,ngayVe,giaTien,moTa)==false) {
+        if (kiemTraNhap(tenChuyenXe,diaDiemDi,diaDiemDen,thoiGianDi,thoiGianDen,giaTien,moTa)==false) {
             Toast.makeText(context,"Vui lòng nhập đầy đủ dữ liệu",Toast.LENGTH_SHORT).show();
             return;
         }
-        ChuyenXeDAO chuyenXeDAO = AppDatabase.getInstance(context).getChuyenXeDAO();
-        chuyenXe.setIdLoaiXe(getIdLoaiXe());
-        chuyenXe.setTenChuyen(getTenChuyenXe());
-        chuyenXe.setHinhAnh(getHinhAnh());
-        chuyenXe.setThoiGianBatDau(getThoiGianDi());
-        chuyenXe.setThoiGianKetThuc(getThoiGianDen());
-        chuyenXe.setNgayDi(getNgayDi());
-        chuyenXe.setNgayVe(getNgayVe());
-        chuyenXe.setDiaDiemDi(getDiaDiemDi());
-        chuyenXe.setDiaDiemDen(getDiaDiemDen());
-        chuyenXe.setGiaTien(Double.parseDouble(getGiaTien().replace(",","")));
-        chuyenXe.setMoTa(getMoTa());
-        chuyenXeDAO.updateChuyenXe(chuyenXe);
+        Calendar calendarDi = convertStringToTime(getThoiGianDi());
+        Calendar calendarVe = convertStringToTime(getThoiGianDen());
+        if(calendarDi.compareTo(calendarVe) <=0){
+            ChuyenXeDAO chuyenXeDAO = AppDatabase.getInstance(context).getChuyenXeDAO();
+            chuyenXe.setIdLoaiXe(getIdLoaiXe());
+            chuyenXe.setTenChuyen(getTenChuyenXe());
+            chuyenXe.setHinhAnh(getHinhAnh());
+            chuyenXe.setThoiGianBatDau(getThoiGianDi());
+            chuyenXe.setThoiGianKetThuc(getThoiGianDen());
+            chuyenXe.setDiaDiemDi(getDiaDiemDi());
+            chuyenXe.setDiaDiemDen(getDiaDiemDen());
+            chuyenXe.setGiaTien(Double.parseDouble(getGiaTien().replace(",","")));
+            chuyenXe.setMoTa(getMoTa());
+            chuyenXeDAO.updateChuyenXe(chuyenXe);
 
 
-        Toast.makeText(context,"Cập nhật chuyến xe thành công",Toast.LENGTH_SHORT).show();
-        goToListFragment(context);
+            Toast.makeText(context,"Cập nhật chuyến xe thành công",Toast.LENGTH_SHORT).show();
+            goToListFragment(context);
+        }else{
+            Toast.makeText(context,"Kiểm tra lại ngày đi và ngày về",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
     }
 
     public void goToListFragment(Context context){
@@ -176,10 +194,10 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
     }
 
 
-    public boolean kiemTraNhap(String tenChuyenXe, String diaDiemDi, String diaDiemDen,String thoiGianDi,String thoiGianDen,String ngayDi,String ngayVe,String giaTien,String moTa) {
+    public boolean kiemTraNhap(String tenChuyenXe, String diaDiemDi, String diaDiemDen,String thoiGianDi,String thoiGianDen,String giaTien,String moTa) {
         //Tên đăng nhập và mật khẩu trống
         if (TextUtils.isEmpty(tenChuyenXe) || TextUtils.isEmpty(diaDiemDi) || TextUtils.isEmpty(diaDiemDen)|| TextUtils.isEmpty(thoiGianDi)|| TextUtils.isEmpty(thoiGianDen)||
-                TextUtils.isEmpty(ngayDi)|| TextUtils.isEmpty(ngayVe) || TextUtils.isEmpty(giaTien)|| TextUtils.isEmpty(moTa)) {
+                 TextUtils.isEmpty(giaTien)|| TextUtils.isEmpty(moTa)) {
             return false;
         }
         return true;
@@ -220,7 +238,7 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
 
     public void setThoiGianDi(String thoiGianDi) {
         this.thoiGianDi = thoiGianDi;
-        notifyPropertyChanged(BR.thoiGianBatDau);
+        notifyPropertyChanged(BR.thoiGianDi);
     }
     @Bindable
     public String getThoiGianDen() {
@@ -229,26 +247,9 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
 
     public void setThoiGianDen(String thoiGianDen) {
         this.thoiGianDen = thoiGianDen;
-        notifyPropertyChanged(BR.thoiGianKetThuc);
-    }
-    @Bindable
-    public String getNgayDi() {
-        return ngayDi;
+        notifyPropertyChanged(BR.thoiGianDen);
     }
 
-    public void setNgayDi(String ngayDi) {
-        this.ngayDi = ngayDi;
-        notifyPropertyChanged(BR.ngayDi);
-    }
-    @Bindable
-    public String getNgayVe() {
-        return ngayVe;
-    }
-
-    public void setNgayVe(String ngayVe) {
-        this.ngayVe = ngayVe;
-        notifyPropertyChanged(BR.ngayVe);
-    }
     @Bindable
     public int getIdLoaiXe() {
         return idLoaiXe;
@@ -285,12 +286,5 @@ public class UpdateChuyenXeViewModel extends BaseObservable {
         this.moTa = moTa;
         notifyPropertyChanged(BR.moTa);
     }
-    @Bindable
-    public Calendar getSelectedCalendarDi() {
-        return selectedCalendarDi;
-    }
 
-    public void setSelectedCalendarDi(Calendar selectedCalendarDi) {
-        this.selectedCalendarDi = selectedCalendarDi;
-    }
 }

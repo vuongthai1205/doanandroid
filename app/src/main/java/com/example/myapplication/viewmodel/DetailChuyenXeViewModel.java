@@ -23,8 +23,6 @@ public class DetailChuyenXeViewModel extends BaseObservable {
     private String diaDiemDen;
     private String thoiGianBatDau;
     private String thoiGianKetThuc;
-    private String ngayDi;
-    private String ngayVe;
     private String tenLoaiXe;
     private String giaTien;
     private String moTa;
@@ -42,8 +40,6 @@ public class DetailChuyenXeViewModel extends BaseObservable {
         this.setDiaDiemDen(chuyenXe.getDiaDiemDen());
         this.setThoiGianBatDau(chuyenXe.getThoiGianBatDau());
         this.setThoiGianKetThuc(chuyenXe.getThoiGianKetThuc());
-        this.setNgayDi(chuyenXe.getNgayDi());
-        this.setNgayVe(chuyenXe.getNgayVe());
         this.setTenLoaiXe(tenLoaiXe);
         if(chuyenXe.getGiaTien()==null){
             this.setGiaTien("Chưa cập nhật");
@@ -116,25 +112,6 @@ public class DetailChuyenXeViewModel extends BaseObservable {
         notifyPropertyChanged(BR.thoiGianKetThuc);
     }
 
-    @Bindable
-    public String getNgayDi() {
-        return ngayDi;
-    }
-
-    public void setNgayDi(String ngayDi) {
-        this.ngayDi = ngayDi;
-        notifyPropertyChanged(BR.ngayDi);
-    }
-
-    @Bindable
-    public String getNgayVe() {
-        return ngayVe;
-    }
-
-    public void setNgayVe(String ngayVe) {
-        this.ngayVe = ngayVe;
-        notifyPropertyChanged(BR.ngayVe);
-    }
 
     @Bindable
     public String getTenLoaiXe() {
