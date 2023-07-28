@@ -26,4 +26,6 @@ public interface DatVeDAO {
     void delete(DatVe datVe);
     @Query("select sum(so_luong_ve) from table_dat_ve where id_chuyen_xe = :id group by id_chuyen_xe")
     int tongSoLuongVe(int id);
+    @Query("select sum(so_luong_ve) from table_dat_ve where id_thanh_vien = :id group by id_thanh_vien")
+    int tongSoLuongVeTheoNguoiDung(int id);
 }

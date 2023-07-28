@@ -59,7 +59,7 @@ public class HistoryBookAdapter extends RecyclerView.Adapter<HistoryBookAdapter.
 
         double tongTien = FunctionPublic.tinhTongTien(datVe.getSoLuongVe(), giaVe);
         holder.tongTien.setText(FunctionPublic.formatMoney(tongTien));
-        String tenTrangThai = trangThaiDAO.getTrangThaiById(datVe.getIdTrangThai());
+        String tenTrangThai = trangThaiDAO.getTenTrangThaiById(datVe.getIdTrangThai());
         holder.trangThai.setText(tenTrangThai);
         holder.maVe.setText(String.valueOf(datVe.getId()) );
 

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.UserManager;
 
 import androidx.databinding.BaseObservable;
+
+import com.example.myapplication.view.DatVeManagerActivity;
 import com.example.myapplication.view.LoaiXeManager;
 import com.example.myapplication.view.ChuyenXeManager;
 import com.example.myapplication.view.ThanhVienManager;
@@ -22,6 +24,12 @@ public class HomeAdminViewModel extends BaseObservable {
     }
     public void goToChuyenXeManager(Context context) {
         Intent i = new Intent(context, ChuyenXeManager.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
+    }
+
+    public void goToDatVeManager(Context context){
+        Intent i = new Intent(context, DatVeManagerActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }

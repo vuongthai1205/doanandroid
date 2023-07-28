@@ -51,4 +51,7 @@ public interface ChuyenXeDAO {
             "and (:gioDi is null or thoi_gian_bat_dau like '%' || :gioDi || '%')"+
             "order by thoi_gian_bat_dau")
     List<ChuyenXe> filterChuyenXe(String diaDiemDi, String diaDiemDen, int idLoaiXe,String gioDi);
+
+    @Query("select * from table_chuyenxe where id_chuyen_xe = :id")
+    ChuyenXe getChuyenXeById(int id);
 }
