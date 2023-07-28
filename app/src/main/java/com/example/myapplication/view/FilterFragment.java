@@ -4,15 +4,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.databinding.FragmentFilterBinding;
+import com.example.myapplication.model.ChuyenXe;
+import com.example.myapplication.model.DAO.ChuyenXeDAO;
+import com.example.myapplication.model.DAO.ChuyenXeDAO_Impl;
 import com.example.myapplication.viewmodel.FilterViewModel;
 
 import java.util.ArrayList;
@@ -23,10 +31,6 @@ import java.util.Set;
 public class FilterFragment extends Fragment {
     FragmentFilterBinding fragmentFilterBinding;
     FilterViewModel filterViewModel = new FilterViewModel();
-    private String diaDiemDi;
-    private String diaDiemDen;
-    private String loaiXe;
-    private String gioDi;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,7 +49,8 @@ public class FilterFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Lấy giá trị loaiXe từ Spinner sau khi người dùng chọn
-                loaiXe = parent.getItemAtPosition(position).toString();
+                String loaiXe = parent.getItemAtPosition(position).toString();
+               filterViewModel.setLoaiXe(loaiXe);
             }
 
             @Override
@@ -63,7 +68,8 @@ public class FilterFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Lấy giá trị diaDiemDi từ Spinner sau khi người dùng chọn
-                diaDiemDi = parent.getItemAtPosition(position).toString();
+                String diaDiemDi = parent.getItemAtPosition(position).toString();
+                filterViewModel.setDiaDiemDi(diaDiemDi);
             }
 
             @Override
@@ -80,7 +86,8 @@ public class FilterFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Lấy giá trị diaDiemDen từ Spinner sau khi người dùng chọn
-                diaDiemDen = parent.getItemAtPosition(position).toString();
+                String diaDiemDen = parent.getItemAtPosition(position).toString();
+               filterViewModel.setDiaDiemDen(diaDiemDen);
             }
 
             @Override
@@ -90,44 +97,29 @@ public class FilterFragment extends Fragment {
         });
 
         // Lấy giá trị gioDi từ EditText
-        gioDi = fragmentFilterBinding.edtGioDi.getText().toString();
 
         // Lắng nghe sự kiện khi người dùng nhấn nút "Lọc"
         fragmentFilterBinding.btnLoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int idLoaiXe = filterViewModel.getIdLoaiXeByName(getContext(), loaiXe);
-                filterViewModel.getChuyenXeFilterAdapter().filterChuyenXe(diaDiemDi, diaDiemDen, idLoaiXe, gioDi);
+                List<ChuyenXe> chuyenXes = filterViewModel.listFilterChuyenXe(getContext());
+                filterViewModel.getChuyenXeFilterAdapter().setData(chuyenXes);
+                hideKeyboard();
             }
+
         });
 
-
-
-//        fragmentFilterBinding.btnLoc.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ArrayAdapter<String> adapterLoaiXe = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, filterViewModel.getListTenLoaiXe(getContext()));
-//
-//                fragmentFilterBinding.spinnerLoaiXe.setAdapter(adapterLoaiXe);
-//                String loaiXe = fragmentFilterBinding.spinnerLoaiXe.getSelectedItem().toString();
-//
-//
-//                ArrayAdapter<String> adapterDiaDiemDi = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, filterViewModel.getListDiaDiemDi(getContext()));
-//
-//                fragmentFilterBinding.spinnerDiaDiemDi.setAdapter(adapterDiaDiemDi);
-//                String diaDiemDi = fragmentFilterBinding.spinnerDiaDiemDi.getSelectedItem().toString();
-//
-//                ArrayAdapter<String> adapterDiaDiemDen = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, filterViewModel.getListDiaDiemDen(getContext()));
-//
-//                fragmentFilterBinding.spinnerDiaDiemDen.setAdapter(adapterDiaDiemDen);
-//                String diaDiemDen = fragmentFilterBinding.spinnerDiaDiemDen.getSelectedItem().toString();
-//
-//                String gioDi = fragmentFilterBinding.edtGioDi.toString();
-//                int idLoaiXe = filterViewModel.getIdLoaiXeByName(getContext(),loaiXe);
-//                filterViewModel.getChuyenXeFilterAdapter().filterChuyenXe(diaDiemDi,diaDiemDen,idLoaiXe,gioDi);
-//            }
-//        });
         return  fragmentFilterBinding.getRoot();
 
+    }
+    private void hideKeyboard() {
+        // Lấy đối tượng InputMethodManager từ Context của Fragment
+        InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+
+        // Kiểm tra xem bàn phím có đang hiển thị không trước khi ẩn
+        View view = requireActivity().getCurrentFocus();
+        if (view != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

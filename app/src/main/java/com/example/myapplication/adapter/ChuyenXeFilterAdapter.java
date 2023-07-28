@@ -87,23 +87,6 @@ public class ChuyenXeFilterAdapter extends RecyclerView.Adapter<ChuyenXeFilterAd
         }
         return 0;
     }
-    public void filterChuyenXe(String diaDiemDi, String diaDiemDen, int idLoaiXe, String gioDi) {
-        List<ChuyenXe> filteredList = new ArrayList<>();
-
-        for (ChuyenXe chuyenXe : chuyenXes) {
-            // Kiểm tra các điều kiện để tìm chuyến xe phù hợp
-            if (chuyenXe.getDiaDiemDi().equals(diaDiemDi)
-                    && chuyenXe.getDiaDiemDen().equals(diaDiemDen)
-                    && chuyenXe.getIdLoaiXe() == idLoaiXe
-                    && chuyenXe.getThoiGianBatDau().equalsIgnoreCase(gioDi)) {
-                filteredList.add(chuyenXe);
-            }
-        }
-
-        // Cập nhật danh sách chuyến xe mới
-        chuyenXes = filteredList;
-        notifyDataSetChanged();
-    }
 
     public static class ChuyenXeFilterAdapterViewHolder extends RecyclerView.ViewHolder{
         ImageView hinhAnh;
