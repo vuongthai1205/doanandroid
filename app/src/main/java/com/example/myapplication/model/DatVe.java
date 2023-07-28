@@ -10,6 +10,8 @@ import androidx.room.PrimaryKey;
 
 import com.example.myapplication.config.SoLuongVeDaTaoSingleton;
 
+import java.io.Serializable;
+
 @Entity(tableName = "table_dat_ve",
         foreignKeys = {@ForeignKey(entity = ThanhVien.class, parentColumns = "id_thanh_vien", childColumns = "id_thanh_vien"),
                 @ForeignKey(entity = ChuyenXe.class, parentColumns = "id_chuyen_xe", childColumns = "id_chuyen_xe"),
@@ -19,7 +21,7 @@ import com.example.myapplication.config.SoLuongVeDaTaoSingleton;
         @Index(name = "index_id_chuyen_xe_vexe", value = "id_chuyen_xe") ,
         @Index(name = "index_id_trang_thai", value = "id_trang_thai")}
 )
-public class DatVe {
+public class DatVe  implements Serializable {
     private static int soLuongVeDaTao = 1;
 
     @PrimaryKey

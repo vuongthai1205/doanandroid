@@ -27,6 +27,9 @@ public interface ThanhVienDAO {
     @Query("select * from table_thanhvien")
     List<ThanhVien> getAll();
 
+    @Query("select* from table_thanhvien where id_quyen = :id")
+    List<ThanhVien> getThanhVienByIdQuyen(int id);
+
     @Query("SELECT EXISTS(SELECT 1 FROM table_thanhvien WHERE ten_dang_nhap = :tenDangNhap " +
             "OR email = :email OR so_dien_thoai = :soDienThoai)")
     boolean isThanhVienExist(String tenDangNhap, String email, String soDienThoai);
