@@ -33,10 +33,6 @@ public class ChuyenXe implements Serializable {
     private String thoiGianBatDau;
     @ColumnInfo(name = "thoi_gian_ket_thuc")
     private String thoiGianKetThuc;
-    @ColumnInfo(name = "ngay_di")
-    private String ngayDi;
-    @ColumnInfo(name = "ngay_ve")
-    private String ngayVe;
     @ColumnInfo(name = "dia_diem_di")
     private String diaDiemDi;
     @ColumnInfo(name = "dia_diem_den")
@@ -51,14 +47,12 @@ public class ChuyenXe implements Serializable {
 
     }
     @Ignore
-    public ChuyenXe( String tenChuyen, String hinhAnh, String thoiGianBatDau, String thoiGianKetThuc,String ngayDi, String ngayVe, String diaDiemDi, String diaDiemDen,Double giaTien,String moTa) {
+    public ChuyenXe( String tenChuyen, String hinhAnh, String thoiGianBatDau, String thoiGianKetThuc, String diaDiemDi, String diaDiemDen,Double giaTien,String moTa) {
 
         this.tenChuyen = tenChuyen;
         this.hinhAnh = hinhAnh;
         this.thoiGianBatDau = thoiGianBatDau;
         this.thoiGianKetThuc = thoiGianKetThuc;
-        this.ngayDi = ngayDi;
-        this.ngayVe = ngayVe;
         this.diaDiemDi = diaDiemDi;
         this.diaDiemDen = diaDiemDen;
         this.giaTien = giaTien;
@@ -132,21 +126,7 @@ public class ChuyenXe implements Serializable {
         this.thoiGianKetThuc = thoiGianKetThuc;
     }
 
-    public String getNgayDi() {
-        return ngayDi;
-    }
 
-    public void setNgayDi(String ngayDi) {
-        this.ngayDi = ngayDi;
-    }
-
-    public String getNgayVe() {
-        return ngayVe;
-    }
-
-    public void setNgayVe(String ngayVe) {
-        this.ngayVe = ngayVe;
-    }
 
     public int getIdLoaiXe() {
         return idLoaiXe;

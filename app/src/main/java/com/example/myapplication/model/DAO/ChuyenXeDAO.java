@@ -35,14 +35,7 @@ public interface ChuyenXeDAO {
     @Query("select dia_diem_den from table_chuyenxe")
     List<String> getListDiaDiemDen();
 
-//    @Query("SELECT * FROM ChuyenXe " +
-//            "WHERE (:diemDi IS NULL OR dia_diem_di = :diemDi) " +
-//            "AND (:diemDen IS NULL OR dia_diem_den = :diemDen) " +
-//            "AND (:idLoaiXe = -1 OR id_loai_xe = :idLoaiXe) " +
-//            "AND (:ngayDi IS NULL OR ngay_di = :ngayDi) " +
-//            "AND (:gioDi IS NULL OR SUBSTR(thoi_gian_bat_dau, 1, 5) >= :gioDi) " +
-//            "ORDER BY thoi_gian_bat_dau")
-//    List<ChuyenXe> filterChuyenXe(String diemDi, String diemDen, int idLoaiXe, String ngayDi, String gioDi);
+
 
     @Query("select * from table_chuyenxe " +
             "where (:diaDiemDi is null or dia_diem_di = :diaDiemDi)" +

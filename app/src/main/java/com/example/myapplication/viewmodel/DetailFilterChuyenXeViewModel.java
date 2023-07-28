@@ -17,8 +17,6 @@ public class DetailFilterChuyenXeViewModel extends BaseObservable {
     private String tenLoaiXe;
 
     public void getThongTinChuyenXe(ChuyenXe chuyenXe){
-//        LoaiXeDAO loaiXeDAO = AppDatabase.getInstance(context).getLoaiXeDAO();
-//        String tenLoaiXe =
         setTenChuyenXe(getTenChuyenXe());
         setDiaDiemDi(getDiaDiemDi());
         setDiaDiemDen(getDiaDiemDen());

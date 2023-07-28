@@ -1,6 +1,8 @@
 package com.example.myapplication.viewmodel;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
@@ -15,8 +17,10 @@ import com.example.myapplication.model.DAO.ChuyenXeDAO;
 import com.example.myapplication.model.DAO.LoaiXeDAO;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public class FilterViewModel extends BaseObservable {
@@ -70,6 +74,33 @@ public class FilterViewModel extends BaseObservable {
         ChuyenXeDAO chuyenXeDAO = AppDatabase.getInstance(context).getChuyenXeDAO();
         List<ChuyenXe> filterChuyenXe = chuyenXeDAO.filterChuyenXe(diaDiemDi,diaDiemDen,getIdLoaiXeByName(context,loaiXe),gioDi);
         return filterChuyenXe;
+    }
+
+    public void showTimePickerDialog(Context context) {
+        // Lấy thời gian hiện tại để hiển thị trong TimePicker
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        // Tạo TimePickerDialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                context,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        // Xử lý thời gian được chọn bởi người dùng khi thời gian hợp lệ
+                        String selectedTime = String.format(Locale.getDefault(), "%dh%02d", hourOfDay, minute);
+                        // Hiển thị thời gian đã chọn trong TextView
+                        setGioDi(selectedTime);
+                    }
+                },
+                hour,
+                minute,
+                true
+        );
+
+        // Hiển thị TimePickerDialog
+        timePickerDialog.show();
     }
 
     @Bindable

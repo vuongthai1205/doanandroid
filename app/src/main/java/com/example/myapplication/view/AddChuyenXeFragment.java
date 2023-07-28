@@ -37,17 +37,17 @@ public class AddChuyenXeFragment extends Fragment {
         fragmentAddChuyenXeBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_add_chuyen_xe,container,false);
         fragmentAddChuyenXeBinding.setAddChuyenXeViewModel(addChuyenXeViewModel);
 
-        fragmentAddChuyenXeBinding.edtNgayDi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addChuyenXeViewModel.showDatePickerDialogNgayDi(getContext());
-            }
-        });
+            fragmentAddChuyenXeBinding.edtThoiGianBatDau.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addChuyenXeViewModel.showTimePickerDialogDi(getContext());
+                }
+            });
 
-        fragmentAddChuyenXeBinding.edtNgayVe.setOnClickListener(new View.OnClickListener() {
+        fragmentAddChuyenXeBinding.edtThoiGianDen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addChuyenXeViewModel.showDatePickerDialogNgayVe(getContext());
+                addChuyenXeViewModel.showTimePickerDialogDen(getContext());
             }
         });
 
