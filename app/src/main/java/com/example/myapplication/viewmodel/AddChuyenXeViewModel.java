@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.R;
 import com.example.myapplication.config.AppDatabase;
+import com.example.myapplication.config.FunctionPublic;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.model.DAO.ChuyenXeDAO;
 import com.example.myapplication.model.DAO.LoaiXeDAO;
@@ -78,13 +79,20 @@ public class AddChuyenXeViewModel extends BaseObservable {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         // Xử lý thời gian được chọn bởi người dùng khi thời gian hợp lệ
-                        if(hourOfDay > selectedGioDi.get(Calendar.HOUR_OF_DAY) ||
-                                (hourOfDay == selectedGioDi.get(Calendar.HOUR_OF_DAY) && minute > selectedGioDi.get(Calendar.MINUTE))){
-                            String selectedTime = String.format(Locale.getDefault(), "%dh%02d", hourOfDay, minute);                            // Hiển thị thời gian đã chọn trong TextView
-                            setThoiGianDen(selectedTime);
-                        }else
-                            Toast.makeText(context,"Vui lòng nhập lại giờ về",Toast.LENGTH_SHORT).show();
 
+                        if (selectedGioDi == null){
+                            Toast.makeText(context, "Vui lòng nhập giờ đi", Toast.LENGTH_SHORT ).show();
+                        }
+                        else {
+
+                            // Xử lý thời gian được chọn bởi người dùng khi thời gian hợp lệ
+                            if(hourOfDay > selectedGioDi.get(Calendar.HOUR_OF_DAY) ||
+                                    (hourOfDay == selectedGioDi.get(Calendar.HOUR_OF_DAY) && minute > selectedGioDi.get(Calendar.MINUTE))){
+                                String selectedTime = String.format(Locale.getDefault(), "%dh%02d", hourOfDay, minute);                            // Hiển thị thời gian đã chọn trong TextView
+                                setThoiGianDen(selectedTime);
+                            }else
+                                Toast.makeText(context,"Vui lòng nhập lại giờ về",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 },
                 hour,
