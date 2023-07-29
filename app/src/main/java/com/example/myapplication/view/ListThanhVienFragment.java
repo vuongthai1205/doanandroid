@@ -39,8 +39,6 @@ public class ListThanhVienFragment extends Fragment {
         fragmentListThanhVienBinding.rcvThanhVien.setLayoutManager(linearLayoutManager);
         listThanhVienViewModel.renderAdapter(getContext());
         fragmentListThanhVienBinding.rcvThanhVien.setAdapter(listThanhVienViewModel.getThanhVienAdapter());
-
-
         fragmentListThanhVienBinding.searchTen.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
