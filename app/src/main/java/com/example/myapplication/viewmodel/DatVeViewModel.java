@@ -1,7 +1,9 @@
 package com.example.myapplication.viewmodel;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.widget.DatePicker;
 import android.widget.Toast;
@@ -89,6 +91,7 @@ public class DatVeViewModel extends BaseObservable {
 
     }
 
+
     public List<Integer> setSpinner(Context context, ChuyenXe chuyenXe){
         DatVeDAO datVeDAO = AppDatabase.getInstance(context).getVeXeDAO();
         int tongSlVe = datVeDAO.tongSoLuongVe(chuyenXe.getIdChuyenXe());
@@ -120,8 +123,6 @@ public class DatVeViewModel extends BaseObservable {
                 if (datVe != null) {
                     datVe.setIdTrangThai(2);
                     datVeDAO.update(datVe);
-
-                    Toast.makeText(context, "Status updated to 2", Toast.LENGTH_SHORT).show();
                 }
             }
         };
