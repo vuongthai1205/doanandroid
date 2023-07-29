@@ -40,6 +40,7 @@ public class UpdateLoaiXeViewModel extends BaseObservable {
 
         }
     }
+
     public void goToListFragment(Context context){
         ListLoaiXeFragment listLoaiXeFragment =new ListLoaiXeFragment();
         FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();

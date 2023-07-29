@@ -53,5 +53,9 @@ public class LoaiXe implements Serializable {
     public void setSoLuongGhe(int soLuongGhe) {
         this.soLuongGhe = soLuongGhe;
     }
+
+    public int getId() {
+        return idLoaiXe;
+    }
 }
 
