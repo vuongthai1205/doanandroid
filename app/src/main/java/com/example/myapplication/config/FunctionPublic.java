@@ -8,6 +8,10 @@ import com.bumptech.glide.Glide;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class FunctionPublic {
@@ -71,5 +75,17 @@ public class FunctionPublic {
     public static double tinhTongTien(int soluongve, double giave){
         double result = soluongve * giave;
         return result;
+    }
+    public static Calendar convertStringToCalendar(String input) {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh'h'mm");
+        try {
+            Date date = sdf.parse(input);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            return calendar;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
