@@ -20,6 +20,8 @@ public interface DatVeDAO {
     DatVe getDatVeById(String id);
     @Query("select * from table_dat_ve where id_thanh_vien = :id")
     List<DatVe> getVeXeById(int id);
+    @Query("select * from table_dat_ve where id_chuyen_xe = :id")
+    List<DatVe> getVeByIdChuyenXe(int id);
     @Update
     void update(DatVe datVe);
     @Delete
