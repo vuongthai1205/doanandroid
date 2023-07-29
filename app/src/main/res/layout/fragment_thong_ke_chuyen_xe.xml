@@ -7,16 +7,21 @@
             name="ThongKeChuyenXeViewModel"
             type="com.example.myapplication.viewmodel.ThongKeChuyenXeViewModel" />
     </data>
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         >
 
         <!-- TODO: Update blank fragment layout -->
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="Thống kê theo chuyến xe" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvThongKeChuyenXe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-    </FrameLayout>
+    </LinearLayout>
 </layout>
