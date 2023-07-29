@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.model.DatVe;
-import com.example.myapplication.view.VeDetailFragment;
+import com.example.myapplication.view.DetailVeFragment;
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class VeAdapter  extends RecyclerView.Adapter<VeAdapter.VeViewHolder>{
         holder.ve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                VeDetailFragment veDetailFragment = new VeDetailFragment();
+                DetailVeFragment veDetailFragment = new DetailVeFragment();
                 showDetail(datVe,veDetailFragment);
             }
         });

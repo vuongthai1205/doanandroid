@@ -52,16 +52,16 @@ public class HistoryBookAdapter extends RecyclerView.Adapter<HistoryBookAdapter.
         TrangThaiDAO trangThaiDAO = AppDatabase.getInstance(context).getTrangThaiDAO();
         String tenChuyenXe = chuyenXeDAO.getTenChuyenById(datVe.getIdChuyenXeVeXe());
         double giaVe = chuyenXeDAO.getGiaVeById(datVe.getIdChuyenXeVeXe());
-        holder.tenChuyenXe.setText(tenChuyenXe);
-        holder.ngayDi.setText(datVe.getNgayGioDi());
-        holder.ngayVe.setText(datVe.getNgayGioVe());
-        holder.soLuongVe.setText(String.valueOf(datVe.getSoLuongVe()));
+        holder.tenChuyenXe.setText("Tên chuyến xe: " + tenChuyenXe);
+        holder.ngayDi.setText("Ngày đi: " +  datVe.getNgayGioDi());
+        holder.ngayVe.setText("Ngày về: " + datVe.getNgayGioVe());
+        holder.soLuongVe.setText("Số lượng: " + datVe.getSoLuongVe());
 
         double tongTien = FunctionPublic.tinhTongTien(datVe.getSoLuongVe(), giaVe);
-        holder.tongTien.setText(FunctionPublic.formatMoney(tongTien));
+        holder.tongTien.setText("Tổng tiền: " + FunctionPublic.formatMoney(tongTien));
         String tenTrangThai = trangThaiDAO.getTenTrangThaiById(datVe.getIdTrangThai());
-        holder.trangThai.setText(tenTrangThai);
-        holder.maVe.setText(String.valueOf(datVe.getId()) );
+        holder.trangThai.setText("Trạng Thái: " +  tenTrangThai);
+        holder.maVe.setText("Mã vé: " + datVe.getId());
 
         holder.huyVe.setOnClickListener(new View.OnClickListener() {
             @Override

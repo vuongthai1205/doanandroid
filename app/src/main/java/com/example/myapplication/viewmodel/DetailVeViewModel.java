@@ -10,13 +10,13 @@ import com.example.myapplication.BR;
 import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.model.ChuyenXe;
 import com.example.myapplication.model.DAO.ChuyenXeDAO;
+import com.example.myapplication.model.DAO.DatVeDAO;
 import com.example.myapplication.model.DAO.TrangThaiDAO;
 import com.example.myapplication.model.DatVe;
-import com.example.myapplication.model.TrangThai;
 
 import java.util.List;
 
-public class VeDetailViewModel extends BaseObservable {
+public class DetailVeViewModel extends BaseObservable {
     private String maVe;
     private String diaDiemDi;
     private String diaDiemDen;
@@ -48,6 +48,11 @@ public class VeDetailViewModel extends BaseObservable {
         TrangThaiDAO trangThaiDAO = AppDatabase.getInstance(context).getTrangThaiDAO();
         List<String > list = trangThaiDAO.getListTenTrangThai();
         return list;
+    }
+    public void updateTrangThai(DatVe datVe, Context context){
+        DatVeDAO datVeDAO = AppDatabase.getInstance(context).getVeXeDAO();
+        datVe.setIdTrangThai(getIdTrangThai());
+        datVeDAO.update(datVe);
     }
     public void kiemTraNgayVe(View v, String ngayVe){
         if (ngayVe==null || ngayVe.isEmpty()){

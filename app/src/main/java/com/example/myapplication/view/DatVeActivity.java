@@ -3,8 +3,11 @@ package com.example.myapplication.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -51,7 +54,8 @@ public class DatVeActivity extends AppCompatActivity {
             activityDatVeBinding.xacNhan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    datVeViewModel.luuDatVe(getApplicationContext(),chuyenXe);
+
+                    showAlert(chuyenXe);
                 }
             });
 
@@ -177,5 +181,62 @@ public class DatVeActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void goToHistoryBook(){
+        Intent i = new Intent(DatVeActivity.this, UserManagerActivity.class);
+        startActivity(i);
+
+    }
+
+    public void showAlert(ChuyenXe chuyenXe)
+    {
+        String thongTinLuongDi = "";
+        String thongTinLuongVe = "";
+        if (datVeViewModel.getNgayDi()==null){
+            thongTinLuongDi = "Thông tin lượt đi: \nChưa đặt ngày đi";
+        }
+        else {
+            thongTinLuongDi = "Thông tin lượt đi \nTên chuyến xe: " + chuyenXe.getTenChuyen() +
+                    "\nĐịa điểm đi: " + chuyenXe.getDiaDiemDi() + "\nĐịa điểm đến: " + chuyenXe.getDiaDiemDen() +
+                    "\nNgày đi: " + datVeViewModel.getNgayDi() + "\nGiờ bắt đầu: " + chuyenXe.getThoiGianBatDau()+
+                    "\nSố lượng vé: " + datVeViewModel.getSoLuongVe() + "\nTổng tiền: " + datVeViewModel.getTongTien();
+        }
+        if (datVeViewModel.getNgayVe()==null){
+            thongTinLuongVe = "\n\n\nKhông có khứ hồi";
+        }
+        else {
+            thongTinLuongVe= "\n\n\nThông tin lượt về \nTên chuyến xe: " + chuyenXe.getTenChuyen() +
+                    "\nĐịa điểm đi: " + chuyenXe.getDiaDiemDen() + "\nĐịa điểm đến: " + chuyenXe.getDiaDiemDi() +
+                    "\nNgày đi: " + datVeViewModel.getNgayDi() + "\nGiờ bắt đầu: " + chuyenXe.getThoiGianKetThuc()+
+                    "\nSố lượng vé: " + datVeViewModel.getSoLuongVe() + "\nTổng tiền: " + datVeViewModel.getTongTien();
+        }
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(DatVeActivity.this);
+        builder.setTitle("Xác nhận thông tin");
+        builder.setMessage(thongTinLuongDi + thongTinLuongVe);
+        builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (datVeViewModel.getNgayDi() == null){
+                    Toast.makeText(DatVeActivity.this, "Vui lòng nhập thông tin vé", Toast.LENGTH_LONG).show();
+                    dialogInterface.dismiss();
+                }
+                else {
+                    datVeViewModel.luuDatVe(getApplicationContext(), chuyenXe);
+                    goToHistoryBook();
+                    Toast.makeText(DatVeActivity.this, "Đặt vé thành công, vui lòng chuyển sang tab lịch sử để xem", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+        builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.create().show();
     }
 }
