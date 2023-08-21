@@ -77,7 +77,7 @@ public class ADetailChuyenXeViewModel extends BaseObservable {
     public void renderAdapter(Context context, int id){
         danhGiaAdapter = new DanhGiaAdapter(context);
         DanhGiaDAO danhGiaDAO = AppDatabase.getInstance(context).getDanhGiaDAO();
-        ;
+
         danhGiaAdapter.setData(danhGiaDAO.layDanhSachDanhGiaTheoChuyenXe(id));
         setDanhGiaAdapter(danhGiaAdapter);
 

@@ -9,6 +9,7 @@ import com.example.myapplication.BR;
 
 import com.example.myapplication.config.AppDatabase;
 import com.example.myapplication.config.VariableGlobal;
+import com.example.myapplication.model.DAO.DatVeDAO;
 import com.example.myapplication.model.DAO.ThanhVienDAO;
 import com.example.myapplication.model.ThanhVien;
 
@@ -23,8 +24,13 @@ public class AccountViewModel extends BaseObservable {
     private String ngayTao;
     private String ngayCapNhat;
     private String avatar;
+    private String tongSoLuongVe;
 
     public void showAccount(ThanhVien thanhVien, Context context){
+
+        DatVeDAO datVeDAO = AppDatabase.getInstance(context).getVeXeDAO();
+        int tong = datVeDAO.tongSoLuongVeTheoNguoiDung(thanhVien.getId());
+        setTongSoLuongVe(String.valueOf(tong));
 
         setHo(thanhVien.getHo());
         setTen(thanhVien.getTen());
@@ -60,10 +66,15 @@ public class AccountViewModel extends BaseObservable {
 
     }
 
-    
+    @Bindable
+    public String getTongSoLuongVe() {
+        return tongSoLuongVe;
+    }
 
-
-
+    public void setTongSoLuongVe(String tongSoLuongVe) {
+        this.tongSoLuongVe = tongSoLuongVe;
+        notifyPropertyChanged(BR.tongSoLuongVe);
+    }
 
     @Bindable
     public String getTenDangNhap() {

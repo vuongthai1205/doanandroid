@@ -90,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginHorizontal="16dp">
+                    android:layout_marginHorizontal="8dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:layout_gravity="center_horizontal"
-                        android:text="547"/>
+                        android:text="@={AccountViewModel.tongSoLuongVe}"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginHorizontal="16dp">
+                    android:layout_marginHorizontal="8dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -119,20 +119,20 @@
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:layout_gravity="center_horizontal"
-                        android:text="547"/>
+                        android:text="000"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:textColor="#727477"
-                        android:text="My Trends"/>
+                        android:text="Đang cập nhật"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginHorizontal="16dp">
+                    android:layout_marginHorizontal="8dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -140,13 +140,13 @@
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:layout_gravity="center_horizontal"
-                        android:text="547"/>
+                        android:text="000"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:textColor="#727477"
-                        android:text="My Trends"/>
+                        android:text="Đang cập nhật"/>
                 </LinearLayout>
             </LinearLayout>
 

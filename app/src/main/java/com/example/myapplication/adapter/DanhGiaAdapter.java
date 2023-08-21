@@ -46,11 +46,11 @@ public class DanhGiaAdapter extends RecyclerView.Adapter<DanhGiaAdapter.DanhGiaV
         ThanhVienDAO thanhVienDAO = AppDatabase.getInstance(context).getThanhVienDAO();
 
         ThanhVien t =thanhVienDAO.getThanhVienById(danhGia.getIdThanhVienDanhGia());
-        holder.diemDanhGia.setText(FunctionPublic.formatDouble(danhGia.getDiemDanhGia()));
-        holder.nhanXet.setText(danhGia.getNhanXet());
+        holder.diemDanhGia.setText("Đánh giá: " + FunctionPublic.formatDouble(danhGia.getDiemDanhGia()));
+        holder.nhanXet.setText("Nội dung: " + danhGia.getNhanXet());
         FunctionPublic.loadImage(t.getAvatar(),holder.avatar,context);
         holder.tenThanhVien.setText(t.getHoTen());
-        holder.thoiGianDanhGia.setText(danhGia.getThoiGianDanhGia());
+        holder.thoiGianDanhGia.setText("Thời gian: " + danhGia.getThoiGianDanhGia());
     }
 
     @Override
