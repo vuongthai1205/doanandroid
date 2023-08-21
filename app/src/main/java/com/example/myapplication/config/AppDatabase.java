@@ -34,8 +34,6 @@ import com.example.myapplication.model.TrangThai;
     , exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
-
-
     public abstract ThanhVienDAO getThanhVienDAO();
     public abstract QuyenDao getQuyenDAO();
     public abstract ChuyenXeDAO getChuyenXeDAO();

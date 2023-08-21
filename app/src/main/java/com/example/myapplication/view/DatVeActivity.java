@@ -208,7 +208,7 @@ public class DatVeActivity extends AppCompatActivity {
         else {
             thongTinLuongVe= "\n\n\nThông tin lượt về \nTên chuyến xe: " + chuyenXe.getTenChuyen() +
                     "\nĐịa điểm đi: " + chuyenXe.getDiaDiemDen() + "\nĐịa điểm đến: " + chuyenXe.getDiaDiemDi() +
-                    "\nNgày đi: " + datVeViewModel.getNgayDi() + "\nGiờ bắt đầu: " + chuyenXe.getThoiGianKetThuc()+
+                    "\nNgày đi: " + datVeViewModel.getNgayVe() + "\nGiờ bắt đầu: " + chuyenXe.getThoiGianKetThuc()+
                     "\nSố lượng vé: " + datVeViewModel.getSoLuongVe() + "\nTổng tiền: " + datVeViewModel.getTongTien();
         }
 
